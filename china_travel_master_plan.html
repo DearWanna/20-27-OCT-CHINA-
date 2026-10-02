@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China Travel Master Plan v3.4 (Update)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Prompt', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #f8fafc; min-height: 100vh; scroll-behavior: smooth; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin: 0 auto; height: 300px; }
+        .custom-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25); }
+        .chinese-font { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+        details summary::-webkit-details-marker { display: none; }
+        .timeline-line { position: absolute; left: 15px; top: 24px; bottom: -10px; width: 2px; background: #475569; }
+        .timeline-item:last-child .timeline-line { display: none; }
+        .weather-card { transition: all 0.3s; }
+        .weather-card:hover { transform: translateY(-3px); border-color: #38bdf8; }
+    </style>
+</head>
+<body class="pb-12">
+
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <!-- Header Area -->
+    <header class="bg-slate-800/90 backdrop-blur rounded-[2rem] p-8 mb-8 border border-slate-700/70 relative overflow-hidden custom-shadow">
+        <div class="relative z-10">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="bg-sky-500 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest text-white shadow-sm">Master Plan v3.4 Updated</span>
+                <span class="text-sky-300 text-xs font-semibold"><i class="fa-solid fa-calendar-days"></i> 20 – 27 ตุลาคม 2026 (8 วัน 7 คืน)</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 text-white">China Family Adventure</h1>
+            <p class="text-slate-300 font-light text-sm max-w-xl leading-relaxed">
+                แผนการเดินทางฉบับสมบูรณ์ (ฉงชิ่ง - สี่ดรุณี - ตูเจียงเยี่ยน - เฉิงตู - ฉงชิ่ง) สำหรับครอบครัวพร้อมเด็กเล็ก
+            </p>
+        </div>
+        <div class="absolute right-[-20px] top-[-20px] text-[180px] opacity-10 rotate-12 pointer-events-none select-none">🇨🇳</div>
+    </header>
+
+    <!-- Altitude Dashboard -->
+    <section class="mb-10 bg-slate-800/80 backdrop-blur rounded-3xl p-6 custom-shadow border border-slate-700/70">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold flex items-center gap-2 text-white"><i class="fa-solid fa-mountain text-sky-400"></i> Altitude Profile & AMS Risk</h2>
+            <span class="text-[10px] text-slate-300 uppercase font-bold tracking-widest italic">Elevation (Meters)</span>
+        </div>
+        <div class="chart-container mb-4">
+            <canvas id="altitudeChart"></canvas>
+        </div>
+        <div class="p-4 bg-amber-950/40 rounded-2xl border border-amber-700/80 flex gap-3 items-start">
+            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1 shrink-0"></i>
+            <div class="text-xs text-amber-200 leading-relaxed">
+                <strong>จุดเตือนสำคัญเรื่องระดับความสูง (Day 3–4):</strong> เดินทางสู่สี่ดรุณี (เมืองรื่อหลง ~3,200m) และซวงเฉียวโกว (~3,840m) ในคืนแรกงดการสระผมและงดอาบน้ำอุ่นจัด/นาน ให้เด็กและผู้ใหญ่จิบน้ำอุ่นบ่อยๆ สวมเสื้อผ้าให้อุ่น เตรียมออกซิเจนกระป๋องพกพาไว้ใกล้ตัว
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodation Hub -->
+    <section class="mb-10">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-3 text-white">
+            <i class="fa-solid fa-hotel text-sky-400"></i> โรงแรมที่พัก & การจอง (Accommodation Details)
+        </h2>
+        <div class="bg-slate-800/80 backdrop-blur rounded-3xl overflow-hidden custom-shadow border border-slate-700/70">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm min-w-[650px]">
+                    <thead class="bg-slate-900/60 text-slate-300 font-bold uppercase text-[10px] tracking-widest border-b border-slate-700/80">
+                        <tr>
+                            <th class="px-6 py-4">เข้า - ออก</th>
+                            <th class="px-6 py-4 text-center">คืน</th>
+                            <th class="px-6 py-4">เมือง / ชื่อโรงแรม</th>
+                            <th class="px-6 py-4 text-right">สถานะ / ลิงก์</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-700/60 text-slate-200">
+                        <!-- Hotel 1 -->
+                        <tr class="hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white">20–22 ต.ค.</div>
+                                <div class="text-[10px] text-slate-300 font-medium italic">Check-in: 14:00</div>
+                            </td>
+                            <td class="px-6 py-4 text-center text-sky-400 font-bold">2</td>
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white">Walling Hotel (Jiefangbei Hongyadong)</div>
+                                <div class="text-[11px] text-slate-300 chinese-font italic">重庆华灵酒店 (解放碑洪崖洞店)</div>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="https://www.trip.com/hotels/detail/?hotelId=75502750&checkIn=2026-10-20&checkOut=2026-10-22&locale=en_xx" target="_blank" class="bg-emerald-950/70 text-emerald-300 border border-emerald-700/80 px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-emerald-900/80 inline-flex items-center gap-1 transition-colors">
+                                    <i class="fa-solid fa-circle-check"></i> จองแล้ว <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Hotel 2 -->
+                        <tr class="hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white">22–23 ต.ค.</div>
+                                <div class="text-[10px] text-slate-300 font-medium italic">Check-in: 12:00</div>
+                            </td>
+                            <td class="px-6 py-4 text-center text-sky-400 font-bold">1</td>
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white">Siguniangshan Hotel</div>
+                                <div class="text-[11px] text-slate-300 chinese-font italic">四姑娘山饭店</div>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="https://www.trip.com/w/SQSDfoXfrV2" target="_blank" class="bg-emerald-950/70 text-emerald-300 border border-emerald-700/80 px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-emerald-900/80 inline-flex items-center gap-1 transition-colors">
+                                    <i class="fa-solid fa-circle-check"></i> จองแล้ว <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Hotel 3 -->
+                        <tr class="hover:bg-slate-700/30 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white">23–26 ต.ค.</div>
+                                <div class="text-[10px] text-slate-300 font-medium italic">Check-in: 14:00</div>
+                            </td>
+                            <td class="px-6 py-4 text-center text-sky-400 font-bold">3</td>
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white">Park Inn by Radisson Chengdu Chunxi Road Taikoo Li Branch</div>
+                                <div class="text-[11px] text-slate-300 chinese-font italic">丽怡酒店 (成都春熙路太古里店)</div>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="https://th.trip.com/hotels/detail/?hotelId=129315894&checkIn=2026-10-24&checkOut=2026-10-26&locale=th-TH" target="_blank" class="bg-emerald-950/70 text-emerald-300 border border-emerald-700/80 px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-emerald-900/80 inline-flex items-center gap-1 transition-colors">
+                                    <i class="fa-solid fa-circle-check"></i> จองแล้ว <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Hotel 4 (AURA SKYHOTEL) -->
+                        <tr class="bg-sky-950/40 border-t border-sky-800/60 hover:bg-sky-950/60 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-sky-200">26–27 ต.ค.</div>
+                                <div class="text-[10px] text-sky-300 font-bold italic">หลัง 14:00</div>
+                            </td>
+                            <td class="px-6 py-4 text-center text-sky-300 font-bold">1</td>
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-sky-100">AURA SKYHOTEL (Hongya Cave Branch)</div>
+                                <div class="text-[11px] text-sky-300 chinese-font font-bold">重庆解放碑洪崖洞奥拉高空酒店</div>
+                                <span class="inline-block mt-1 text-[9px] bg-sky-900/80 text-sky-200 border border-sky-700/60 font-extrabold px-1.5 py-0.5 rounded">LATEST CONFIRMED</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <a href="https://th.trip.com/hotels/detail/?hotelId=133581290" target="_blank" class="bg-sky-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-sky-500 inline-flex items-center gap-1 shadow-sm transition-colors">
+                                    <i class="fa-solid fa-check-double"></i> จองแล้ว <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Itinerary Section -->
+    <section class="mb-10">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-3 text-white">
+            <i class="fa-solid fa-route text-sky-400"></i> แผนการเดินทางรายวันอย่างละเอียด (Detailed Itinerary)
+        </h2>
+        <div id="itinerary-wrapper" class="space-y-4">
+            <!-- Injected via JS -->
+        </div>
+    </section>
+
+    <!-- Weather Historical Forecast -->
+    <section class="mb-10">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-3 text-white">
+            <i class="fa-solid fa-cloud-sun text-sky-400"></i> พยากรณ์อากาศและสภาพอากาศย้อนหลัง
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="weather-grid">
+            <!-- Weather Injected via JS -->
+        </div>
+    </section>
+
+    <!-- Final Preparation & Checklist -->
+    <section class="bg-slate-800/80 backdrop-blur p-6 sm:p-8 rounded-[2rem] custom-shadow border border-slate-700/70">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2 text-white">
+            <i class="fa-solid fa-clipboard-check text-sky-400"></i> เช็คลิสต์อุปกรณ์ & ของเตรียมตัวก่อนเดินทาง
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm" id="checklist-grid">
+            <!-- Checklist Injected via JS -->
+        </div>
+    </section>
+</div>
+
+<script>
+    const itineraryData = [
+        {
+            day: "Day 01",
+            date: "อ. 20 ต.ค.",
+            title: "เชียงใหม่ ➔ ฉงชิ่ง",
+            badge: "พักฉงชิ่ง (คืนที่ 1)",
+            hotel: "Walling Hotel (Jiefangbei Hongyadong)",
+            items: [
+                { time: "11:00 – 18:00 น.", text: "ออกเดินทางจากเชียงใหม่ (CNX) ถึงสนามบินฉงชิ่ง เจียงเป่ย (CKG) Terminal 3", transport: "Thai AirAsia", icon: "fa-plane" },
+                { time: "18:00 – 19:15 น.", text: "ผ่านพิธีการ ตม., รับกระเป๋าเดินทาง และเปิดใช้งาน Alipay / eSIM", transport: "", icon: "fa-passport" },
+                { time: "19:15 – 20:00 น.", text: "เดินทางเข้าเมืองสู่โรงแรม Walling Hotel ย่าน Jiefangbei / Hongyadong", transport: "Didi (~45 นาที) / CRT Line 10", icon: "fa-taxi" },
+                { time: "20:00 น. เป็นต้นไป", text: "เช็กอิน เดินเล่นย่านถนนคนเดิน Jiefangbei เบาๆ หาอาหารเย็นทาน แล้วพักผ่อนปรับเวลา", transport: "เดินเท้า", icon: "fa-utensils" }
+            ],
+            tip: "ทิปวันแรก: เด็กเล็กมักเหนื่อยล้าจากการบิน แนะนำให้เลือกร้านอาหารใกล้โรงแรมที่สุด ไม่ต้องเดินไกล และเตรียมของว่างติดตัวระหว่างรอคิว ตม.",
+            tipIcon: "fa-child",
+            tipColor: "bg-sky-950/50 border-sky-800/80 text-sky-200"
+        },
+        {
+            day: "Day 02",
+            date: "พ. 21 ต.ค.",
+            title: "เที่ยวฉงชิ่งเต็มวัน",
+            badge: "พักฉงชิ่ง (คืนที่ 2)",
+            hotel: "Walling Hotel (Jiefangbei Hongyadong)",
+            items: [
+                { time: "09:00 – 10:30 น.", text: "ไหว้พระที่ วัดหลัวฮั่น (Luohan Temple 罗汉寺)", transport: "เดิน ~10 นาที", icon: "fa-vihara" },
+                { time: "10:30 – 11:30 น.", text: "จิบกาแฟและชมวิวเมืองที่ Wadingding Coffee (瓦丁丁咖啡) อาคาร S95 ชั้น 5", transport: "เดินเท้า", icon: "fa-mug-hot" },
+                { time: "11:30 – 14:00 น.", text: "ห้าง The Ring Chongqing ชมสวนป่าในห้าง Muguang Forest และทานอาหารกลางวัน", transport: "Didi / CRT Line 5 (~25 นาที)", icon: "fa-tree" },
+                { time: "14:30 – 15:30 น.", text: "สถานี Liziba (李子坝) ถ่ายรูปจุดรถไฟวิ่งทะลุตึกชื่อดัง", transport: "CRT Line 2 (~30 นาที)", icon: "fa-train-subway" },
+                { time: "16:00 – 17:30 น.", text: "ลานมิติพิศวง Kuixinglou Square (魁星楼广场)", transport: "CRT Line 2 ลง Linjiangmen", icon: "fa-building" },
+                { time: "18:00 – 20:30 น.", text: "ไฟยามค่ำคืนที่ Hongyadong (洪崖洞) ทานอาหารเย็นริมแม่น้ำ", transport: "เดินลงทางชัน / Didi", icon: "fa-moon" }
+            ],
+            tip: "ทิปสำหรับครอบครัว: ฉงชิ่งเป็นเมืองภูเขามีบันไดเยอะมาก แนะนำพกรถเข็นแบบพับเบา หรือเป้อุ้มเด็กสำรองไว้สำหรับช่วง Hongyadong ที่คนแน่นและมีทางลาดชัน",
+            tipIcon: "fa-baby-carriage",
+            tipColor: "bg-amber-950/60 border-amber-800 text-amber-200"
+        },
+        {
+            day: "Day 03",
+            date: "พฤ. 22 ต.ค.",
+            title: "ฉงชิ่ง ➔ เฉิงตู",
+            badge: "พักเฉิงตู (คืนที่ 3)",
+            hotel: "Park Inn by Radisson Chengdu Chunxi Road Taikoo Li Branch",
+            items: [
+                { time: "ช่วงเช้า", text: "เช็กเอาต์ ออกเดินทางจากฉงชิ่ง นั่งรถไฟความเร็วสูง (HSR) มุ่งหน้าสู่สถานี Chengdu East", transport: "รถไฟความเร็วสูง CRH (~1.5–2 ชม.)", icon: "fa-train" },
+                { time: "ช่วงเที่ยง", text: "เดินทางถึงสถานี Chengdu East เข้าเช็กอิน / ฝากกระเป๋าที่โรงแรม Park Inn by Radisson", transport: "Didi (~20 นาที)", icon: "fa-hotel" },
+                { time: "บ่าย – เย็น", text: "เที่ยวเมืองเฉิงตูเบาๆ เดินเล่นย่าน Chunxi Road, Taikoo Li หาอาหารเย็นทาน ชิลๆ พักผ่อน", transport: "เดินเท้า", icon: "fa-bag-shopping" }
+            ],
+            tip: "ทิปการจัดกระเป๋า: ฝากกระเป๋าเดินทางใบใหญ่ไว้ที่โรงแรม Park Inn ได้เลย แล้วจัดเพียงเป้หรือกระเป๋าใบเล็กสำหรับค้างสี่ดรุณี 1 คืนในวันถัดไป",
+            tipIcon: "fa-suitcase",
+            tipColor: "bg-sky-950/60 border-sky-800 text-sky-200"
+        },
+        {
+            day: "Day 04",
+            date: "ศ. 23 ต.ค.",
+            title: "เฉิงตู ➔ ตูเจียงเยี่ยน ➔ สี่ดรุณี",
+            badge: "พักสี่ดรุณี (คืนที่ 4)",
+            hotel: "Siguniangshan Hotel (四姑娘山饭店)",
+            items: [
+                { time: "07:00 น.", text: "ออกเดินทางจากโรงแรมในเฉิงตูด้วยรถเหมาส่วนตัวพร้อมคนขับ มุ่งหน้าสู่ตูเจียงเยี่ยน", transport: "รถเหมาส่วนตัว", icon: "fa-van-shuttle" },
+                { time: "08:00 – 11:30 น.", text: "เที่ยวชม ระบบชลประทานโบราณตูเจียงเยี่ยน (Dujiangyan Irrigation System)", transport: "เดินเท้า / รถกอล์ฟ", icon: "fa-water" },
+                { time: "11:30 – 12:30 น.", text: "ทานอาหารกลางวันย่านตูเจียงเยี่ยน", transport: "", icon: "fa-utensils" },
+                { time: "12:30 น.", text: "ออกเดินทางจากตูเจียงเยี่ยน มุ่งหน้าสู่สี่ดรุณี / เมืองริหลง (Siguniangshan / Rilong)", transport: "รถเหมาส่วนตัว (~3.5 ชม.)", icon: "fa-mountain" },
+                { time: "16:00 – 17:00 น.", text: "เดินทางถึง Siguniangshan / Rilong (แวะถ่ายรูปจุดชมวิว Maobiliang 猫鼻梁 หากเวลาและสภาพอากาศเอื้ออำนวย)", transport: "จุดชมวิว", icon: "fa-camera" },
+                { time: "17:00 น. เป็นต้นไป", text: "เข้าเช็กอินที่ Siguniangshan Hotel (ความสูง ~3,200 เมตร) พักผ่อนและทานอาหารเย็น", transport: "", icon: "fa-hotel" }
+            ],
+            amsNotice: "ข้อควรปฏิบัติสำคัญเรื่อง AMS คืนแรกที่สี่ดรุณี: 1) งดการสระผม และ งดการอาบน้ำอุ่นจัด/นาน ในคืนแรก 2) ให้เด็กและผู้ใหญ่จิบน้ำอุ่นบ่อยๆ สวมเสื้อผ้าให้อุ่น ไม่เดินเร็วหรือวิ่ง 3) เตรียมออกซิเจนกระป๋องพกพาไว้ใกล้ตัว",
+            tip: "ทิปเดินทาง: ตารางเวลานี้เป๊ะมาก ได้เที่ยวตูเจียงเยี่ยนครบ และเดินทางถึงสี่ดรุณีช่วงเย็นพอดี",
+            tipIcon: "fa-clock",
+            tipColor: "bg-sky-950/60 border-sky-800 text-sky-200"
+        },
+        {
+            day: "Day 05",
+            date: "ส. 24 ต.ค.",
+            title: "สี่ดรุณี ➔ เฉิงตู",
+            badge: "พักเฉิงตู (คืนที่ 5)",
+            hotel: "Park Inn by Radisson Chengdu Chunxi Road Taikoo Li Branch",
+            items: [
+                { time: "08:00 น.", text: "เข้าเที่ยวอุทยานสี่ดรุณี หุบเขาซวงเฉียวโกว (Shuangqiao Valley) นั่งรถบัสขึ้นจุดสูงสุด (Red Redwood Forest ~3,840m) แล้วย้อนเที่ยวลงมา", transport: "รถบัสอุทยาน", icon: "fa-mountain-sun" },
+                { time: "08:00 – 14:00 น.", text: "เที่ยวชมจุดไฮไลต์ต่างๆ ภายในหุบเขาซวงเฉียวโกว ใช้เวลาประมาณ 5–6 ชั่วโมง", transport: "เดินเท้า / รถบัส", icon: "fa-person-walking" },
+                { time: "14:00 – 15:00 น.", text: "ออกจากอุทยาน รับกระเป๋าที่โรงแรม พร้อมขึ้นรถเหมาเดินทางกลับสู่เฉิงตู", transport: "รถเหมาส่วนตัว", icon: "fa-car" },
+                { time: "19:00 – 20:00 น.", text: "เดินทางถึงเมืองเฉิงตู เช็กอิน Park Inn by Radisson (รับกระเป๋าใหญ่คืน) ทานอาหารเย็นและพักผ่อน", transport: "", icon: "fa-hotel" }
+            ],
+            tip: "ทิปเดินทางกลับ: ออกจากอุทยานช่วง 14:00–15:00 น. จะขับรถกลับถึงเฉิงตูช่วง 19:00–20:00 น. ทันเวลาอาหารมื้อค่ำพอดี",
+            tipIcon: "fa-clock",
+            tipColor: "bg-emerald-950/60 border-emerald-800 text-emerald-200"
+        },
+        {
+            day: "Day 06",
+            date: "อา. 25 ต.ค.",
+            title: "เที่ยวเฉิงตู (แพนด้า & ย่านโบราณ)",
+            badge: "พักเฉิงตู (คืนที่ 6)",
+            hotel: "Park Inn by Radisson Chengdu Chunxi Road Taikoo Li Branch",
+            items: [
+                { time: "08:30 – 12:00 น.", text: "ชมความน่ารักของหมีแพนด้าที่ ศูนย์อนุรักษ์หมีแพนดาเฉิงตู (Chengdu Panda Base)", transport: "Didi (~30 นาที)", icon: "fa-paw" },
+                { time: "12:30 – 14:00 น.", text: "ทานอาหารกลางวันย่านถนนโบราณ Jinli Ancient Street (锦里古街)", transport: "Didi", icon: "fa-utensils" },
+                { time: "14:30 – 17:00 น.", text: "ห้าง IFS ถ่ายรูปคู่แพนด้าปีนตึก IFS Panda Rooftop และเดินช้อปปิ้ง Taikoo Li", transport: "เดินเท้า / Didi", icon: "fa-camera" },
+                { time: "17:30 น. เป็นต้นไป", text: "ทานอาหารค่ำหมาล่าหม้อไฟเฉิงตู และพักผ่อนเตรียมเดินทางกลับฉงชิ่งในวันถัดไป", transport: "", icon: "fa-moon" }
+            ],
+            tip: "ทิปชมแพนด้า: ควรไปศูนย์แพนด้าแต่เช้าตรู่ เพราะช่วงเช้าแพนด้าจะออกมาตื่นตัวกินไผ่กลางแจ้ง หากสายเกินไปอากาศร้อนแพนด้าจะเข้าไปนอนหลับด้านใน",
+            tipIcon: "fa-face-smile",
+            tipColor: "bg-amber-950/50 border-amber-800/80 text-amber-200"
+        },
+        {
+            day: "Day 07",
+            date: "จ. 26 ต.ค.",
+            title: "เฉิงตู ➔ ฉงชิ่ง",
+            badge: "พักฉงชิ่ง AURA SKYHOTEL",
+            hotel: "AURA SKYHOTEL (Jiefangbei Pedestrian Street · Hongya Cave Branch)",
+            items: [
+                { time: "09:30 – 11:30 น.", text: "เช็กเอาต์ นั่งรถไฟความเร็วสูงจาก Chengdu East กลับสู่ฉงชิ่ง (North/West)", transport: "รถไฟความเร็วสูง (~1.5–2 ชม.)", icon: "fa-train" },
+                { time: "12:00 – 13:00 น.", text: "เช็กอิน AURA SKYHOTEL Jiefangbei Pedestrian Street · Hongya Cave Branch ฝากกระเป๋า", transport: "Didi", icon: "fa-hotel" },
+                { time: "13:30 – 17:00 น.", text: "ถนนโบราณ 18 ขั้น Shibati (十八梯) หรือห้างจานบิน Raffles City Chongqing", transport: "Didi / Metro", icon: "fa-route" },
+                { time: "18:00 – 20:30 น.", text: "อาหารเย็นส่งท้ายทริป เดินเล่นเก็บบรรยากาศ Jiefangbei / Hongyadong", transport: "เดินเท้า", icon: "fa-fire" }
+            ],
+            tip: "ทิปส่งท้าย: โรงแรม AURA SKYHOTEL ตั้งอยู่ใกล้ Hongyadong สะดวกต่อการออกไปเดินเก็บภาพบรรยากาศคืนสุดท้ายโดยไม่ต้องนั่งรถไกล",
+            tipIcon: "fa-star",
+            tipColor: "bg-sky-950/50 border-sky-800/80 text-sky-200"
+        },
+        {
+            day: "Day 08",
+            date: "อ. 27 ต.ค.",
+            title: "ฉงชิ่ง ➔ เชียงใหม่",
+            badge: "เดินทางกลับ",
+            hotel: "-",
+            items: [
+                { time: "07:30 – 08:15 น.", text: "เช็กเอาต์ เดินทางไปสนามบินฉงชิ่ง Jiangbei (CKG) Terminal 3", transport: "Didi (~35 นาที) / CRT Line 10", icon: "fa-taxi" },
+                { time: "08:30 – 11:00 น.", text: "เช็กอินเคาน์เตอร์ Thai AirAsia โหลดกระเป๋า ผ่าน ตม. ขาออก (เผื่อเวลา 2.5–3 ชม.)", transport: "", icon: "fa-passport" },
+                { time: "11:20 – 16:40 น.", text: "ออกจาก CKG ถึงเชียงใหม่ (CNX) เวลา 16:40 น. โดยสวัสดิภาพ", transport: "FD Flight", icon: "fa-plane-arrival" }
+            ],
+            tip: "ทิปวันกลับ: ควรเผื่อเวลา ตม. และการโหลดกระเป๋าขาออกที่ CKG อย่างน้อย 3 ชั่วโมง เนื่องจากผู้เดินทางค่อนข้างหนาแน่น",
+            tipIcon: "fa-clock",
+            tipColor: "bg-slate-800 border-slate-700 text-slate-200"
+        }
+    ];
+
+    const weatherStats = [
+        { city: "Chongqing", temp: "16° / 22°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun" },
+        { city: "Chongqing", temp: "15° / 20°C", cond: "ฝนปรอย", icon: "fa-cloud-rain" },
+        { city: "Siguniang", temp: "-2° / 10°C", cond: "หนาวจัด/แดด", icon: "fa-sun" },
+        { city: "Siguniang/Chengdu", temp: "2° / 15°C", cond: "หนาว/เย็นสบาย", icon: "fa-snowflake" },
+        { city: "Dujiangyan", temp: "11° / 17°C", cond: "เย็น/เมฆมาก", icon: "fa-cloud-moon" },
+        { city: "Chengdu", temp: "11° / 17°C", cond: "เมฆมาก", icon: "fa-cloud-sun" },
+        { city: "Chongqing", temp: "15° / 21°C", cond: "เมฆครึ้ม", icon: "fa-cloud-sun" },
+        { city: "Chongqing", temp: "16° / 20°C", cond: "เมฆมาก", icon: "fa-cloud" }
+    ];
+
+    const checklists = [
+        "Passport / สำเนาพาสปอร์ต",
+        "Alipay / WeChat Pay (ผูกบัตรเรียบร้อย)",
+        "eSIM / International Roaming",
+        "Powerbank (ความจุไม่เกินกำหนด)",
+        "เสื้อกันหนาวหนา / ลองจอน (สำหรับสี่ดรุณี)",
+        "ฮีทเทค (สำหรับเด็ก/ผู้ใหญ่)",
+        "ออกซิเจนกระป๋องพกพา (ซื้อที่เมืองริหลง)",
+        "ยาประจำตัว / ยาแก้แพ้ / ยาแก้เมารถ",
+        "กระติกน้ำอุ่นพกพา (จิบน้ำอุ่นกัน AMS)",
+        "รถเข็นเด็กแบบพับเบา (สำหรับทางราบ)",
+        "เป้อุ้มเด็ก (สำหรับทางบันได/Hongyadong)",
+        "ขนม/ของว่างเด็ก ช่วงรอ ตม. & รถไฟ"
+    ];
+
+    const itinWrapper = document.getElementById('itinerary-wrapper');
+    itineraryData.forEach((item) => {
+        const activitiesHtml = item.items.map((act) => `
+            <div class="relative pl-8 pb-5 timeline-item">
+                <div class="timeline-line"></div>
+                <div class="absolute left-0 top-0.5 w-7 h-7 bg-slate-800 border-2 border-sky-400 rounded-full flex items-center justify-center z-10 shadow-sm">
+                    <i class="fa-solid ${act.icon} text-[10px] text-sky-300"></i>
+                </div>
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="text-xs font-bold text-sky-300 bg-sky-950/70 px-2 py-0.5 rounded border border-sky-800/80">${act.time}</span>
+                    ${act.transport ? `<span class="text-[10px] font-semibold text-slate-300 bg-slate-700/80 border border-slate-600/60 px-2 py-0.5 rounded"><i class="fa-solid fa-person-walking-luggage text-[9px] mr-1 text-slate-300"></i>${act.transport}</span>` : ''}
+                </div>
+                <div class="text-sm text-slate-200 font-medium leading-relaxed pt-0.5">
+                    ${act.text}
+                </div>
+            </div>
+        `).join('');
+
+        const amsHtml = item.amsNotice ? `
+            <div class="mt-2 mb-4 p-4 bg-rose-950/50 border border-rose-700/80 rounded-2xl flex gap-3 items-start text-xs text-rose-200 leading-relaxed">
+                <i class="fa-solid fa-notes-medical text-rose-400 text-base mt-0.5 shrink-0"></i>
+                <div><strong>${item.amsNotice}</strong></div>
+            </div>
+        ` : '';
+
+        const tipHtml = item.tip ? `
+            <div class="mt-3 p-3.5 rounded-2xl border ${item.tipColor} flex gap-3 items-start text-xs leading-relaxed">
+                <i class="fa-solid ${item.tipIcon} text-sm mt-0.5 shrink-0 text-sky-400"></i>
+                <div>${item.tip}</div>
+            </div>
+        ` : '';
+
+        const html = `
+            <details class="group bg-slate-800/90 rounded-3xl border border-slate-700/80 custom-shadow overflow-hidden transition-all duration-300" open>
+                <summary class="flex items-center justify-between p-5 cursor-pointer bg-slate-800 hover:bg-slate-700/80 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-600 text-white flex flex-col items-center justify-center font-bold text-xs shadow-md shrink-0">
+                            <span class="text-[9px] uppercase tracking-tighter text-sky-100 leading-none">${item.day}</span>
+                            <span class="text-sm leading-none mt-0.5">${item.date.split(' ')[1]}</span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-slate-300 font-bold uppercase tracking-wider">${item.date}</div>
+                            <div class="text-base font-bold text-white">${item.title}</div>
+                            <div class="text-[10px] inline-block px-2 py-0.5 bg-sky-950/80 text-sky-300 rounded-md mt-1 font-bold border border-sky-700/80">${item.badge}</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-slate-300 group-open:rotate-180 transition-transform mr-2"></i>
+                </summary>
+                <div class="p-6 pt-3 border-t border-slate-700/60 bg-slate-900/60">
+                    <div class="mb-4 text-xs font-semibold text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-hotel text-sky-400"></i> ที่พัก: <span class="text-slate-100 font-bold">${item.hotel}</span>
+                    </div>
+                    ${activitiesHtml}
+                    ${amsHtml}
+                    ${tipHtml}
+                </div>
+            </details>
+        `;
+        itinWrapper.insertAdjacentHTML('beforeend', html);
+    });
+
+    const weatherGrid = document.getElementById('weather-grid');
+    weatherStats.forEach((w, i) => {
+        const isCold = w.city.includes("Siguniang");
+        const html = `
+            <div class="weather-card p-4 rounded-2xl border ${isCold ? 'bg-amber-950/40 border-amber-700/80' : 'bg-slate-800/80 border-slate-700/80'} text-center custom-shadow">
+                <div class="text-[9px] uppercase font-bold text-slate-300 mb-1 leading-none">Day ${i+1}: ${w.city}</div>
+                <i class="fa-solid ${w.icon} ${isCold ? 'text-amber-400' : 'text-sky-400'} text-2xl my-2"></i>
+                <div class="text-sm font-black text-white">${w.temp}</div>
+                <div class="text-[10px] text-slate-200 font-medium">${w.cond}</div>
+            </div>
+        `;
+        weatherGrid.insertAdjacentHTML('beforeend', html);
+    });
+
+    const checkGrid = document.getElementById('checklist-grid');
+    checklists.forEach(item => {
+        checkGrid.insertAdjacentHTML('beforeend', `
+            <div class="flex items-center gap-3 p-3 bg-slate-700/40 rounded-xl border border-slate-600/60">
+                <i class="fa-solid fa-circle-check text-sky-400 text-sm shrink-0"></i>
+                <span class="text-slate-200 text-xs font-medium">${item}</span>
+            </div>
+        `);
+    });
+
+    const ctx = document.getElementById('altitudeChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8'],
+            datasets: [{
+                label: 'Altitude (m)',
+                data: [200, 200, 3200, 3840, 700, 500, 200, 200],
+                borderColor: '#38bdf8',
+                backgroundColor: 'rgba(56, 189, 248, 0.18)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.35,
+                pointRadius: 5,
+                pointBackgroundColor: '#0f172a',
+                pointBorderColor: '#38bdf8',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#334155' }, ticks: { font: { size: 10 }, color: '#cbd5e1' } },
+                x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#cbd5e1' } }
+            }
+        }
+    });
+</script>
+</body>
+</html>
