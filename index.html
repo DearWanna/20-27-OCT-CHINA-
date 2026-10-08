@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>China Travel Master Plan v3.5 (Bauhaus Edition)</title>
+    <title>China Trip 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -82,7 +82,7 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-bold uppercase tracking-wider">
             <div class="flex items-center gap-2">
                 <span class="w-3 h-3 bg-[#F0C020] border border-[#121212]"></span>
-                <span>BAUHAUS TRAVEL DESIGN SYSTEM v3.5</span>
+                <span id="trip-countdown">CHINA TRIP 2026</span>
             </div>
             <div class="flex items-center gap-3">
                 <span class="bg-[#121212] text-white px-2.5 py-1 font-mono">OCT 20 – 27, 2026</span>
@@ -142,8 +142,8 @@
                                 <span class="bg-[#1040C0] text-white px-1.5 py-0.5">HSR + BUS</span>
                             </div>
                             <div class="flex justify-between py-1">
-                                <span>STYLE:</span>
-                                <span>BAUHAUS CONSTRUCTIVIST</span>
+                                <span>HOTELS:</span>
+                                <span class="bg-[#F0C020] text-[#121212] border border-[#121212] px-1.5 py-0.5"><i class="fa-solid fa-circle-check"></i> จองครบ 7 คืน</span>
                             </div>
                         </div>
                     </div>
@@ -171,8 +171,11 @@
                 <a href="#weather" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
                     <i class="fa-solid fa-cloud-sun text-[#F0C020]"></i> WEATHER
                 </a>
-                <a href="#checklist" class="px-4 py-3 hover:bg-[#1040C0] transition-colors flex items-center gap-1.5">
+                <a href="#checklist" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
                     <i class="fa-solid fa-check-square text-[#F0C020]"></i> CHECKLIST
+                </a>
+                <a href="#help" class="px-4 py-3 hover:bg-[#1040C0] transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-life-ring text-[#F0C020]"></i> HELP
                 </a>
             </div>
 
@@ -331,11 +334,11 @@
                             </div>
                             <div>
                                 <span class="bg-[#121212] text-white text-[10px] font-extrabold px-2 py-0.5 uppercase">CHONGQING</span>
-                                <h3 class="font-bold text-base text-[#121212] mt-1">AURA SKYHOTEL Jiefangbei Hongya Cave</h3>
-                                <p class="text-xs text-slate-600 chinese-font font-semibold">重庆解放碑洪崖洞奥拉高空酒店</p>
+                                <h3 class="font-bold text-base text-[#121212] mt-1">วอลลิง โฮเทล- เจียฟางเป่ย หงหยาต้ง ฉงชิ่ง</h3>
+                                <p class="text-xs text-slate-600 chinese-font font-semibold">重庆华灵酒店 (解放碑洪崖洞店) — Walling Hotel</p>
                             </div>
                         </div>
-                        <a href="https://th.trip.com/hotels/detail/?hotelId=133581290" target="_blank" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-4 py-2 text-xs flex items-center gap-1.5 shrink-0">
+                        <a href="https://th.trip.com/hotels/detail/?hotelId=75502750" target="_blank" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-4 py-2 text-xs flex items-center gap-1.5 shrink-0">
                             <i class="fa-solid fa-circle-check text-[#D02020]"></i> จองแล้ว <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                         </a>
                     </div>
@@ -456,7 +459,7 @@
                     </div>
 
                     <div class="bg-[#121212] text-white px-3 py-1.5 text-xs font-mono font-bold border-2 border-[#121212]">
-                        PROGRESS: <span id="checklist-progress" class="text-[#F0C020]">0/12</span>
+                        PROGRESS: <span id="checklist-progress" class="text-[#F0C020]">0/13</span>
                     </div>
                 </div>
 
@@ -468,19 +471,90 @@
             </div>
         </section>
 
+        <!-- Section 6: Emergency & Phrases -->
+        <section id="help" class="scroll-mt-20">
+            <div class="border-4 border-[#121212] bg-white p-6 shadow-bauhaus-lg space-y-6">
+
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-4">
+                    <div class="w-10 h-10 bg-[#F0C020] text-[#121212] border-2 border-[#121212] flex items-center justify-center font-black text-lg shadow-bauhaus-sm">
+                        06
+                    </div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-[#121212]">
+                            EMERGENCY & PHRASES
+                        </h2>
+                        <p class="text-xs font-bold text-slate-600 uppercase">เบอร์ฉุกเฉินในจีน และประโยคภาษาจีนที่ใช้บ่อย (กดเพื่อขยายให้คนท้องถิ่นดู)</p>
+                    </div>
+                </div>
+
+                <!-- Shrimp allergy card -->
+                <div class="bg-[#D02020] text-white border-4 border-[#121212] p-4 sm:p-5 shadow-bauhaus space-y-3">
+                    <div class="flex items-center gap-2 text-xs font-black uppercase">
+                        <i class="fa-solid fa-triangle-exclamation text-[#F0C020] text-lg"></i> ALLERGY CARD · แพ้กุ้งรุนแรง (อาจถึงชีวิต)
+                    </div>
+                    <div class="chinese-font font-black text-2xl sm:text-3xl leading-snug">我对虾严重过敏，吃了可能会有生命危险！</div>
+                    <div class="chinese-font font-bold text-base sm:text-lg leading-snug">如果菜里有虾（包括虾仁、虾米、虾皮、虾滑、虾酱、虾油、海鲜汤底），请一定告诉我。谢谢！</div>
+                    <div class="text-xs font-semibold opacity-90">ฉันแพ้กุ้งรุนแรง กินแล้วอาจถึงแก่ชีวิต ถ้าอาหารมีกุ้ง (รวมกุ้งแห้ง กุ้งบด กะปิ/ซอสกุ้ง น้ำมันกุ้ง น้ำซุปทะเล) กรุณาบอกด้วย ขอบคุณครับ</div>
+                    <button onclick="showAllergyCard()" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-4 py-2 text-xs">
+                        <i class="fa-solid fa-expand"></i> ขยายเต็มจอให้พนักงานร้านดู
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <a href="tel:120" class="btn-bauhaus bg-[#D02020] text-white p-3 text-center">
+                        <div class="text-2xl font-black font-display">120</div>
+                        <div class="text-[11px]"><i class="fa-solid fa-truck-medical"></i> รถพยาบาล</div>
+                    </a>
+                    <a href="tel:110" class="btn-bauhaus bg-[#1040C0] text-white p-3 text-center">
+                        <div class="text-2xl font-black font-display">110</div>
+                        <div class="text-[11px]"><i class="fa-solid fa-shield-halved"></i> ตำรวจ</div>
+                    </a>
+                    <a href="tel:119" class="btn-bauhaus bg-[#F0C020] text-[#121212] p-3 text-center">
+                        <div class="text-2xl font-black font-display">119</div>
+                        <div class="text-[11px]"><i class="fa-solid fa-fire-extinguisher"></i> ดับเพลิง</div>
+                    </a>
+                    <a href="tel:122" class="btn-bauhaus bg-white text-[#121212] p-3 text-center">
+                        <div class="text-2xl font-black font-display">122</div>
+                        <div class="text-[11px]"><i class="fa-solid fa-car-burst"></i> อุบัติเหตุจราจร</div>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="phrase-grid">
+                    <!-- Injected via JS -->
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
-    <!-- Bauhaus Graphic Footer -->
+    <!-- Floating allergy button -->
+    <button onclick="showAllergyCard()" class="fixed bottom-4 right-4 z-40 btn-bauhaus bg-[#D02020] text-white px-3 py-2 text-xs flex items-center gap-1.5" aria-label="การ์ดแพ้กุ้ง">
+        🦐 <span>แพ้กุ้ง</span>
+    </button>
+
+    <!-- Show-to-local modal (taxi / phrases) -->
+    <div id="show-modal" class="hidden fixed inset-0 z-50 bg-[#121212]/80 flex items-center justify-center p-4" onclick="if (event.target === this) closeShowModal()">
+        <div class="bg-white border-4 border-[#121212] shadow-bauhaus-yellow w-full max-w-lg p-6 space-y-4 text-center">
+            <div id="show-modal-label" class="text-xs font-black uppercase text-[#1040C0]"></div>
+            <div id="show-modal-zh" class="chinese-font font-black text-3xl sm:text-4xl leading-snug text-[#121212] break-words"></div>
+            <div id="show-modal-sub" class="chinese-font font-bold text-lg text-[#D02020]"></div>
+            <div id="show-modal-th" class="text-sm font-semibold text-slate-600"></div>
+            <button onclick="closeShowModal()" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-6 py-2 text-sm">ปิด</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="border-t-4 border-[#121212] bg-[#121212] text-white py-12 mt-16">
         <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             
             <div class="space-y-2">
                 <div class="flex items-center gap-2 text-xl font-black font-display text-[#F0C020]">
                     <span class="w-4 h-4 bg-[#D02020] border border-white"></span>
-                    BAUHAUS MASTER PLAN
+                    CHINA TRIP 2026
                 </div>
                 <p class="text-xs text-slate-400 font-medium">
-                    ออกแบบด้วยระบบเรขาคณิตBauhaus เน้นการใช้งานจริง อ่านง่าย ชัดเจนทุกมุมมอง
+                    แผนเดินทางครอบครัว 20–27 ต.ค. 2026 · ฉงชิ่ง – เฉิงตู – ปี้เผิงโกว
                 </p>
             </div>
 
@@ -491,8 +565,8 @@
             </div>
 
             <div class="text-right text-xs text-slate-400 font-mono">
-                CHINA TRIP 2026<br>
-                CHIANG MAI ➔ CHONGQING ➔ CHENGDU
+                CNX ➔ CKG ➔ TFU ➔ BPG<br>
+                ➔ TFU ➔ CKG ➔ CNX
             </div>
 
         </div>
@@ -509,10 +583,10 @@
                 title: "เชียงใหม่ ➔ ฉงชิ่ง (เดินทางวันแรก)",
                 hotel: "วอลลิง โฮเทล- เจียฟางเป่ย หงหยาต้ง ฉงชิ่ง (Walling Hotel)",
                 items: [
-                    { time: "11:00 – 18:00", text: "ออกเดินทางจากเชียงใหม่ (CNX) ถึงสนามบินฉงชิ่ง เจียงเป่ย (CKG) Terminal 3", transport: "Thai AirAsia (FD)", icon: "fa-plane" },
+                    { time: "11:00 – 18:00", text: "ออกเดินทางจากเชียงใหม่ (CNX) ถึงสนามบินฉงชิ่ง เจียงเป่ย (CKG) Terminal 3", transport: "Thai AirAsia (FD)", icon: "fa-plane", places: [{ zh: "重庆江北国际机场T3航站楼", city: "重庆" }] },
                     { time: "18:00 – 19:15", text: "ผ่านพิธีการ ตม., รับกระเป๋าเดินทาง และเปิดใช้งาน Alipay / eSIM", transport: "ตม. ขาเข้า", icon: "fa-passport" },
-                    { time: "19:15 – 20:00", text: "เดินทางเข้าเมืองสู่โรงแรม Walling Hotel ย่าน Jiefangbei / Hongyadong", transport: "Didi (~45 นาที) / CRT Line 10", icon: "fa-taxi" },
-                    { time: "20:00 น.+", text: "เช็กอิน เดินเล่นย่านถนนคนเดิน Jiefangbei เบาๆ หาอาหารเย็นทาน แล้วพักผ่อน", transport: "เดินเท้า", icon: "fa-utensils" }
+                    { time: "19:15 – 20:00", text: "เดินทางเข้าเมืองสู่โรงแรม Walling Hotel ย่าน Jiefangbei / Hongyadong", transport: "Didi (~45 นาที) / CRT Line 10", icon: "fa-taxi", places: [{ zh: "重庆华灵酒店(解放碑洪崖洞店)", city: "重庆" }] },
+                    { time: "20:00 น.+", text: "เช็กอิน เดินเล่นย่านถนนคนเดิน Jiefangbei เบาๆ หาอาหารเย็นทาน แล้วพักผ่อน", transport: "เดินเท้า", icon: "fa-utensils", places: [{ zh: "解放碑步行街", city: "重庆" }] }
                 ],
                 tip: "ทิปวันแรก: เด็กเล็กมักเหนื่อยล้าจากการบิน แนะนำให้เลือกร้านอาหารใกล้โรงแรมที่สุด ไม่ต้องเดินไกล",
                 colorBlock: "bg-[#1040C0] text-white"
@@ -525,12 +599,12 @@
                 title: "เที่ยวฉงชิ่งเต็มวัน (แลนด์มาร์กมิติพิศวง)",
                 hotel: "วอลลิง โฮเทล- เจียฟางเป่ย หงหยาต้ง ฉงชิ่ง (Walling Hotel)",
                 items: [
-                    { time: "09:00 – 10:30", text: "ไหว้พระที่ วัดหลัวฮั่น (Luohan Temple 罗汉寺)", transport: "เดิน ~10 นาที", icon: "fa-vihara" },
-                    { time: "10:30 – 11:30", text: "จิบกาแฟและชมวิวเมืองที่ Wadingding Coffee (瓦丁丁咖啡) อาคาร S95 ชั้น 5", transport: "เดินเท้า", icon: "fa-mug-hot" },
-                    { time: "11:30 – 14:00", text: "ห้าง The Ring Chongqing ชมสวนป่า Muguang Forest และทานมื้อเที่ยง", transport: "Didi / CRT Line 5", icon: "fa-tree" },
-                    { time: "14:30 – 15:30", text: "สถานี Liziba (李子坝) ถ่ายรูปจุดรถไฟวิ่งทะลุตึก", transport: "CRT Line 2", icon: "fa-train" },
-                    { time: "16:00 – 17:30", text: "ลานมิติพิศวง Kuixinglou Square (魁星楼广场)", transport: "CRT Line 2", icon: "fa-building" },
-                    { time: "18:00 – 20:30", text: "ชมไฟยามค่ำคืนที่ Hongyadong (洪崖洞) ทานอาหารเย็นริมแม่น้ำ", transport: "เดินเท้า / Didi", icon: "fa-moon" }
+                    { time: "09:00 – 10:30", text: "ไหว้พระที่ วัดหลัวฮั่น (Luohan Temple 罗汉寺)", transport: "เดิน ~10 นาที", icon: "fa-vihara", places: [{ zh: "罗汉寺", city: "重庆" }] },
+                    { time: "10:30 – 11:30", text: "จิบกาแฟและชมวิวเมืองที่ Wadingding Coffee (瓦丁丁咖啡) อาคาร S95 ชั้น 5", transport: "เดินเท้า", icon: "fa-mug-hot", places: [{ zh: "瓦丁丁咖啡", city: "重庆" }] },
+                    { time: "11:30 – 14:00", text: "ห้าง The Ring Chongqing ชมสวนป่า Muguang Forest และทานมื้อเที่ยง", transport: "Didi / CRT Line 5", icon: "fa-tree", places: [{ zh: "重庆光环购物公园", city: "重庆" }, { zh: "沐光森林", city: "重庆" }] },
+                    { time: "14:30 – 15:30", text: "สถานี Liziba (李子坝) ถ่ายรูปจุดรถไฟวิ่งทะลุตึก", transport: "CRT Line 2", icon: "fa-train", places: [{ zh: "李子坝站", city: "重庆" }] },
+                    { time: "16:00 – 17:30", text: "ลานมิติพิศวง Kuixinglou Square (魁星楼广场)", transport: "CRT Line 2", icon: "fa-building", places: [{ zh: "魁星楼广场", city: "重庆" }] },
+                    { time: "18:00 – 20:30", text: "ชมไฟยามค่ำคืนที่ Hongyadong (洪崖洞) ทานอาหารเย็นริมแม่น้ำ", transport: "เดินเท้า / Didi", icon: "fa-moon", places: [{ zh: "洪崖洞", city: "重庆" }] }
                 ],
                 tip: "ทิปสำหรับครอบครัว: ฉงชิ่งมีบันไดเยอะมาก แนะนำพกรถเข็นแบบพับเบา หรือเป้อุ้มเด็กสำรองไว้สำหรับช่วง Hongyadong",
                 colorBlock: "bg-[#1040C0] text-white"
@@ -543,9 +617,9 @@
                 title: "ฉงชิ่ง ➔ เฉิงตู (ย้ายเมืองโดยรถไฟความเร็วสูง)",
                 hotel: "สาขาพาร์กอินน์ บาย เรดิสัน ไท่กู๋หลี่ ถนนชุนซี เฉิงตู (Park Inn)",
                 items: [
-                    { time: "09:00 – 11:00", text: "เช็กเอาต์ นั่งรถไฟความเร็วสูง (HSR) มุ่งหน้าสู่สถานี Chengdu East", transport: "CRH Train (~2 ชม.)", icon: "fa-train" },
-                    { time: "11:30 – 12:30", text: "เดินทางถึงเฉิงตู เช็กอิน Park Inn by Radisson ถนนชุนซี", transport: "Didi (~20 นาที)", icon: "fa-hotel" },
-                    { time: "13:30 – 17:00", text: "เดินเล่น Chunxi Road, Taikoo Li, ถ่ายรูปคูตึกหมีแพนด้า IFS", transport: "เดินเท้า", icon: "fa-bag-shopping" },
+                    { time: "09:00 – 11:00", text: "เช็กเอาต์ นั่งรถไฟความเร็วสูง (HSR) มุ่งหน้าสู่สถานี Chengdu East", transport: "CRH Train (~2 ชม.)", icon: "fa-train", places: [{ zh: "成都东站", city: "成都" }] },
+                    { time: "11:30 – 12:30", text: "เดินทางถึงเฉิงตู เช็กอิน Park Inn by Radisson ถนนชุนซี", transport: "Didi (~20 นาที)", icon: "fa-hotel", places: [{ zh: "丽怡酒店(成都春熙路太古里店)", city: "成都" }] },
+                    { time: "13:30 – 17:00", text: "เดินเล่น Chunxi Road, Taikoo Li, ถ่ายรูปคูตึกหมีแพนด้า IFS", transport: "เดินเท้า", icon: "fa-bag-shopping", places: [{ zh: "春熙路", city: "成都" }, { zh: "成都远洋太古里", city: "成都" }, { zh: "成都国际金融中心IFS", city: "成都" }] },
                     { time: "17:30 – 20:00", text: "ทานมื้อเย็นเสฉวน จัดเป้ใบเล็กเตรียมตัวไปปี้เผิงโกววันพรุ่งนี้", transport: "พักผ่อน", icon: "fa-utensils" }
                 ],
                 tip: "ทิปการจัดกระเป๋า: ฝากกระเป๋าเดินทางใบใหญ่ไว้ที่โรงแรม Park Inn เฉิงตู แล้วจัดเฉพาะเป้ใบเล็กไปปี้เผิงโกว 1 คืน",
@@ -559,9 +633,9 @@
                 title: "เฉิงตู ➔ ปี้เผิงโกว (นั่งบัสชมทิวทัศน์ธรรมชาติ)",
                 hotel: "โรงแรมกวนซานหวังเยว่ ปี้เผิงโกว (Bipenggou Guanshan Wangyue)",
                 items: [
-                    { time: "07:00 – 12:00", text: "เดินทางจากเฉิงตูด้วยรถบัสท่องเที่ยว มุ่งหน้าสู่อำเภอหลี่เซียน / อุทยานปี้เผิงโกว", transport: "Tourist Bus (~5 ชม.)", icon: "fa-bus" },
+                    { time: "07:00 – 12:00", text: "เดินทางจากเฉิงตูด้วยรถบัสท่องเที่ยว มุ่งหน้าสู่อำเภอหลี่เซียน / อุทยานปี้เผิงโกว", transport: "Tourist Bus (~5 ชม.)", icon: "fa-bus", places: [{ zh: "理县", city: "阿坝" }, { zh: "毕棚沟景区", city: "阿坝" }] },
                     { time: "12:00 – 13:30", text: "ทานอาหารกลางวันท้องถิ่นสไตล์ Tibetan-Qiang", transport: "มื้อเที่ยง", icon: "fa-utensils" },
-                    { time: "14:00", text: "เช็กอินเข้าพักที่ โรงแรมกวนซานหวังเยว่ ปี้เผิงโกว (~2,800m)", transport: "เช็กอิน", icon: "fa-hotel" },
+                    { time: "14:00", text: "เช็กอินเข้าพักที่ โรงแรมกวนซานหวังเยว่ ปี้เผิงโกว (~2,800m)", transport: "เช็กอิน", icon: "fa-hotel", places: [{ zh: "毕棚沟观山望月酒店", city: "阿坝" }] },
                     { time: "14:30 – 17:30", text: "พักผ่อนชมวิวยอดเขาหิมะ ปรับร่างกายกับระดับความสูง", transport: "เดินชมวิว", icon: "fa-mountain" },
                     { time: "18:00", text: "ทานอาหารเย็น รีบพักผ่อนเก็บพลังไว้เที่ยวอุทยานวันพรุ่งนี้", transport: "พักผ่อน", icon: "fa-moon" }
                 ],
@@ -577,10 +651,10 @@
                 hotel: "สาขาพาร์กอินน์ บาย เรดิสัน ไท่กู๋หลี่ ถนนชุนซี เฉิงตู (Park Inn)",
                 items: [
                     { time: "08:00 – 08:30", text: "ทานอาหารเช้า เช็กเอาต์ฝากกระเป๋าที่โรงแรม", transport: "เช็กเอาต์", icon: "fa-id-card" },
-                    { time: "08:30 – 14:00", text: "เที่ยวอุทยานปี้เผิงโกว (Longzhu Lake, Moon Bay, Swallow Rock ~3,837m)", transport: "รถอุทยาน & รถไฟฟ้า", icon: "fa-tree" },
+                    { time: "08:30 – 14:00", text: "เที่ยวอุทยานปี้เผิงโกว (Longzhu Lake, Moon Bay, Swallow Rock ~3,837m)", transport: "รถอุทยาน & รถไฟฟ้า", icon: "fa-tree", places: [{ zh: "毕棚沟景区", city: "阿坝" }, { zh: "上海子", city: "阿坝" }] },
                     { time: "14:00 – 15:00", text: "ออกจากอุทยาน รับกระเป๋าคืน และเดินทางไปสถานีรถบัส", transport: "เตรียมกลับ", icon: "fa-bus" },
                     { time: "15:00 – 19:30", text: "ขึ้นรถบัสเดินทางกลับสู่เมืองเฉิงตู", transport: "Tourist Bus", icon: "fa-bus-simple" },
-                    { time: "19:30 – 20:30", text: "เช็กอิน Park Inn by Radisson (รับกระเป๋าใหญ่คืน) ทานอาหารค่ำ", transport: "Didi", icon: "fa-hotel" }
+                    { time: "19:30 – 20:30", text: "เช็กอิน Park Inn by Radisson (รับกระเป๋าใหญ่คืน) ทานอาหารค่ำ", transport: "Didi", icon: "fa-hotel", places: [{ zh: "丽怡酒店(成都春熙路太古里店)", city: "成都" }] }
                 ],
                 tip: "ทิปเที่ยวอุทยาน: มีรถไฟฟ้า (Electromobile) เชื่อมระหว่างจุดสำคัญ นั่งทุ่นแรงช่วยให้เด็กๆ เที่ยวสบายขึ้น",
                 colorBlock: "bg-[#D02020] text-white"
@@ -593,12 +667,12 @@
                 title: "เที่ยวเฉิงตู (ศูนย์หมีแพนด้า & ถนนโบราณจินหลี่)",
                 hotel: "สาขาพาร์กอินน์ บาย เรดิสัน ไท่กู๋หลี่ ถนนชุนซี เฉิงตู (Park Inn)",
                 items: [
-                    { time: "08:30 – 12:00", text: "ชมความน่ารักของหมีแพนด้าที่ ศูนย์อนุรักษ์หมีแพนดาเฉิงตู (Chengdu Panda Base)", transport: "Didi (~30 นาที)", icon: "fa-paw" },
-                    { time: "12:30 – 14:00", text: "ทานอาหารกลางวันย่านถนนโบราณ Jinli Ancient Street (锦里古街)", transport: "Didi", icon: "fa-utensils" },
-                    { time: "14:30 – 17:00", text: "เดินชมวัฒนธรรมย่าน Kuanzhai Alley (ตรอกกว้างตรอกแคบ)", transport: "Didi / Metro", icon: "fa-camera" },
+                    { time: "08:30 – 12:00", text: "ชมความน่ารักของหมีแพนด้าที่ ศูนย์อนุรักษ์หมีแพนดาเฉิงตู (Chengdu Panda Base)", transport: "Didi (~30 นาที)", icon: "fa-paw", places: [{ zh: "成都大熊猫繁育研究基地", city: "成都" }] },
+                    { time: "12:30 – 14:00", text: "ทานอาหารกลางวันย่านถนนโบราณ Jinli Ancient Street (锦里古街)", transport: "Didi", icon: "fa-utensils", places: [{ zh: "锦里古街", city: "成都" }] },
+                    { time: "14:30 – 17:00", text: "เดินชมวัฒนธรรมย่าน Kuanzhai Alley (ตรอกกว้างตรอกแคบ)", transport: "Didi / Metro", icon: "fa-camera", places: [{ zh: "宽窄巷子", city: "成都" }] },
                     { time: "17:30 น.+", text: "ทานอาหารค่ำหมาล่าหม้อไฟเฉิงตูส่งท้าย", transport: "มื้อค่ำ", icon: "fa-fire" }
                 ],
-                tip: "ทิปชมแพนด้า: ควรไปถึงศูนย์แพนด้าแต่เช้าตรู่ เพราะแพนด้าจะออกมาตื่นตัวกินไผ่กลางแจ้งก่อนอากาศร้อน",
+                tip: "ทิปชมแพนด้า: ควรไปถึงศูนย์แพนด้าแต่เช้าตรู่ เพราะแพนด้าจะออกมาตื่นตัวกินไผ่กลางแจ้งก่อนอากาศร้อน<br>🦐 <strong>แพ้กุ้ง:</strong> ร้านหม้อไฟมักมี <span class=\"chinese-font\">虾滑</span> (กุ้งบด) และใช้น้ำซุปร่วมกัน ให้โชว์การ์ดแพ้กุ้งก่อนสั่ง และขอหม้อแยก/ห้ามใส่กุ้งลงหม้อ",
                 colorBlock: "bg-[#121212] text-white"
             },
             {
@@ -607,14 +681,14 @@
                 day: "DAY 07",
                 date: "จันทร์ 26 ต.ค. 2026",
                 title: "เฉิงตู ➔ ฉงชิ่ง (ย้ายกลับฉงชิ่ง คืนสุดท้าย)",
-                hotel: "AURA SKYHOTEL Jiefangbei Pedestrian Street Hongya Cave",
+                hotel: "วอลลิง โฮเทล- เจียฟางเป่ย หงหยาต้ง ฉงชิ่ง (Walling Hotel)",
                 items: [
-                    { time: "09:30 – 11:30", text: "เช็กเอาต์ นั่งรถไฟความเร็วสูงกลับสู่ฉงชิ่ง", transport: "CRH Train (~2 ชม.)", icon: "fa-train" },
-                    { time: "12:00 – 13:00", text: "เช็กอิน AURA SKYHOTEL Jiefangbei Hongya Cave ฝากกระเป๋า", transport: "Didi", icon: "fa-hotel" },
-                    { time: "13:30 – 17:00", text: "ถนนโบราณ 18 ขั้น Shibati (十八梯) หรือห้าง Raffles City", transport: "Didi / Metro", icon: "fa-route" },
+                    { time: "09:30 – 11:30", text: "เช็กเอาต์ นั่งรถไฟความเร็วสูงกลับสู่ฉงชิ่ง", transport: "CRH Train (~2 ชม.)", icon: "fa-train", places: [{ zh: "成都东站", city: "成都" }] },
+                    { time: "12:00 – 13:00", text: "เช็กอิน Walling Hotel (โรงแรมเดิมคืนแรก) ย่าน Jiefangbei / Hongyadong ฝากกระเป๋า", transport: "Didi", icon: "fa-hotel", places: [{ zh: "重庆华灵酒店(解放碑洪崖洞店)", city: "重庆" }] },
+                    { time: "13:30 – 17:00", text: "ถนนโบราณ 18 ขั้น Shibati (十八梯) หรือห้าง Raffles City", transport: "Didi / Metro", icon: "fa-route", places: [{ zh: "十八梯", city: "重庆" }, { zh: "重庆来福士", city: "重庆" }] },
                     { time: "18:00 – 20:30", text: "อาหารเย็นส่งท้ายทริป เดินเล่นเก็บบรรยากาศยามค่ำคืน", transport: "เดินเท้า", icon: "fa-moon" }
                 ],
-                tip: "โรงแรม AURA SKYHOTEL ตั้งอยู่ใกล้ Hongyadong สะดวกต่อการเดินออกไปถ่ายรูปบรรยากาศส่งท้าย",
+                tip: "กลับมาพัก Walling Hotel ที่เดิม คุ้นเคยเส้นทางแล้ว ใกล้ Hongyadong เดินออกไปถ่ายรูปบรรยากาศส่งท้ายได้สะดวก",
                 colorBlock: "bg-[#1040C0] text-white"
             },
             {
@@ -625,7 +699,7 @@
                 title: "ฉงชิ่ง ➔ เชียงใหม่ (เดินทางกลับโดยสวัสดิภาพ)",
                 hotel: "เดินทางกลับประเทศไทย",
                 items: [
-                    { time: "07:30 – 08:15", text: "เช็กเอาต์ เดินทางไปสนามบินฉงชิ่ง Jiangbei (CKG) Terminal 3", transport: "Didi (~35 นาที)", icon: "fa-taxi" },
+                    { time: "07:30 – 08:15", text: "เช็กเอาต์ เดินทางไปสนามบินฉงชิ่ง Jiangbei (CKG) Terminal 3", transport: "Didi (~35 นาที)", icon: "fa-taxi", places: [{ zh: "重庆江北国际机场T3航站楼", city: "重庆" }] },
                     { time: "08:30 – 11:00", text: "เช็กอินเคาน์เตอร์ Thai AirAsia โหลดกระเป๋า ผ่าน ตม. ขาออก", transport: "สนามบิน CKG", icon: "fa-passport" },
                     { time: "11:20 – 16:40", text: "บินตรงออกจาก CKG ถึงเชียงใหม่ (CNX) เวลา 16:40 น.", transport: "FD Flight", icon: "fa-plane-arrival" }
                 ],
@@ -657,7 +731,8 @@
             "กระติกน้ำอุ่นพกพา (จิบน้ำอุ่นกัน AMS)",
             "รถเข็นเด็กแบบพับเบา (สำหรับทางราบในเฉิงตู)",
             "เป้อุ้มเด็ก (สำหรับทางบันได/Hongyadong)",
-            "ขนม/ของว่างเด็ก ช่วงนั่งรถบัส & รอคิว ตม."
+            "ขนม/ของว่างเด็ก ช่วงนั่งรถบัส & รอคิว ตม.",
+            "ยาแก้แพ้ / EpiPen (ถ้ามี) — แพ้กุ้ง พกติดตัวตลอดเวลา"
         ];
 
         let currentFilter = 'ALL';
@@ -682,23 +757,25 @@
                         <div class="text-xs sm:text-sm font-semibold text-[#121212] leading-snug">
                             ${act.text}
                         </div>
+                        ${act.places ? `<div class="flex flex-wrap gap-1.5 mt-1.5">${act.places.map(placeChip).join('')}</div>` : ''}
                     </div>
                 `).join('');
 
+                const isToday = itemDate(item) === chinaToday();
                 const accordion = document.createElement('div');
-                accordion.className = 'border-3 border-[#121212] bg-white shadow-bauhaus-sm overflow-hidden';
+                accordion.className = `border-3 border-[#121212] bg-white overflow-hidden ${isToday ? 'shadow-bauhaus-red' : 'shadow-bauhaus-sm'}`;
                 accordion.innerHTML = `
                     <button onclick="toggleAccordion(${item.id})" class="w-full text-left p-4 flex items-center justify-between gap-4 bg-[#F0F0F0] hover:bg-[#F0C020] transition-colors border-b-2 border-[#121212]">
                         <div class="flex items-center gap-3">
                             <span class="${item.colorBlock} border-2 border-[#121212] px-2.5 py-1 font-black text-xs uppercase shadow-bauhaus-sm">${item.day}</span>
                             <div>
                                 <div class="text-[10px] font-bold text-slate-600 uppercase">${item.date}</div>
-                                <div class="font-bold text-sm sm:text-base text-[#121212]">${item.title}</div>
+                                <div class="font-bold text-sm sm:text-base text-[#121212]">${item.title}${isToday ? ' <span class="bg-[#D02020] text-white text-[10px] font-black px-1.5 py-0.5 align-middle">TODAY</span>' : ''}</div>
                             </div>
                         </div>
-                        <i id="acc-icon-${item.id}" class="fa-solid fa-chevron-down text-[#121212] text-sm"></i>
+                        <i id="acc-icon-${item.id}" class="fa-solid ${isToday ? 'fa-chevron-up' : 'fa-chevron-down'} text-[#121212] text-sm"></i>
                     </button>
-                    <div id="acc-body-${item.id}" class="hidden p-5 bg-white space-y-4">
+                    <div id="acc-body-${item.id}" class="${isToday ? '' : 'hidden'} p-5 bg-white space-y-4">
                         <div class="text-xs font-bold text-slate-700 bg-[#E0E0E0] p-2 border border-[#121212] flex items-center gap-2">
                             <i class="fa-solid fa-hotel text-[#1040C0]"></i> HOTEL STAY: <span class="text-[#121212] font-black">${item.hotel}</span>
                         </div>
@@ -773,6 +850,122 @@
                 `;
                 container.appendChild(card);
             });
+        }
+
+
+        // ---------- Show-to-local modal ----------
+        const phrases = [
+            { zh: "这个菜里有虾吗？", py: "Zhège cài lǐ yǒu xiā ma?", th: "เมนูนี้มีกุ้งไหม", hot: true },
+            { zh: "请不要放虾，我对虾过敏", py: "Qǐng búyào fàng xiā, wǒ duì xiā guòmǐn", th: "กรุณาอย่าใส่กุ้ง ฉันแพ้กุ้ง", hot: true },
+            { zh: "我过敏了，请马上叫救护车！", py: "Wǒ guòmǐn le, qǐng mǎshàng jiào jiùhùchē!", th: "ฉันแพ้อาหาร ช่วยเรียกรถพยาบาลด่วน!", hot: true },
+            { zh: "请带我去这个地址", py: "Qǐng dài wǒ qù zhège dìzhǐ", th: "ช่วยพาฉันไปที่อยู่นี้" },
+            { zh: "我有高原反应，需要氧气", py: "Wǒ yǒu gāoyuán fǎnyìng, xūyào yǎngqì", th: "ฉันมีอาการแพ้ความสูง ต้องการออกซิเจน" },
+            { zh: "我不舒服，请帮帮我", py: "Wǒ bù shūfu, qǐng bāngbang wǒ", th: "ฉันไม่สบาย ช่วยด้วย" },
+            { zh: "最近的医院在哪里？", py: "Zuìjìn de yīyuàn zài nǎlǐ?", th: "โรงพยาบาลที่ใกล้ที่สุดอยู่ที่ไหน" },
+            { zh: "洗手间在哪里？", py: "Xǐshǒujiān zài nǎlǐ?", th: "ห้องน้ำอยู่ที่ไหน" },
+            { zh: "不要辣", py: "Bú yào là", th: "ไม่เอาเผ็ด" },
+            { zh: "微辣", py: "Wēi là", th: "เผ็ดน้อย" },
+            { zh: "多少钱？", py: "Duōshǎo qián?", th: "ราคาเท่าไหร่" },
+            { zh: "可以用支付宝吗？", py: "Kěyǐ yòng Zhīfùbǎo ma?", th: "จ่ายด้วย Alipay ได้ไหม" },
+            { zh: "我们是泰国游客", py: "Wǒmen shì Tàiguó yóukè", th: "พวกเราเป็นนักท่องเที่ยวไทย" }
+        ];
+
+        function openShowModal(label, zh, sub, th) {
+            document.getElementById('show-modal-label').textContent = label;
+            document.getElementById('show-modal-zh').textContent = zh;
+            document.getElementById('show-modal-sub').textContent = sub || '';
+            document.getElementById('show-modal-th').textContent = th || '';
+            document.getElementById('show-modal').classList.remove('hidden');
+        }
+        function closeShowModal() {
+            document.getElementById('show-modal').classList.add('hidden');
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShowModal(); });
+
+        function renderPhrases() {
+            const grid = document.getElementById('phrase-grid');
+            grid.innerHTML = '';
+            phrases.forEach(ph => {
+                const btn = document.createElement('button');
+                btn.className = `text-left border-2 border-[#121212] ${ph.hot ? 'bg-[#F0C020]' : 'bg-[#F0F0F0]'} hover:bg-[#F0C020] p-3 shadow-bauhaus-sm flex items-center justify-between gap-3 transition-colors`;
+                btn.innerHTML = `
+                    <div>
+                        <div class="chinese-font font-black text-base text-[#121212]">${ph.zh}</div>
+                        <div class="text-[11px] font-semibold text-slate-600">${ph.py} · ${ph.th}</div>
+                    </div>
+                    <i class="fa-solid fa-expand text-[#1040C0]"></i>`;
+                btn.onclick = () => openShowModal('PHRASE', ph.zh, '', `${ph.py} — ${ph.th}`);
+                grid.appendChild(btn);
+            });
+        }
+
+
+        function showAllergyCard() {
+            openShowModal('⚠️ 过敏 ALLERGY · แพ้กุ้ง',
+                '我对虾严重过敏，吃了可能会有生命危险！',
+                '如果菜里有虾（包括虾仁、虾米、虾皮、虾滑、虾酱、虾油、海鲜汤底），请一定告诉我。谢谢！',
+                'ฉันแพ้กุ้งรุนแรง อาจถึงชีวิต ถ้าอาหารมีกุ้ง กรุณาบอกด้วย');
+        }
+
+        // ---------- Chinese place names (Amap search) ----------
+        function placeChip(pl) {
+            const amap = `https://uri.amap.com/search?keyword=${encodeURIComponent(pl.zh)}&city=${encodeURIComponent(pl.city)}&callnative=1`;
+            return `<span class="inline-flex items-stretch border-2 border-[#121212] text-[11px] font-bold bg-white">
+                <span class="chinese-font px-2 py-0.5">${pl.zh}</span>
+                <a href="${amap}" target="_blank" rel="noopener" class="bg-[#1040C0] text-white px-1.5 py-0.5 border-l-2 border-[#121212] hover:bg-[#D02020]" title="ค้นหาใน Amap"><i class="fa-solid fa-map-location-dot"></i> Amap</a>
+                <button type="button" onclick="copyPlace(this, '${pl.zh}')" class="bg-[#F0C020] px-1.5 py-0.5 border-l-2 border-[#121212] hover:bg-white" title="คัดลอกชื่อจีน"><i class="fa-regular fa-copy"></i></button>
+            </span>`;
+        }
+
+        function copyPlace(btn, text) {
+            const done = () => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => { btn.innerHTML = '<i class="fa-regular fa-copy"></i>'; }, 1200);
+            };
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text) && done());
+            } else if (fallbackCopy(text)) done();
+        }
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            let ok = false;
+            try { ok = document.execCommand('copy'); } catch (e) {}
+            ta.remove();
+            return ok;
+        }
+
+        // Add "show to driver" button under each hotel's Chinese name
+        function addTaxiButtons() {
+            document.querySelectorAll('#hotels .chinese-font').forEach(p => {
+                const zh = p.textContent.split(' — ')[0].trim();
+                const btn = document.createElement('button');
+                btn.className = 'mt-1.5 bg-[#121212] text-white px-2 py-0.5 text-[10px] font-black uppercase hover:bg-[#1040C0]';
+                btn.innerHTML = '<i class="fa-solid fa-taxi mr-1 text-[#F0C020]"></i>ให้คนขับดู';
+                btn.onclick = () => openShowModal('TAXI · DIDI', zh, '请带我去这个酒店', 'ช่วยพาฉันไปโรงแรมนี้');
+                p.insertAdjacentElement('afterend', btn);
+            });
+        }
+
+        // ---------- Countdown & today (China time, UTC+8) ----------
+        const TRIP_START = '2026-10-20';
+        function chinaToday() {
+            return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+        }
+        function dayDiff(a, b) {
+            return Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / 86400000);
+        }
+        function itemDate(item) {
+            return `2026-10-${String(19 + item.id).padStart(2, '0')}`;
+        }
+        function renderCountdown() {
+            const el = document.getElementById('trip-countdown');
+            const today = chinaToday();
+            const diff = dayDiff(today, TRIP_START);
+            if (diff > 0) el.textContent = `อีก ${diff} วัน ออกเดินทาง ✈️`;
+            else if (diff > -8) el.textContent = `วันนี้ DAY ${String(1 - diff).padStart(2, '0')} ของทริป 🇨🇳`;
+            else el.textContent = 'CHINA TRIP 2026 · จบทริปแล้ว';
         }
 
         // ---------- Bipenggou live forecast (yr.no / MET Norway) ----------
@@ -1028,7 +1221,8 @@
             writeForecastCache(cache);
         }
 
-        let checkedState = JSON.parse(localStorage.getItem('bauhaus_trip_checklist') || '{}');
+        let checkedState = {};
+        try { checkedState = JSON.parse(localStorage.getItem('bauhaus_trip_checklist') || '{}'); } catch (e) {}
 
         function renderChecklist() {
             const container = document.getElementById('checklist-grid');
@@ -1056,15 +1250,18 @@
 
         function toggleCheck(index) {
             checkedState[index] = !checkedState[index];
-            localStorage.setItem('bauhaus_trip_checklist', JSON.stringify(checkedState));
+            try { localStorage.setItem('bauhaus_trip_checklist', JSON.stringify(checkedState)); } catch (e) {}
             renderChecklist();
         }
 
         window.onload = function() {
             renderItinerary();
+            renderCountdown();
             renderWeather();
             loadBipenggouForecast(false);
             renderChecklist();
+            renderPhrases();
+            addTaxiButtons();
 
             const ctx = document.getElementById('altitudeChart').getContext('2d');
             new Chart(ctx, {
