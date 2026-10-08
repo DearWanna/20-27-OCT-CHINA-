@@ -399,6 +399,42 @@
                     <!-- Injected via JS -->
                 </div>
 
+                <!-- Bipenggou Live Forecast (yr.no / MET Norway) -->
+                <div id="bipenggou-weather" class="border-4 border-[#121212] bg-[#F0F0F0] p-4 sm:p-5 shadow-bauhaus space-y-5">
+
+                    <div class="flex flex-wrap items-start justify-between gap-3 border-b-3 border-[#121212] pb-3">
+                        <div>
+                            <div class="inline-flex items-center gap-2 bg-[#D02020] text-white border-2 border-[#121212] px-2 py-0.5 text-[10px] font-black uppercase">
+                                <i class="fa-solid fa-satellite-dish"></i> LIVE · YR.NO
+                            </div>
+                            <h3 class="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-[#121212] mt-2">
+                                BIPENGGOU FORECAST
+                            </h3>
+                            <p class="text-xs font-bold text-slate-700">พยากรณ์อากาศปี้เผิงโกว 2 ระดับความสูง (ดึงข้อมูลสดจาก yr.no / MET Norway)</p>
+                        </div>
+                        <button onclick="loadBipenggouForecast(true)" class="btn-bauhaus bg-white text-[#121212] px-3 py-2 text-[11px] flex items-center gap-1.5">
+                            <i class="fa-solid fa-rotate"></i> REFRESH
+                        </button>
+                    </div>
+
+                    <div class="bg-[#F0C020] border-2 border-[#121212] p-3 text-xs font-semibold text-[#121212] flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-[#1040C0] text-sm mt-0.5"></i>
+                        <div>
+                            แอปพยากรณ์อากาศใน iPhone <u>ไม่มีข้อมูลของปี้เผิงโกว</u> จึงใช้ข้อมูลจาก <strong>yr.no</strong> ตามพิกัดจริงแทน
+                            · yr.no พยากรณ์ล่วงหน้าได้ประมาณ <strong>9–10 วัน</strong> วันที่ไปปี้เผิงโกว (<strong>23–24 ต.ค.</strong>) จะเริ่มแสดงประมาณวันที่ 14 ต.ค. เป็นต้นไป
+                            · วันที่อยู่ในทริปจะถูกไฮไลต์ <span class="bg-[#D02020] text-white px-1 font-black">สีแดง</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5" id="bipenggou-locations">
+                        <!-- Injected via JS -->
+                    </div>
+
+                    <p class="text-[10px] font-bold text-slate-600">
+                        ข้อมูลพยากรณ์: <a href="https://www.yr.no/" target="_blank" rel="noopener" class="underline">Yr</a> / MET Norway (CC BY 4.0) · เวลาแสดงตามเวลาจีน (UTC+8) · ข้อมูลล่าสุดถูกเก็บไว้ในเครื่อง เปิดดูได้แม้สัญญาณไม่ดี
+                    </p>
+                </div>
+
             </div>
         </section>
 
@@ -602,8 +638,8 @@
             { day: "Day 1", city: "Chongqing", temp: "16° / 22°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun", bg: "bg-white" },
             { day: "Day 2", city: "Chongqing", temp: "15° / 20°C", cond: "ฝนปรอย", icon: "fa-cloud-rain", bg: "bg-white" },
             { day: "Day 3", city: "Chengdu", temp: "14° / 20°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun", bg: "bg-white" },
-            { day: "Day 4", city: "Bipenggou", temp: "0° / 12°C", cond: "หนาวจัด/แดดสวย", icon: "fa-sun", bg: "bg-[#F0C020]" },
-            { day: "Day 5", city: "Bipenggou", temp: "-2° / 10°C", cond: "หนาวจัด/ยอดเขาหิมะ", icon: "fa-snowflake", bg: "bg-[#F0C020]" },
+            { day: "Day 4", city: "Bipenggou", temp: "0° / 12°C", cond: "หนาวจัด/แดดสวย", icon: "fa-sun", bg: "bg-[#F0C020]", link: "#bipenggou-weather" },
+            { day: "Day 5", city: "Bipenggou", temp: "-2° / 10°C", cond: "หนาวจัด/ยอดเขาหิมะ", icon: "fa-snowflake", bg: "bg-[#F0C020]", link: "#bipenggou-weather" },
             { day: "Day 6", city: "Chengdu", temp: "12° / 18°C", cond: "เมฆมาก", icon: "fa-cloud-sun", bg: "bg-white" },
             { day: "Day 7", city: "Chongqing", temp: "15° / 21°C", cond: "เมฆครึ้ม", icon: "fa-cloud", bg: "bg-white" },
             { day: "Day 8", city: "Chongqing", temp: "16° / 20°C", cond: "เมฆมาก", icon: "fa-cloud", bg: "bg-white" }
@@ -733,9 +769,263 @@
                     <i class="fa-solid ${w.icon} text-2xl text-[#121212] my-1"></i>
                     <div class="text-sm font-black text-[#121212]">${w.temp}</div>
                     <div class="text-[10px] font-bold text-slate-800">${w.cond}</div>
+                    ${w.link ? `<a href="${w.link}" class="inline-block bg-[#121212] text-white px-2 py-0.5 text-[10px] font-black uppercase hover:bg-[#D02020]">ดูพยากรณ์สด <i class="fa-solid fa-arrow-down text-[9px]"></i></a>` : ''}
                 `;
                 container.appendChild(card);
             });
+        }
+
+        // ---------- Bipenggou live forecast (yr.no / MET Norway) ----------
+        const bipenggouLocations = [
+            {
+                key: 'entrance',
+                name: 'ทางเข้าอุทยานปี้เผิงโกว',
+                nameEn: 'Bipenggou Park Entrance',
+                altitude: 2300,
+                lat: 31.412, lon: 102.983,
+                accent: 'bg-[#1040C0]'
+            },
+            {
+                key: 'shanghaizi',
+                name: 'ปี้เผิงโกว (จุดจอดรถบัส ซั่งไห่จื่อ)',
+                nameEn: 'Shanghaizi Bus Stop',
+                altitude: 3600,
+                lat: 31.251, lon: 102.889,
+                accent: 'bg-[#D02020]'
+            }
+        ];
+
+        const TRIP_DATES = ['2026-10-20','2026-10-21','2026-10-22','2026-10-23','2026-10-24','2026-10-25','2026-10-26','2026-10-27'];
+        const BPG_DATES = ['2026-10-23','2026-10-24'];
+        const FORECAST_CACHE_KEY = 'bpg_yr_forecast_v1';
+        const FORECAST_MAX_AGE = 60 * 60 * 1000; // 1 hour
+
+        const yrLinks = (loc) => {
+            const c = `${loc.lat},${loc.lon}`;
+            return {
+                daily: `https://www.yr.no/en/forecast/daily-table/${c}`,
+                hourly: `https://www.yr.no/en/forecast/hourly-table/${c}`,
+                graph: `https://www.yr.no/en/forecast/graph/${c}`,
+                map: `https://www.google.com/maps?q=${c}`
+            };
+        };
+
+        // MET Norway symbol_code → [FontAwesome icon, Thai label]
+        function symbolInfo(code) {
+            const base = (code || '').replace(/_(day|night|polartwilight)$/, '');
+            const night = /_night$/.test(code || '');
+            const map = {
+                clearsky: [night ? 'fa-moon' : 'fa-sun', 'ท้องฟ้าแจ่มใส'],
+                fair: [night ? 'fa-cloud-moon' : 'fa-cloud-sun', 'แดดออก มีเมฆเล็กน้อย'],
+                partlycloudy: [night ? 'fa-cloud-moon' : 'fa-cloud-sun', 'มีเมฆบางส่วน'],
+                cloudy: ['fa-cloud', 'เมฆมาก'],
+                fog: ['fa-smog', 'หมอก'],
+                lightrain: ['fa-cloud-rain', 'ฝนเล็กน้อย'],
+                rain: ['fa-cloud-showers-heavy', 'ฝนตก'],
+                heavyrain: ['fa-cloud-showers-heavy', 'ฝนตกหนัก'],
+                lightrainshowers: ['fa-cloud-sun-rain', 'ฝนโปรยเป็นช่วง'],
+                rainshowers: ['fa-cloud-sun-rain', 'ฝนตกเป็นช่วง'],
+                heavyrainshowers: ['fa-cloud-showers-heavy', 'ฝนตกหนักเป็นช่วง'],
+                lightsleet: ['fa-cloud-meatball', 'ฝนปนหิมะเล็กน้อย'],
+                sleet: ['fa-cloud-meatball', 'ฝนปนหิมะ'],
+                heavysleet: ['fa-cloud-meatball', 'ฝนปนหิมะหนัก'],
+                lightsleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะเป็นช่วง'],
+                sleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะเป็นช่วง'],
+                heavysleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะหนักเป็นช่วง'],
+                lightsnow: ['fa-snowflake', 'หิมะตกเล็กน้อย'],
+                snow: ['fa-snowflake', 'หิมะตก'],
+                heavysnow: ['fa-snowflake', 'หิมะตกหนัก'],
+                lightsnowshowers: ['fa-snowflake', 'หิมะโปรยเป็นช่วง'],
+                snowshowers: ['fa-snowflake', 'หิมะตกเป็นช่วง'],
+                heavysnowshowers: ['fa-snowflake', 'หิมะตกหนักเป็นช่วง']
+            };
+            if (map[base]) return map[base];
+            if (base.includes('thunder')) return ['fa-cloud-bolt', 'ฝนฟ้าคะนอง'];
+            if (base.includes('snow')) return ['fa-snowflake', 'หิมะ'];
+            if (base.includes('sleet')) return ['fa-cloud-meatball', 'ฝนปนหิมะ'];
+            if (base.includes('rain')) return ['fa-cloud-rain', 'ฝน'];
+            return ['fa-cloud', code || '-'];
+        }
+
+        // China local time (UTC+8) helpers
+        function cstParts(iso) {
+            const d = new Date(new Date(iso).getTime() + 8 * 3600 * 1000);
+            return { date: d.toISOString().slice(0, 10), hour: d.getUTCHours() };
+        }
+
+        const thaiDays = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+        const thaiMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+        function thaiDate(ymd) {
+            const d = new Date(ymd + 'T00:00:00Z');
+            return `${thaiDays[d.getUTCDay()]} ${d.getUTCDate()} ${thaiMonths[d.getUTCMonth()]}`;
+        }
+
+        function summarizeDaily(timeseries) {
+            const days = {};
+            timeseries.forEach(t => {
+                const { date, hour } = cstParts(t.time);
+                const det = t.data.instant.details;
+                const n1 = t.data.next_1_hours;
+                const n6 = t.data.next_6_hours;
+                const day = days[date] || (days[date] = { date, min: Infinity, max: -Infinity, precip: 0, wind: 0, symbol: null, symbolDist: 99 });
+                if (typeof det.air_temperature === 'number') {
+                    day.min = Math.min(day.min, det.air_temperature);
+                    day.max = Math.max(day.max, det.air_temperature);
+                }
+                if (typeof det.wind_speed === 'number') day.wind = Math.max(day.wind, det.wind_speed);
+                // Hourly steps carry next_1_hours; later 6-hourly steps only next_6_hours
+                if (n1) day.precip += n1.details.precipitation_amount || 0;
+                else if (n6) day.precip += n6.details.precipitation_amount || 0;
+                // Pick the symbol closest to midday as the day's representative
+                const sym = (n6 && n6.summary.symbol_code) || (n1 && n1.summary.symbol_code);
+                const dist = Math.abs(hour - 10);
+                if (sym && dist < day.symbolDist) { day.symbol = sym; day.symbolDist = dist; }
+            });
+            return Object.values(days)
+                .filter(d => d.min !== Infinity)
+                .sort((a, b) => a.date.localeCompare(b.date));
+        }
+
+        function readForecastCache() {
+            try { return JSON.parse(localStorage.getItem(FORECAST_CACHE_KEY) || 'null'); } catch (e) { return null; }
+        }
+        function writeForecastCache(data) {
+            try { localStorage.setItem(FORECAST_CACHE_KEY, JSON.stringify(data)); } catch (e) {}
+        }
+
+        function renderLocationShell(loc) {
+            const l = yrLinks(loc);
+            return `
+                <div class="border-3 border-[#121212] bg-white shadow-bauhaus-sm">
+                    <div class="${loc.accent} text-white border-b-3 border-[#121212] p-3 flex items-start justify-between gap-3">
+                        <div>
+                            <div class="font-black text-sm sm:text-base leading-tight">${loc.name}</div>
+                            <div class="text-[10px] font-bold uppercase opacity-90">${loc.nameEn}</div>
+                        </div>
+                        <div class="bg-[#F0C020] text-[#121212] border-2 border-[#121212] px-2 py-0.5 text-xs font-black whitespace-nowrap">
+                            <i class="fa-solid fa-mountain mr-1"></i>${loc.altitude.toLocaleString()} M
+                        </div>
+                    </div>
+                    <div class="p-3 space-y-3">
+                        <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold">
+                            <span class="bg-[#E0E0E0] border border-[#121212] px-2 py-0.5 font-mono">
+                                <i class="fa-solid fa-location-dot text-[#D02020] mr-1"></i>${loc.lat}, ${loc.lon}
+                            </span>
+                            <a href="${l.map}" target="_blank" rel="noopener" class="border border-[#121212] px-2 py-0.5 hover:bg-[#F0C020]">
+                                <i class="fa-solid fa-map mr-1"></i>แผนที่
+                            </a>
+                        </div>
+                        <div id="fc-${loc.key}" class="min-h-[120px]">
+                            <div class="text-xs font-bold text-slate-600 py-6 text-center"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลดพยากรณ์จาก yr.no…</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 pt-1">
+                            <a href="${l.daily}" target="_blank" rel="noopener" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-2 py-2 text-[10px] text-center">
+                                <i class="fa-solid fa-calendar-days"></i> รายวัน
+                            </a>
+                            <a href="${l.hourly}" target="_blank" rel="noopener" class="btn-bauhaus bg-white text-[#121212] px-2 py-2 text-[10px] text-center">
+                                <i class="fa-solid fa-clock"></i> รายชั่วโมง
+                            </a>
+                            <a href="${l.graph}" target="_blank" rel="noopener" class="btn-bauhaus bg-white text-[#121212] px-2 py-2 text-[10px] text-center">
+                                <i class="fa-solid fa-chart-line"></i> กราฟ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderForecastTable(loc, entry) {
+            const box = document.getElementById(`fc-${loc.key}`);
+            if (!box) return;
+            if (!entry || !entry.days || !entry.days.length) {
+                box.innerHTML = `
+                    <div class="border-2 border-dashed border-[#121212] p-4 text-xs font-bold text-center text-[#121212] space-y-1">
+                        <i class="fa-solid fa-plug-circle-xmark text-[#D02020] text-lg"></i>
+                        <div>โหลดข้อมูลสดไม่ได้ (อาจไม่มีสัญญาณ)</div>
+                        <a href="${yrLinks(loc).daily}" target="_blank" rel="noopener" class="underline text-[#1040C0]">เปิดดูบน yr.no โดยตรง</a>
+                    </div>`;
+                return;
+            }
+            const rows = entry.days.slice(0, 10).map(d => {
+                const [icon, label] = symbolInfo(d.symbol);
+                const isBpg = BPG_DATES.includes(d.date);
+                const isTrip = TRIP_DATES.includes(d.date);
+                const rowCls = isBpg ? 'bg-[#D02020] text-white' : (isTrip ? 'bg-[#F0C020]' : 'bg-white');
+                const minCls = isBpg ? '' : (d.min <= 0 ? 'text-[#1040C0]' : '');
+                return `
+                    <tr class="${rowCls} border-b border-[#121212]">
+                        <td class="px-2 py-1.5 font-bold whitespace-nowrap">${thaiDate(d.date)}${isBpg ? ' <i class="fa-solid fa-star text-[#F0C020]"></i>' : ''}</td>
+                        <td class="px-2 py-1.5"><i class="fa-solid ${icon} mr-1"></i><span class="hidden sm:inline">${label}</span></td>
+                        <td class="px-2 py-1.5 font-black text-right whitespace-nowrap"><span class="${minCls}">${Math.round(d.min)}°</span> / ${Math.round(d.max)}°</td>
+                        <td class="px-2 py-1.5 text-right whitespace-nowrap">${d.precip >= 0.05 ? d.precip.toFixed(1) : '0'} mm</td>
+                        <td class="px-2 py-1.5 text-right whitespace-nowrap hidden sm:table-cell">${Math.round(d.wind)} m/s</td>
+                    </tr>`;
+            }).join('');
+
+            const lastDay = entry.days[entry.days.length - 1].date;
+            const bpgCovered = BPG_DATES.some(dt => entry.days.some(d => d.date === dt));
+            const notice = bpgCovered ? '' : `
+                <div class="mt-2 text-[10px] font-bold text-[#121212] bg-[#E0E0E0] border border-[#121212] px-2 py-1">
+                    <i class="fa-solid fa-hourglass-half mr-1"></i>ตอนนี้พยากรณ์ได้ถึง ${thaiDate(lastDay)} — วันที่ 23–24 ต.ค. ยังไม่อยู่ในช่วงพยากรณ์ กลับมาเช็กใหม่ใกล้วันเดินทาง
+                </div>`;
+            const updated = new Date(entry.fetchedAt).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' });
+
+            box.innerHTML = `
+                <div class="overflow-x-auto border-2 border-[#121212]">
+                    <table class="w-full text-[11px] sm:text-xs">
+                        <thead class="bg-[#121212] text-white uppercase text-[10px]">
+                            <tr>
+                                <th class="px-2 py-1.5 text-left">วัน</th>
+                                <th class="px-2 py-1.5 text-left">สภาพอากาศ</th>
+                                <th class="px-2 py-1.5 text-right">ต่ำ/สูง</th>
+                                <th class="px-2 py-1.5 text-right">ฝน/หิมะ</th>
+                                <th class="px-2 py-1.5 text-right hidden sm:table-cell">ลมแรงสุด</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                </div>
+                ${notice}
+                <div class="mt-1 text-[10px] font-bold text-slate-500">อัปเดต: ${updated}${entry.stale ? ' (ข้อมูลเก่าที่เก็บไว้)' : ''}</div>
+            `;
+        }
+
+        async function fetchLocationForecast(loc) {
+            const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${loc.lat}&lon=${loc.lon}&altitude=${loc.altitude}`;
+            const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const json = await res.json();
+            return { fetchedAt: Date.now(), days: summarizeDaily(json.properties.timeseries) };
+        }
+
+        async function loadBipenggouForecast(force) {
+            const container = document.getElementById('bipenggou-locations');
+            if (!container.dataset.ready) {
+                container.innerHTML = bipenggouLocations.map(renderLocationShell).join('');
+                container.dataset.ready = '1';
+            } else if (force) {
+                bipenggouLocations.forEach(loc => {
+                    const box = document.getElementById(`fc-${loc.key}`);
+                    if (box) box.innerHTML = `<div class="text-xs font-bold text-slate-600 py-6 text-center"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลด…</div>`;
+                });
+            }
+
+            const cache = readForecastCache() || {};
+            await Promise.all(bipenggouLocations.map(async loc => {
+                const cached = cache[loc.key];
+                if (!force && cached && Date.now() - cached.fetchedAt < FORECAST_MAX_AGE) {
+                    renderForecastTable(loc, cached);
+                    return;
+                }
+                try {
+                    const fresh = await fetchLocationForecast(loc);
+                    cache[loc.key] = fresh;
+                    renderForecastTable(loc, fresh);
+                } catch (e) {
+                    renderForecastTable(loc, cached ? { ...cached, stale: true } : null);
+                }
+            }));
+            writeForecastCache(cache);
         }
 
         let checkedState = JSON.parse(localStorage.getItem('bauhaus_trip_checklist') || '{}');
@@ -773,6 +1063,7 @@
         window.onload = function() {
             renderItinerary();
             renderWeather();
+            loadBipenggouForecast(false);
             renderChecklist();
 
             const ctx = document.getElementById('altitudeChart').getContext('2d');
