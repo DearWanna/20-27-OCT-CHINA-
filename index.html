@@ -472,82 +472,68 @@
 
         <!-- Section 4: Weather Grid -->
         <section id="weather" class="scroll-mt-20">
-            <div class="border-4 border-[#121212] bg-white p-6 shadow-bauhaus-lg space-y-6">
-                
-                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-4">
-                    <div class="w-10 h-10 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center font-black text-lg shadow-bauhaus-sm">
-                        04
+            <div class="border-4 border-[#121212] bg-white p-4 shadow-bauhaus space-y-3">
+
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121212] pb-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center font-black text-sm">
+                            04
+                        </div>
+                        <div>
+                            <h2 class="font-display font-black text-lg sm:text-xl uppercase tracking-tight text-[#121212]">
+                                WEATHER FORECAST
+                            </h2>
+                            <p class="text-[10px] font-bold text-slate-600">พยากรณ์สดจาก yr.no / MET Norway · วันที่เกินช่วงพยากรณ์ (~9–10 วัน) แสดงค่าประมาณ</p>
+                        </div>
                     </div>
-                    <div>
-                        <h2 class="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-[#121212]">
-                            WEATHER FORECAST
-                        </h2>
-                        <p class="text-xs font-bold text-slate-600 uppercase">พยากรณ์สดจาก yr.no / MET Norway · วันที่ยังเกินช่วงพยากรณ์ (~9–10 วัน) จะแสดงค่าประมาณ</p>
-                    </div>
+                    <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white text-[#121212] px-2 py-1 text-[10px] flex items-center gap-1">
+                        <i class="fa-solid fa-rotate"></i> REFRESH
+                    </button>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="weather-grid">
+                <div class="grid grid-cols-4 lg:grid-cols-8 gap-2" id="weather-grid">
                     <!-- Injected via JS -->
                 </div>
 
                 <!-- City Live Forecast (yr.no / MET Norway) -->
-                <div id="city-weather" class="border-4 border-[#121212] bg-[#F0F0F0] p-4 sm:p-5 shadow-bauhaus space-y-5 scroll-mt-20">
-
-                    <div class="flex flex-wrap items-start justify-between gap-3 border-b-3 border-[#121212] pb-3">
-                        <div>
-                            <div class="inline-flex items-center gap-2 bg-[#1040C0] text-white border-2 border-[#121212] px-2 py-0.5 text-[10px] font-black uppercase">
-                                <i class="fa-solid fa-satellite-dish"></i> LIVE · YR.NO
-                            </div>
-                            <h3 class="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-[#121212] mt-2">
-                                CHONGQING & CHENGDU FORECAST
-                            </h3>
-                            <p class="text-xs font-bold text-slate-700">พยากรณ์อากาศในเมืองฉงชิ่งและเฉิงตู (ย่านที่พัก) วันที่อยู่เมืองนั้นจะถูกไฮไลต์ <span class="bg-[#D02020] text-white px-1 font-black">สีแดง</span></p>
+                <details id="city-weather" class="forecast-panel border-2 border-[#121212] bg-[#F0F0F0] scroll-mt-20 group">
+                    <summary class="list-none cursor-pointer px-3 py-2 flex items-center justify-between gap-2 hover:bg-[#F0C020] transition-colors">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <span class="bg-[#1040C0] text-white border border-[#121212] px-1.5 py-0.5 text-[9px] font-black uppercase shrink-0"><i class="fa-solid fa-satellite-dish"></i> LIVE</span>
+                            <span class="font-display font-black text-sm uppercase truncate">CHONGQING & CHENGDU FORECAST</span>
                         </div>
-                        <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white text-[#121212] px-3 py-2 text-[11px] flex items-center gap-1.5">
-                            <i class="fa-solid fa-rotate"></i> REFRESH
-                        </button>
+                        <i class="fa-solid fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-3 pt-1 space-y-3">
+                        <p class="text-[11px] font-bold text-slate-700">พยากรณ์อากาศย่านที่พักในฉงชิ่งและเฉิงตู · วันที่อยู่เมืองนั้นไฮไลต์ <span class="bg-[#D02020] text-white px-1 font-black">สีแดง</span></p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="city-locations">
+                            <!-- Injected via JS -->
+                        </div>
                     </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5" id="city-locations">
-                        <!-- Injected via JS -->
-                    </div>
-                </div>
+                </details>
 
                 <!-- Bipenggou Live Forecast (yr.no / MET Norway) -->
-                <div id="bipenggou-weather" class="border-4 border-[#121212] bg-[#F0F0F0] p-4 sm:p-5 shadow-bauhaus space-y-5 scroll-mt-20">
-
-                    <div class="flex flex-wrap items-start justify-between gap-3 border-b-3 border-[#121212] pb-3">
-                        <div>
-                            <div class="inline-flex items-center gap-2 bg-[#D02020] text-white border-2 border-[#121212] px-2 py-0.5 text-[10px] font-black uppercase">
-                                <i class="fa-solid fa-satellite-dish"></i> LIVE · YR.NO
-                            </div>
-                            <h3 class="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-[#121212] mt-2">
-                                BIPENGGOU FORECAST
-                            </h3>
-                            <p class="text-xs font-bold text-slate-700">พยากรณ์อากาศปี้เผิงโกว 2 ระดับความสูง (ดึงข้อมูลสดจาก yr.no / MET Norway)</p>
+                <details id="bipenggou-weather" class="forecast-panel border-2 border-[#121212] bg-[#F0F0F0] scroll-mt-20 group">
+                    <summary class="list-none cursor-pointer px-3 py-2 flex items-center justify-between gap-2 hover:bg-[#F0C020] transition-colors">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <span class="bg-[#D02020] text-white border border-[#121212] px-1.5 py-0.5 text-[9px] font-black uppercase shrink-0"><i class="fa-solid fa-satellite-dish"></i> LIVE</span>
+                            <span class="font-display font-black text-sm uppercase truncate">BIPENGGOU FORECAST</span>
                         </div>
-                        <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white text-[#121212] px-3 py-2 text-[11px] flex items-center gap-1.5">
-                            <i class="fa-solid fa-rotate"></i> REFRESH
-                        </button>
-                    </div>
-
-                    <div class="bg-[#F0C020] border-2 border-[#121212] p-3 text-xs font-semibold text-[#121212] flex items-start gap-2">
-                        <i class="fa-solid fa-circle-info text-[#1040C0] text-sm mt-0.5"></i>
-                        <div>
-                            แอปพยากรณ์อากาศใน iPhone <u>ไม่มีข้อมูลของปี้เผิงโกว</u> จึงใช้ข้อมูลจาก <strong>yr.no</strong> ตามพิกัดจริงแทน
-                            · yr.no พยากรณ์ล่วงหน้าได้ประมาณ <strong>9–10 วัน</strong> วันที่ไปปี้เผิงโกว (<strong>23–24 ต.ค.</strong>) จะเริ่มแสดงประมาณวันที่ 14 ต.ค. เป็นต้นไป
-                            · วันที่อยู่ในทริปจะถูกไฮไลต์ <span class="bg-[#D02020] text-white px-1 font-black">สีแดง</span>
+                        <i class="fa-solid fa-chevron-down text-xs group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-3 pt-1 space-y-3">
+                        <p class="text-[11px] font-bold text-slate-700">
+                            ปี้เผิงโกว 2 ระดับความสูง · แอปอากาศใน iPhone <u>ไม่มีข้อมูลปี้เผิงโกว</u> จึงใช้ yr.no ตามพิกัดจริง · วันที่ไปไฮไลต์ <span class="bg-[#D02020] text-white px-1 font-black">สีแดง</span>
+                        </p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="bipenggou-locations">
+                            <!-- Injected via JS -->
                         </div>
                     </div>
+                </details>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5" id="bipenggou-locations">
-                        <!-- Injected via JS -->
-                    </div>
-
-                    <p class="text-[10px] font-bold text-slate-600">
-                        ข้อมูลพยากรณ์: <a href="https://www.yr.no/" target="_blank" rel="noopener" class="underline">Yr</a> / MET Norway (CC BY 4.0) · เวลาแสดงตามเวลาจีน (UTC+8) · ข้อมูลล่าสุดถูกเก็บไว้ในเครื่อง เปิดดูได้แม้สัญญาณไม่ดี
-                    </p>
-                </div>
+                <p class="text-[10px] font-bold text-slate-600">
+                    ข้อมูล: <a href="https://www.yr.no/" target="_blank" rel="noopener" class="underline">Yr</a> / MET Norway (CC BY 4.0) · เวลาจีน (UTC+8) · เก็บข้อมูลล่าสุดไว้ในเครื่อง ดูได้แม้สัญญาณไม่ดี
+                </p>
 
             </div>
         </section>
@@ -968,6 +954,11 @@
             renderItinerary();
         }
 
+        function openForecast(hash) {
+            const el = document.querySelector(hash);
+            if (el && el.tagName === 'DETAILS') el.open = true;
+        }
+
         function renderWeather(cache) {
             const container = document.getElementById('weather-grid');
             container.innerHTML = '';
@@ -981,18 +972,17 @@
                     temp = `${Math.round(live.min)}° / ${Math.round(live.max)}°C`;
                 }
                 const badge = live
-                    ? '<span class="bg-[#1040C0] text-white text-[9px] font-black px-1.5 py-0.5">LIVE · YR.NO</span>'
-                    : '<span class="bg-[#E0E0E0] border border-[#121212] text-[9px] font-black px-1.5 py-0.5">ค่าประมาณ</span>';
+                    ? '<span class="inline-block bg-[#1040C0] text-white text-[8px] font-black px-1 py-0.5">LIVE ▾</span>'
+                    : '<span class="inline-block bg-[#E0E0E0] border border-[#121212] text-[8px] font-black px-1 py-0.5">ประมาณ ▾</span>';
                 const card = document.createElement('div');
-                card.className = `border-3 border-[#121212] ${w.bg} p-4 text-center shadow-bauhaus-sm space-y-2`;
+                card.className = `border-2 border-[#121212] ${w.bg} p-1.5 text-center space-y-0.5 leading-tight`;
                 card.innerHTML = `
-                    <div class="text-[10px] font-black uppercase text-slate-700">${w.day}: ${w.city}</div>
-                    <div class="text-[10px] font-bold text-slate-600">${thaiDate(w.date)}</div>
-                    <i class="fa-solid ${icon} text-2xl text-[#121212] my-1"></i>
-                    <div class="text-sm font-black text-[#121212]">${temp}</div>
-                    <div class="text-[10px] font-bold text-slate-800">${cond}</div>
-                    <div>${badge}</div>
-                    <a href="${w.link}" class="inline-block bg-[#121212] text-white px-2 py-0.5 text-[10px] font-black uppercase hover:bg-[#D02020]">ดูพยากรณ์สด <i class="fa-solid fa-arrow-down text-[9px]"></i></a>
+                    <div class="text-[9px] font-black uppercase text-slate-700">${w.day.replace('Day ', 'D')} · ${thaiDate(w.date).split(' ').slice(1).join(' ')}</div>
+                    <div class="text-[9px] font-bold text-slate-600 truncate">${w.city}</div>
+                    <i class="fa-solid ${icon} text-base text-[#121212]"></i>
+                    <div class="text-[11px] font-black text-[#121212] whitespace-nowrap">${temp.replace('C', '')}</div>
+                    <div class="text-[9px] font-bold text-slate-800 truncate" title="${cond}">${cond}</div>
+                    <a href="${w.link}" onclick="openForecast('${w.link}')" class="block">${badge}</a>
                 `;
                 container.appendChild(card);
             });
