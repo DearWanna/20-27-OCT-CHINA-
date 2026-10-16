@@ -70,6 +70,25 @@
 
         summary::-webkit-details-marker { display: none; }
 
+        /* ---------- Print / PDF export ---------- */
+        .print-only { display: none; }
+        @media print {
+            @page { size: A4; margin: 10mm; }
+            html, body { background: #fff !important; }
+            body { padding: 0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .print-only { display: block !important; }
+            .no-print, nav, footer, #elevation, #weather, #checklist, #help, #show-modal,
+            button[aria-label="การ์ดแพ้กุ้ง"], #hotels button, #itinerary-list button[title],
+            #itinerary-list a[title], #flights summary span:last-child { display: none !important; }
+            main { padding: 0 !important; max-width: none !important; }
+            main > * + * { margin-top: 16px !important; }
+            [class*="shadow-bauhaus"] { box-shadow: none !important; }
+            #flights { break-after: page; }
+            #hotels > div > div > div, #flight-legs > div > div, #itinerary-list .border-l-3 { break-inside: avoid; }
+            #itinerary-list > div > button { break-after: avoid; }
+            a[href^="http"] { text-decoration: none; }
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 10px; height: 10px; }
         ::-webkit-scrollbar-track { background: #E0E0E0; border-left: 2px solid #121212; }
@@ -94,7 +113,7 @@
     </header>
 
     <!-- Main Poster Hero -->
-    <section class="border-b-4 border-[#121212] bg-[#F0F0F0] relative overflow-hidden bg-dot-pattern">
+    <section class="no-print border-b-4 border-[#121212] bg-[#F0F0F0] relative overflow-hidden bg-dot-pattern">
         <div class="max-w-6xl mx-auto px-4 py-10 md:py-14 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
@@ -121,6 +140,9 @@
                         <a href="#hotels" class="btn-bauhaus bg-white text-[#121212] px-5 py-3 text-sm flex items-center gap-2">
                             <i class="fa-solid fa-hotel"></i> รายชื่อโรงแรม
                         </a>
+                        <button onclick="exportPDF()" class="btn-bauhaus bg-[#D02020] text-white px-5 py-3 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-file-pdf"></i> EXPORT PDF
+                        </button>
                     </div>
                 </div>
 
@@ -191,45 +213,54 @@
                 <button onclick="toggleAllAccordions(false)" class="bg-[#D02020] text-white border-2 border-white px-2.5 py-1 text-[11px] font-extrabold hover:bg-white hover:text-[#121212] transition-colors">
                     COLLAPSE
                 </button>
+                <button onclick="exportPDF()" class="bg-white text-[#121212] border-2 border-white px-2.5 py-1 text-[11px] font-extrabold hover:bg-[#F0C020] transition-colors">
+                    <i class="fa-solid fa-file-pdf text-[#D02020]"></i> PDF
+                </button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-4 py-10 space-y-12">
 
+        <!-- Print-only title -->
+        <div class="print-only border-b-4 border-[#121212] pb-2">
+            <div class="font-display font-black text-2xl uppercase">China Trip 2026 · แผนการเดินทาง</div>
+            <div class="text-xs font-bold">20–27 ต.ค. 2026 · เชียงใหม่ ➔ ฉงชิ่ง ➔ เฉิงตู ➔ ปี้เผิงโกว ➔ เฉิงตู ➔ ฉงชิ่ง ➔ เชียงใหม่ · 4 ผู้ใหญ่ + 1 เด็ก</div>
+        </div>
+
         <!-- Section 1: Elevation Profile & AMS Risk -->
         <section id="elevation" class="scroll-mt-20">
-            <div class="border-4 border-[#121212] bg-white p-6 shadow-bauhaus-lg space-y-6">
+            <div class="border-4 border-[#121212] bg-white p-4 shadow-bauhaus space-y-3">
                 
-                <div class="flex flex-wrap items-center justify-between gap-4 border-b-4 border-[#121212] pb-4">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#121212] pb-2">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center font-black text-lg shadow-bauhaus-sm">
+                        <div class="w-8 h-8 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center font-black text-sm shadow-bauhaus-sm">
                             01
                         </div>
                         <div>
-                            <h2 class="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-[#121212]">
+                            <h2 class="font-display font-black text-lg sm:text-xl uppercase tracking-tight text-[#121212]">
                                 ELEVATION PROFILE & AMS RISK
                             </h2>
                             <p class="text-xs font-bold text-slate-600 uppercase">ระดับความสูงและแผนบริหารจัดการภาวะ AMS</p>
                         </div>
                     </div>
-                    <span class="bg-[#F0C020] border-2 border-[#121212] px-3 py-1 text-xs font-black uppercase">
+                    <span class="bg-[#F0C020] border-2 border-[#121212] px-2 py-0.5 text-[10px] font-black uppercase">
                         HIGHEST POINT: 3,837 M
                     </span>
                 </div>
 
                 <!-- Altitude Chart Canvas -->
-                <div class="bg-[#F0F0F0] border-3 border-[#121212] p-4 relative h-72">
+                <div class="bg-[#F0F0F0] border-2 border-[#121212] p-2 relative h-40 sm:h-44">
                     <canvas id="altitudeChart"></canvas>
                 </div>
 
                 <!-- Warning Notice Block -->
-                <div class="bg-[#F0C020] border-3 border-[#121212] p-5 shadow-bauhaus flex flex-col md:flex-row gap-4 items-start md:items-center">
-                    <div class="w-12 h-12 rounded-full bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center font-black text-2xl shrink-0 shadow-bauhaus-sm">
+                <div class="bg-[#F0C020] border-2 border-[#121212] p-3 flex gap-3 items-start md:items-center">
+                    <div class="w-8 h-8 rounded-full bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center font-black text-sm shrink-0">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                     </div>
-                    <div class="text-xs sm:text-sm font-semibold leading-relaxed text-[#121212]">
-                        <strong class="font-black uppercase text-base text-[#D02020] block mb-1">
+                    <div class="text-[11px] sm:text-xs font-semibold leading-relaxed text-[#121212]">
+                        <strong class="font-black text-xs sm:text-sm text-[#D02020] block mb-0.5">
                             ⚠️ คำเตือนเรื่องระดับความสูง (Day 4–5 ปี้เผิงโกว: ที่พัก ~2,000m / ในอุทยานสูงสุด 3,837m):
                         </strong>
                         ในคืนแรกที่ไปถึง (23 ต.ค.) <u>ควรงดสระผม และงดอาบน้ำอุ่นจัด/นาน</u> เพื่อป้องกันหลอดเลือดขยายตัวรวดเร็ว ให้ทุกคนจิบน้ำอุ่นบ่อยๆ สวมเสื้อผ้าให้อุ่นเสมอ และพกออกซิเจนกระป๋องติดตัว
@@ -422,7 +453,8 @@
                     </div>
 
                     <!-- Filter buttons -->
-                    <div class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                    <div class="no-print flex flex-wrap items-center gap-1.5 text-xs font-bold">
+                        <button onclick="exportPDF()" class="px-3 py-1.5 border-2 border-[#121212] bg-[#D02020] text-white uppercase"><i class="fa-solid fa-file-pdf"></i> PDF</button>
                         <button onclick="filterCity('ALL')" id="filter-ALL" class="px-3 py-1.5 border-2 border-[#121212] bg-[#121212] text-white uppercase">ALL</button>
                         <button onclick="filterCity('CHONGQING')" id="filter-CHONGQING" class="px-3 py-1.5 border-2 border-[#121212] bg-white text-[#121212] hover:bg-[#F0C020] uppercase">CHONGQING</button>
                         <button onclick="filterCity('CHENGDU')" id="filter-CHENGDU" class="px-3 py-1.5 border-2 border-[#121212] bg-white text-[#121212] hover:bg-[#F0C020] uppercase">CHENGDU</button>
@@ -450,7 +482,7 @@
                         <h2 class="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-[#121212]">
                             WEATHER FORECAST
                         </h2>
-                        <p class="text-xs font-bold text-slate-600 uppercase">อุณหภูมิและพยากรณ์อากาศแต่ละเมืองประจำวัน</p>
+                        <p class="text-xs font-bold text-slate-600 uppercase">พยากรณ์สดจาก yr.no / MET Norway · วันที่ยังเกินช่วงพยากรณ์ (~9–10 วัน) จะแสดงค่าประมาณ</p>
                     </div>
                 </div>
 
@@ -458,8 +490,31 @@
                     <!-- Injected via JS -->
                 </div>
 
+                <!-- City Live Forecast (yr.no / MET Norway) -->
+                <div id="city-weather" class="border-4 border-[#121212] bg-[#F0F0F0] p-4 sm:p-5 shadow-bauhaus space-y-5 scroll-mt-20">
+
+                    <div class="flex flex-wrap items-start justify-between gap-3 border-b-3 border-[#121212] pb-3">
+                        <div>
+                            <div class="inline-flex items-center gap-2 bg-[#1040C0] text-white border-2 border-[#121212] px-2 py-0.5 text-[10px] font-black uppercase">
+                                <i class="fa-solid fa-satellite-dish"></i> LIVE · YR.NO
+                            </div>
+                            <h3 class="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-[#121212] mt-2">
+                                CHONGQING & CHENGDU FORECAST
+                            </h3>
+                            <p class="text-xs font-bold text-slate-700">พยากรณ์อากาศในเมืองฉงชิ่งและเฉิงตู (ย่านที่พัก) วันที่อยู่เมืองนั้นจะถูกไฮไลต์ <span class="bg-[#D02020] text-white px-1 font-black">สีแดง</span></p>
+                        </div>
+                        <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white text-[#121212] px-3 py-2 text-[11px] flex items-center gap-1.5">
+                            <i class="fa-solid fa-rotate"></i> REFRESH
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5" id="city-locations">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
                 <!-- Bipenggou Live Forecast (yr.no / MET Norway) -->
-                <div id="bipenggou-weather" class="border-4 border-[#121212] bg-[#F0F0F0] p-4 sm:p-5 shadow-bauhaus space-y-5">
+                <div id="bipenggou-weather" class="border-4 border-[#121212] bg-[#F0F0F0] p-4 sm:p-5 shadow-bauhaus space-y-5 scroll-mt-20">
 
                     <div class="flex flex-wrap items-start justify-between gap-3 border-b-3 border-[#121212] pb-3">
                         <div>
@@ -471,7 +526,7 @@
                             </h3>
                             <p class="text-xs font-bold text-slate-700">พยากรณ์อากาศปี้เผิงโกว 2 ระดับความสูง (ดึงข้อมูลสดจาก yr.no / MET Norway)</p>
                         </div>
-                        <button onclick="loadBipenggouForecast(true)" class="btn-bauhaus bg-white text-[#121212] px-3 py-2 text-[11px] flex items-center gap-1.5">
+                        <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white text-[#121212] px-3 py-2 text-[11px] flex items-center gap-1.5">
                             <i class="fa-solid fa-rotate"></i> REFRESH
                         </button>
                     </div>
@@ -778,15 +833,16 @@
             }
         ];
 
+        // Fallback estimates when the trip day is beyond the live forecast range
         const weatherStats = [
-            { day: "Day 1", city: "Chongqing", temp: "16° / 22°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun", bg: "bg-white" },
-            { day: "Day 2", city: "Chongqing", temp: "15° / 20°C", cond: "ฝนปรอย", icon: "fa-cloud-rain", bg: "bg-white" },
-            { day: "Day 3", city: "Chengdu", temp: "14° / 20°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun", bg: "bg-white" },
-            { day: "Day 4", city: "Bipenggou", temp: "0° / 12°C", cond: "หนาวจัด/แดดสวย", icon: "fa-sun", bg: "bg-[#F0C020]", link: "#bipenggou-weather" },
-            { day: "Day 5", city: "Bipenggou", temp: "-2° / 10°C", cond: "หนาวจัด/ยอดเขาหิมะ", icon: "fa-snowflake", bg: "bg-[#F0C020]", link: "#bipenggou-weather" },
-            { day: "Day 6", city: "Chengdu", temp: "12° / 18°C", cond: "เมฆมาก", icon: "fa-cloud-sun", bg: "bg-white" },
-            { day: "Day 7", city: "Chongqing", temp: "15° / 21°C", cond: "เมฆครึ้ม", icon: "fa-cloud", bg: "bg-white" },
-            { day: "Day 8", city: "Chongqing", temp: "16° / 20°C", cond: "เมฆมาก", icon: "fa-cloud", bg: "bg-white" }
+            { day: "Day 1", city: "Chongqing", date: "2026-10-20", loc: "chongqing", temp: "16° / 22°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun", bg: "bg-white", link: "#city-weather" },
+            { day: "Day 2", city: "Chongqing", date: "2026-10-21", loc: "chongqing", temp: "15° / 20°C", cond: "ฝนปรอย", icon: "fa-cloud-rain", bg: "bg-white", link: "#city-weather" },
+            { day: "Day 3", city: "Chengdu", date: "2026-10-22", loc: "chengdu", temp: "14° / 20°C", cond: "เมฆบางส่วน", icon: "fa-cloud-sun", bg: "bg-white", link: "#city-weather" },
+            { day: "Day 4", city: "Bipenggou", date: "2026-10-23", loc: "entrance", temp: "0° / 12°C", cond: "หนาวจัด/แดดสวย", icon: "fa-sun", bg: "bg-[#F0C020]", link: "#bipenggou-weather" },
+            { day: "Day 5", city: "Bipenggou 3,600m", date: "2026-10-24", loc: "shanghaizi", temp: "-2° / 10°C", cond: "หนาวจัด/ยอดเขาหิมะ", icon: "fa-snowflake", bg: "bg-[#F0C020]", link: "#bipenggou-weather" },
+            { day: "Day 6", city: "Chengdu", date: "2026-10-25", loc: "chengdu", temp: "12° / 18°C", cond: "เมฆมาก", icon: "fa-cloud-sun", bg: "bg-white", link: "#city-weather" },
+            { day: "Day 7", city: "Chongqing", date: "2026-10-26", loc: "chongqing", temp: "15° / 21°C", cond: "เมฆครึ้ม", icon: "fa-cloud", bg: "bg-white", link: "#city-weather" },
+            { day: "Day 8", city: "Chongqing", date: "2026-10-27", loc: "chongqing", temp: "16° / 20°C", cond: "เมฆมาก", icon: "fa-cloud", bg: "bg-white", link: "#city-weather" }
         ];
 
         const checklistItems = [
@@ -906,24 +962,35 @@
             renderItinerary();
         }
 
-        function renderWeather() {
+        function renderWeather(cache) {
             const container = document.getElementById('weather-grid');
             container.innerHTML = '';
             weatherStats.forEach(w => {
+                const entry = cache && cache[w.loc];
+                const live = entry && entry.days && entry.days.find(d => d.date === w.date);
+                let icon = w.icon, temp = w.temp, cond = w.cond;
+                if (live) {
+                    const [lIcon, lLabel] = symbolInfo(live.symbol);
+                    icon = lIcon; cond = lLabel;
+                    temp = `${Math.round(live.min)}° / ${Math.round(live.max)}°C`;
+                }
+                const badge = live
+                    ? '<span class="bg-[#1040C0] text-white text-[9px] font-black px-1.5 py-0.5">LIVE · YR.NO</span>'
+                    : '<span class="bg-[#E0E0E0] border border-[#121212] text-[9px] font-black px-1.5 py-0.5">ค่าประมาณ</span>';
                 const card = document.createElement('div');
                 card.className = `border-3 border-[#121212] ${w.bg} p-4 text-center shadow-bauhaus-sm space-y-2`;
                 card.innerHTML = `
                     <div class="text-[10px] font-black uppercase text-slate-700">${w.day}: ${w.city}</div>
-                    <i class="fa-solid ${w.icon} text-2xl text-[#121212] my-1"></i>
-                    <div class="text-sm font-black text-[#121212]">${w.temp}</div>
-                    <div class="text-[10px] font-bold text-slate-800">${w.cond}</div>
-                    ${w.link ? `<a href="${w.link}" class="inline-block bg-[#121212] text-white px-2 py-0.5 text-[10px] font-black uppercase hover:bg-[#D02020]">ดูพยากรณ์สด <i class="fa-solid fa-arrow-down text-[9px]"></i></a>` : ''}
+                    <div class="text-[10px] font-bold text-slate-600">${thaiDate(w.date)}</div>
+                    <i class="fa-solid ${icon} text-2xl text-[#121212] my-1"></i>
+                    <div class="text-sm font-black text-[#121212]">${temp}</div>
+                    <div class="text-[10px] font-bold text-slate-800">${cond}</div>
+                    <div>${badge}</div>
+                    <a href="${w.link}" class="inline-block bg-[#121212] text-white px-2 py-0.5 text-[10px] font-black uppercase hover:bg-[#D02020]">ดูพยากรณ์สด <i class="fa-solid fa-arrow-down text-[9px]"></i></a>
                 `;
                 container.appendChild(card);
             });
         }
-
-
 
         // ---------- Flights ----------
         const flightLegs = [
@@ -953,7 +1020,7 @@
                 ['FlightAware', `https://www.flightaware.com/live/flight/AIQ${num}`, 'fa-solid fa-plane-up']
             ];
             return links.map(([name, url, icon]) => `
-                <a href="${url}" target="_blank" rel="noopener" class="btn-bauhaus bg-white text-[#121212] px-2 py-1 text-[10px] flex items-center gap-1">
+                <a href="${url}" target="_blank" rel="noopener" class="no-print btn-bauhaus bg-white text-[#121212] px-2 py-1 text-[10px] flex items-center gap-1">
                     <i class="${icon}"></i> ${name}
                 </a>`).join('');
         }
@@ -989,12 +1056,30 @@
                                 </div>
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
-                                <span class="text-[10px] font-black uppercase text-slate-600">สถานะสด / เกต:</span>
+                                <span class="no-print text-[10px] font-black uppercase text-slate-600">สถานะสด / เกต:</span>
                                 ${flightStatusLinks(sg.no)}
                             </div>
                         </div>`).join('')}
                 </div>
             `).join('');
+        }
+
+
+        // ---------- PDF export (print dialog → Save as PDF) ----------
+        function exportPDF() {
+            const flights = document.getElementById('flights-details');
+            const flightsWasOpen = flights.open;
+            const prevFilter = currentFilter;
+            if (currentFilter !== 'ALL') filterCity('ALL');
+            toggleAllAccordions(true);
+            flights.open = true;
+            const restore = () => {
+                window.removeEventListener('afterprint', restore);
+                flights.open = flightsWasOpen;
+                if (prevFilter !== 'ALL') filterCity(prevFilter); else renderItinerary();
+            };
+            window.addEventListener('afterprint', restore);
+            setTimeout(() => window.print(), 250);
         }
 
         // ---------- Show-to-local modal ----------
@@ -1112,7 +1197,7 @@
             else el.textContent = 'CHINA TRIP 2026 · จบทริปแล้ว';
         }
 
-        // ---------- Bipenggou live forecast (yr.no / MET Norway) ----------
+        // ---------- Live forecast (yr.no / MET Norway) ----------
         const bipenggouLocations = [
             {
                 key: 'entrance',
@@ -1120,7 +1205,8 @@
                 nameEn: 'Bipenggou Park Entrance',
                 altitude: 2300,
                 lat: 31.412, lon: 102.983,
-                accent: 'bg-[#1040C0]'
+                accent: 'bg-[#1040C0]',
+                highlight: ['2026-10-23', '2026-10-24']
             },
             {
                 key: 'shanghaizi',
@@ -1128,12 +1214,38 @@
                 nameEn: 'Shanghaizi Bus Stop',
                 altitude: 3600,
                 lat: 31.251, lon: 102.889,
-                accent: 'bg-[#D02020]'
+                accent: 'bg-[#D02020]',
+                highlight: ['2026-10-24']
             }
         ];
 
+        const cityLocations = [
+            {
+                key: 'chongqing',
+                name: 'ฉงชิ่ง (เจียฟางเป่ย / หงหยาต้ง)',
+                nameEn: 'Chongqing · Jiefangbei',
+                altitude: 250,
+                lat: 29.558, lon: 106.577,
+                accent: 'bg-[#1040C0]',
+                highlight: ['2026-10-20', '2026-10-21', '2026-10-26', '2026-10-27']
+            },
+            {
+                key: 'chengdu',
+                name: 'เฉิงตู (ถนนชุนซี / ไท่กู๋หลี่)',
+                nameEn: 'Chengdu · Chunxi Road',
+                altitude: 500,
+                lat: 30.655, lon: 104.080,
+                accent: 'bg-[#121212]',
+                highlight: ['2026-10-22', '2026-10-24', '2026-10-25']
+            }
+        ];
+
+        const forecastGroups = [
+            { containerId: 'city-locations', locations: cityLocations },
+            { containerId: 'bipenggou-locations', locations: bipenggouLocations }
+        ];
+
         const TRIP_DATES = ['2026-10-20','2026-10-21','2026-10-22','2026-10-23','2026-10-24','2026-10-25','2026-10-26','2026-10-27'];
-        const BPG_DATES = ['2026-10-23','2026-10-24'];
         const FORECAST_CACHE_KEY = 'bpg_yr_forecast_v1';
         const FORECAST_MAX_AGE = 60 * 60 * 1000; // 1 hour
 
@@ -1285,7 +1397,7 @@
             }
             const rows = entry.days.slice(0, 10).map(d => {
                 const [icon, label] = symbolInfo(d.symbol);
-                const isBpg = BPG_DATES.includes(d.date);
+                const isBpg = loc.highlight.includes(d.date);
                 const isTrip = TRIP_DATES.includes(d.date);
                 const rowCls = isBpg ? 'bg-[#D02020] text-white' : (isTrip ? 'bg-[#F0C020]' : 'bg-white');
                 const minCls = isBpg ? '' : (d.min <= 0 ? 'text-[#1040C0]' : '');
@@ -1300,10 +1412,11 @@
             }).join('');
 
             const lastDay = entry.days[entry.days.length - 1].date;
-            const bpgCovered = BPG_DATES.some(dt => entry.days.some(d => d.date === dt));
-            const notice = bpgCovered ? '' : `
+            const covered = loc.highlight.every(dt => entry.days.some(d => d.date === dt));
+            const pending = loc.highlight.filter(dt => !entry.days.some(d => d.date === dt)).map(thaiDate).join(', ');
+            const notice = covered ? '' : `
                 <div class="mt-2 text-[10px] font-bold text-[#121212] bg-[#E0E0E0] border border-[#121212] px-2 py-1">
-                    <i class="fa-solid fa-hourglass-half mr-1"></i>ตอนนี้พยากรณ์ได้ถึง ${thaiDate(lastDay)} — วันที่ 23–24 ต.ค. ยังไม่อยู่ในช่วงพยากรณ์ กลับมาเช็กใหม่ใกล้วันเดินทาง
+                    <i class="fa-solid fa-hourglass-half mr-1"></i>ตอนนี้พยากรณ์ได้ถึง ${thaiDate(lastDay)} — ${pending} ยังไม่อยู่ในช่วงพยากรณ์ กลับมาเช็กใหม่ใกล้วันนั้น
                 </div>`;
             const updated = new Date(entry.fetchedAt).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' });
 
@@ -1335,20 +1448,25 @@
             return { fetchedAt: Date.now(), days: summarizeDaily(json.properties.timeseries) };
         }
 
-        async function loadBipenggouForecast(force) {
-            const container = document.getElementById('bipenggou-locations');
-            if (!container.dataset.ready) {
-                container.innerHTML = bipenggouLocations.map(renderLocationShell).join('');
-                container.dataset.ready = '1';
-            } else if (force) {
-                bipenggouLocations.forEach(loc => {
+        async function loadForecasts(force) {
+            const allLocations = forecastGroups.flatMap(g => g.locations);
+            forecastGroups.forEach(g => {
+                const container = document.getElementById(g.containerId);
+                if (!container.dataset.ready) {
+                    container.innerHTML = g.locations.map(renderLocationShell).join('');
+                    container.dataset.ready = '1';
+                }
+            });
+            if (force) {
+                allLocations.forEach(loc => {
                     const box = document.getElementById(`fc-${loc.key}`);
                     if (box) box.innerHTML = `<div class="text-xs font-bold text-slate-600 py-6 text-center"><i class="fa-solid fa-spinner fa-spin mr-1"></i> กำลังโหลด…</div>`;
                 });
             }
 
             const cache = readForecastCache() || {};
-            await Promise.all(bipenggouLocations.map(async loc => {
+            renderWeather(cache);
+            await Promise.all(allLocations.map(async loc => {
                 const cached = cache[loc.key];
                 if (!force && cached && Date.now() - cached.fetchedAt < FORECAST_MAX_AGE) {
                     renderForecastTable(loc, cached);
@@ -1363,6 +1481,7 @@
                 }
             }));
             writeForecastCache(cache);
+            renderWeather(cache);
         }
 
         let checkedState = {};
@@ -1402,8 +1521,7 @@
             renderItinerary();
             renderCountdown();
             renderFlights();
-            renderWeather();
-            loadBipenggouForecast(false);
+            loadForecasts(false);
             renderChecklist();
             renderPhrases();
             addTaxiButtons();
@@ -1417,12 +1535,12 @@
                         label: 'Altitude (Meters)',
                         data: [200, 200, 500, 2000, 3837, 500, 200, 200],
                         borderColor: '#121212',
-                        borderWidth: 4,
+                        borderWidth: 3,
                         backgroundColor: 'rgba(240, 192, 32, 0.45)',
                         pointBackgroundColor: '#D02020',
                         pointBorderColor: '#121212',
                         pointBorderWidth: 3,
-                        pointRadius: 6,
+                        pointRadius: 4,
                         pointHoverRadius: 9,
                         fill: true,
                         tension: 0.1
@@ -1447,8 +1565,8 @@
                     scales: {
                         y: {
                             grid: { color: '#121212', lineWidth: 1 },
-                            ticks: { font: { family: 'Outfit', weight: 'bold', size: 11 }, color: '#121212' },
-                            title: { display: true, text: 'ALTITUDE (M)', font: { family: 'Outfit', weight: 'bold', size: 10 }, color: '#121212' }
+                            ticks: { font: { family: 'Outfit', weight: 'bold', size: 9 }, color: '#121212', maxTicksLimit: 5 },
+                            title: { display: false }
                         },
                         x: {
                             grid: { color: '#E0E0E0', lineWidth: 1 },
