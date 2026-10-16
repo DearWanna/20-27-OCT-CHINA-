@@ -68,6 +68,8 @@
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
         }
 
+        summary::-webkit-details-marker { display: none; }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 10px; height: 10px; }
         ::-webkit-scrollbar-track { background: #E0E0E0; border-left: 2px solid #121212; }
@@ -162,6 +164,9 @@
                 <a href="#elevation" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
                     <i class="fa-solid fa-chart-line text-[#F0C020]"></i> ELEVATION
                 </a>
+                <a href="#flights" onclick="document.getElementById('flights-details').open = true" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-plane text-[#F0C020]"></i> FLIGHTS
+                </a>
                 <a href="#hotels" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
                     <i class="fa-solid fa-hotel text-[#F0C020]"></i> HOTELS
                 </a>
@@ -232,6 +237,57 @@
                 </div>
 
             </div>
+        </section>
+
+        <!-- Flights -->
+        <section id="flights" class="scroll-mt-20">
+            <details id="flights-details" class="border-4 border-[#121212] bg-white shadow-bauhaus-lg group">
+                <summary class="list-none cursor-pointer p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-[#F0C020] transition-colors">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-[#121212] text-[#F0C020] border-2 border-[#121212] flex items-center justify-center font-black text-lg shadow-bauhaus-sm">
+                            <i class="fa-solid fa-plane"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-[#121212]">
+                                FLIGHTS
+                            </h2>
+                            <p class="text-xs font-bold text-slate-600 uppercase">Thai AirAsia · CNX ⇄ CKG ต่อเครื่องที่ดอนเมือง · 4 ผู้ใหญ่ + 1 เด็ก</p>
+                        </div>
+                    </div>
+                    <span class="bg-[#F0C020] border-2 border-[#121212] px-3 py-1 text-xs font-black uppercase flex items-center gap-1.5">
+                        <span class="group-open:hidden">ดูรายละเอียด</span><span class="hidden group-open:inline">ซ่อน</span>
+                        <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform"></i>
+                    </span>
+                </summary>
+
+                <div class="p-6 pt-0 space-y-6">
+                    <div id="flight-legs" class="space-y-6">
+                        <!-- Injected via JS -->
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-semibold">
+                        <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-1">
+                            <div class="font-black uppercase text-[#1040C0]"><i class="fa-solid fa-suitcase"></i> สัมภาระ (ทุกเที่ยวบิน)</div>
+                            <div>กระเป๋าโหลด <strong>20 กก. × 2 ใบ</strong> (ซื้อไว้ 2 คน)</div>
+                            <div>กระเป๋าถือขึ้นเครื่อง <strong>7 กก. × 5 คน</strong></div>
+                            <div class="text-slate-600">AirAsia เข้มเรื่องน้ำหนัก 7 กก. ควรชั่งก่อนออกจากโรงแรม</div>
+                        </div>
+                        <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-1">
+                            <div class="font-black uppercase text-[#1040C0]"><i class="fa-solid fa-utensils"></i> อาหารที่สั่งไว้ (FD552 DMK ➔ CKG)</div>
+                            <div>ข้าวมันไก่อังเคิลชิน · ข้าวหน้าไก่เทริยากิ + อเมริกาโน่ · ข้าวหน้าปลาซาบะย่างซีอิ๊ว · มักกะโรนีอบดับเบิ้ลชีส</div>
+                            <div class="text-slate-600">🦐 ไม่มีเมนูกุ้ง แต่ควรบอกลูกเรือเรื่องแพ้กุ้งไว้ด้วย</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F0C020] border-2 border-[#121212] p-3 text-xs font-bold text-[#121212] flex items-start gap-2 shadow-bauhaus-sm">
+                        <i class="fa-solid fa-lightbulb text-[#D02020] text-sm mt-0.5"></i>
+                        <div>
+                            เกตและการเปลี่ยนเกตแบบเรียลไทม์: เปิดการแจ้งเตือนในแอป <strong>AirAsia MOVE</strong> ไว้ (แม่นที่สุด) หรือกดปุ่ม Google / Flightradar24 / FlightAware ของแต่ละเที่ยวด้านบน
+                            · เลขการจองและชื่อผู้โดยสารไม่ได้ใส่ไว้ในเว็บนี้ (เว็บเปิดสาธารณะ) ให้ดูในแอปหรืออีเมลยืนยัน
+                        </div>
+                    </div>
+                </div>
+            </details>
         </section>
 
         <!-- Section 2: Accommodation Hub -->
@@ -583,7 +639,10 @@
                 title: "เชียงใหม่ ➔ ฉงชิ่ง (เดินทางวันแรก)",
                 hotel: "วอลลิง โฮเทล- เจียฟางเป่ย หงหยาต้ง ฉงชิ่ง (Walling Hotel)",
                 items: [
-                    { time: "11:00 – 18:00", text: "ออกเดินทางจากเชียงใหม่ (CNX) ถึงสนามบินฉงชิ่ง เจียงเป่ย (CKG) Terminal 3", transport: "Thai AirAsia (FD)", icon: "fa-plane", places: [{ zh: "重庆江北国际机场T3航站楼", city: "重庆" }] },
+                    { time: "08:30 – 11:05", text: "ถึงสนามบินเชียงใหม่ (CNX) อาคาร 2 (ในประเทศ) เช็กอิน โหลดกระเป๋า และถามเคาน์เตอร์ให้ชัดว่ากระเป๋าโหลดส่งถึงฉงชิ่ง (CKG) เลยหรือไม่ และได้บอร์ดดิ้งพาสครบ 2 เที่ยวหรือยัง", transport: "เช็กอิน CNX", icon: "fa-passport" },
+                    { time: "11:05 – 12:15", text: "FD3436 เชียงใหม่ (CNX อาคาร 2) ➔ ดอนเมือง (DMK อาคาร 2 ในประเทศ)", transport: "FD3436 · 1 ชม. 10 นาที", icon: "fa-plane" },
+                    { time: "12:15 – 13:45", text: "ต่อเครื่องที่ดอนเมือง 1 ชม. 30 นาที เดินจากอาคาร 2 (ในประเทศ) ไปอาคาร 1 (ระหว่างประเทศ) ผ่าน ตม. ขาออก แล้วไปที่เกต", transport: "Transfer DMK T2 ➔ T1", icon: "fa-person-walking-luggage" },
+                    { time: "13:45 – 18:00", text: "FD552 ดอนเมือง (DMK อาคาร 1) ➔ ฉงชิ่ง เจียงเป่ย (CKG) อาคาร 3 (เวลาจีน) ทานอาหารที่สั่งไว้บนเครื่อง", transport: "FD552 · 3 ชม. 15 นาที", icon: "fa-plane-arrival", places: [{ zh: "重庆江北国际机场T3航站楼", city: "重庆" }] },
                     { time: "18:00 – 19:15", text: "ผ่านพิธีการ ตม., รับกระเป๋าเดินทาง และเปิดใช้งาน Alipay / eSIM", transport: "ตม. ขาเข้า", icon: "fa-passport" },
                     { time: "19:15 – 20:00", text: "เดินทางเข้าเมืองสู่โรงแรม Walling Hotel ย่าน Jiefangbei / Hongyadong", transport: "Didi (~45 นาที) / CRT Line 10", icon: "fa-taxi", places: [{ zh: "重庆华灵酒店(解放碑洪崖洞店)", city: "重庆" }] },
                     { time: "20:00 น.+", text: "เช็กอิน เดินเล่นย่านถนนคนเดิน Jiefangbei เบาๆ หาอาหารเย็นทาน แล้วพักผ่อน", transport: "เดินเท้า", icon: "fa-utensils", places: [{ zh: "解放碑步行街", city: "重庆" }] }
@@ -709,10 +768,12 @@
                 hotel: "เดินทางกลับประเทศไทย",
                 items: [
                     { time: "07:30 – 08:15", text: "เช็กเอาต์ เดินทางไปสนามบินฉงชิ่ง Jiangbei (CKG) Terminal 3", transport: "Didi (~35 นาที)", icon: "fa-taxi", places: [{ zh: "重庆江北国际机场T3航站楼", city: "重庆" }] },
-                    { time: "08:30 – 11:00", text: "เช็กอินเคาน์เตอร์ Thai AirAsia โหลดกระเป๋า ผ่าน ตม. ขาออก", transport: "สนามบิน CKG", icon: "fa-passport" },
-                    { time: "11:20 – 16:40", text: "บินตรงออกจาก CKG ถึงเชียงใหม่ (CNX) เวลา 16:40 น.", transport: "FD Flight", icon: "fa-plane-arrival" }
+                    { time: "08:30 – 11:00", text: "เช็กอินเคาน์เตอร์ Thai AirAsia อาคาร 3 โหลดกระเป๋า แล้วถามให้ชัดว่ากระเป๋าส่งถึงเชียงใหม่เลย หรือต้องรับที่ดอนเมือง จากนั้นผ่าน ตม. ขาออก", transport: "สนามบิน CKG T3", icon: "fa-passport" },
+                    { time: "11:20 – 13:45", text: "FD557 ฉงชิ่ง (CKG อาคาร 3) ➔ ดอนเมือง (DMK อาคาร 1) (ออกตามเวลาจีน ถึงตามเวลาไทย)", transport: "FD557 · 3 ชม. 25 นาที", icon: "fa-plane" },
+                    { time: "13:45 – 15:25", text: "ต่อเครื่องที่ดอนเมือง 1 ชม. 40 นาที ผ่าน ตม. ขาเข้าไทย (รับกระเป๋าถ้าไม่ได้ส่งต่อ) แล้วเดินจากอาคาร 1 ไปอาคาร 2 (ในประเทศ)", transport: "Transfer DMK T1 ➔ T2", icon: "fa-person-walking-luggage" },
+                    { time: "15:25 – 16:40", text: "FD3419 ดอนเมือง (DMK อาคาร 2) ➔ เชียงใหม่ (CNX อาคาร 2) ถึงบ้านโดยสวัสดิภาพ 🏠", transport: "FD3419 · 1 ชม. 15 นาที", icon: "fa-plane-arrival" }
                 ],
-                tip: "เผื่อเวลา ตม. และการโหลดกระเป๋าขาออกที่สนามบิน CKG อย่างน้อย 3 ชั่วโมง",
+                tip: "เผื่อเวลา ตม. และการโหลดกระเป๋าขาออกที่สนามบิน CKG อย่างน้อย 3 ชั่วโมง<br>⏱️ ต่อเครื่องที่ดอนเมืองมีเวลา 1 ชม. 40 นาที และต้องผ่าน ตม. ไทย ถ้าต้องรับกระเป๋าเองจะค่อนข้างกระชั้น ลงเครื่องแล้วไปเลย ไม่ต้องแวะ",
                 colorBlock: "bg-[#1040C0] text-white"
             }
         ];
@@ -862,6 +923,79 @@
             });
         }
 
+
+
+        // ---------- Flights ----------
+        const flightLegs = [
+            {
+                label: "ขาไป · อ. 20 ต.ค. 2026", total: "5 ชม. 55 นาที · 1 ต่อ",
+                segments: [
+                    { no: "FD3436", from: "CNX", fromName: "เชียงใหม่", fromTerm: "อาคาร 2", dep: "11:05", to: "DMK", toName: "ดอนเมือง", toTerm: "อาคาร 2", arr: "12:15", dur: "1 ชม. 10 นาที", date: "2026-10-20" },
+                    { layover: "ต่อเครื่อง 1 ชม. 30 นาที · เปลี่ยนจากอาคาร 2 ➔ อาคาร 1 (ผ่าน ตม. ขาออก)" },
+                    { no: "FD552", from: "DMK", fromName: "ดอนเมือง", fromTerm: "อาคาร 1", dep: "13:45", to: "CKG", toName: "ฉงชิ่ง", toTerm: "อาคาร 3", arr: "18:00", dur: "3 ชม. 15 นาที", date: "2026-10-20", note: "ถึงเวลาจีน (GMT+8)" }
+                ]
+            },
+            {
+                label: "ขากลับ · อ. 27 ต.ค. 2026", total: "6 ชม. 20 นาที · 1 ต่อ",
+                segments: [
+                    { no: "FD557", from: "CKG", fromName: "ฉงชิ่ง", fromTerm: "อาคาร 3", dep: "11:20", to: "DMK", toName: "ดอนเมือง", toTerm: "อาคาร 1", arr: "13:45", dur: "3 ชม. 25 นาที", date: "2026-10-27", note: "ออกเวลาจีน ถึงเวลาไทย" },
+                    { layover: "ต่อเครื่อง 1 ชม. 40 นาที · ผ่าน ตม. ขาเข้าไทย แล้วเปลี่ยนจากอาคาร 1 ➔ อาคาร 2" },
+                    { no: "FD3419", from: "DMK", fromName: "ดอนเมือง", fromTerm: "อาคาร 2", dep: "15:25", to: "CNX", toName: "เชียงใหม่", toTerm: "อาคาร 2", arr: "16:40", dur: "1 ชม. 15 นาที", date: "2026-10-27" }
+                ]
+            }
+        ];
+
+        function flightStatusLinks(no) {
+            const num = no.replace(/^FD/, '');
+            const links = [
+                ['Google', `https://www.google.com/search?q=${no}+flight+status`, 'fa-brands fa-google'],
+                ['Flightradar24', `https://www.flightradar24.com/data/flights/${no.toLowerCase()}`, 'fa-solid fa-satellite-dish'],
+                ['FlightAware', `https://www.flightaware.com/live/flight/AIQ${num}`, 'fa-solid fa-plane-up']
+            ];
+            return links.map(([name, url, icon]) => `
+                <a href="${url}" target="_blank" rel="noopener" class="btn-bauhaus bg-white text-[#121212] px-2 py-1 text-[10px] flex items-center gap-1">
+                    <i class="${icon}"></i> ${name}
+                </a>`).join('');
+        }
+
+        function renderFlights() {
+            const box = document.getElementById('flight-legs');
+            box.innerHTML = flightLegs.map(leg => `
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121212] pb-2">
+                        <div class="font-black text-sm uppercase">${leg.label}</div>
+                        <div class="bg-[#121212] text-white px-2 py-0.5 text-[11px] font-mono font-bold">${leg.total}</div>
+                    </div>
+                    ${leg.segments.map(sg => sg.layover ? `
+                        <div class="text-[11px] font-bold text-[#D02020] border-l-4 border-dashed border-[#D02020] pl-3 py-1">
+                            <i class="fa-solid fa-person-walking-luggage mr-1"></i>${sg.layover}
+                        </div>` : `
+                        <div class="border-3 border-[#121212] bg-[#F0F0F0] p-3 shadow-bauhaus-sm space-y-3">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="bg-[#D02020] text-white border-2 border-[#121212] px-2 py-0.5 font-black text-sm font-mono">${sg.no}</span>
+                                <span class="text-[11px] font-bold text-slate-700">Thai AirAsia · ${sg.dur}${sg.note ? ' · ' + sg.note : ''}</span>
+                            </div>
+                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-center">
+                                <div>
+                                    <div class="font-display font-black text-2xl">${sg.dep}</div>
+                                    <div class="font-black text-sm">${sg.from}</div>
+                                    <div class="text-[10px] font-bold text-slate-600">${sg.fromName} · ${sg.fromTerm}</div>
+                                </div>
+                                <i class="fa-solid fa-plane text-[#1040C0] text-lg"></i>
+                                <div>
+                                    <div class="font-display font-black text-2xl">${sg.arr}</div>
+                                    <div class="font-black text-sm">${sg.to}</div>
+                                    <div class="text-[10px] font-bold text-slate-600">${sg.toName} · ${sg.toTerm}</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-[10px] font-black uppercase text-slate-600">สถานะสด / เกต:</span>
+                                ${flightStatusLinks(sg.no)}
+                            </div>
+                        </div>`).join('')}
+                </div>
+            `).join('');
+        }
 
         // ---------- Show-to-local modal ----------
         const phrases = [
@@ -1267,6 +1401,7 @@
         window.onload = function() {
             renderItinerary();
             renderCountdown();
+            renderFlights();
             renderWeather();
             loadBipenggouForecast(false);
             renderChecklist();
