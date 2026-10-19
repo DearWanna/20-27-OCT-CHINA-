@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     
     <style>
         :root {
@@ -77,7 +79,7 @@
             html, body { background: #fff !important; }
             body { padding: 0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .print-only { display: block !important; }
-            .no-print, nav, footer, #elevation, #weather, #checklist, #help, #show-modal,
+            .no-print, nav, footer, #elevation, #map, #weather, #checklist, #help, #show-modal,
             button[aria-label="การ์ดแพ้กุ้ง"], #hotels button, #itinerary-list button[title],
             #itinerary-list a[title], #flights summary span:last-child { display: none !important; }
             main { padding: 0 !important; max-width: none !important; }
@@ -88,6 +90,14 @@
             #itinerary-list > div > button { break-after: avoid; }
             a[href^="http"] { text-decoration: none; }
         }
+
+        /* Trip map */
+        #trip-map { height: 420px; }
+        @media (max-width: 640px) { #trip-map { height: 340px; } }
+        .map-pin { width: 26px; height: 26px; border: 2px solid #121212; display: flex; align-items: center; justify-content: center; font: 800 11px 'Outfit', sans-serif; color: #fff; box-shadow: 2px 2px 0 #121212; }
+        .map-pin.hotel { border-radius: 50%; background: #F0C020 !important; color: #121212; }
+        .leaflet-popup-content-wrapper { border-radius: 0; border: 2px solid #121212; box-shadow: 4px 4px 0 #121212; }
+        .leaflet-popup-content { margin: 10px 12px; font-family: 'Prompt', sans-serif; }
 
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -194,6 +204,9 @@
                 </a>
                 <a href="#itinerary" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
                     <i class="fa-solid fa-route text-[#F0C020]"></i> ITINERARY
+                </a>
+                <a href="#map" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-map-location-dot text-[#F0C020]"></i> MAP
                 </a>
                 <a href="#weather" class="px-4 py-3 hover:bg-[#1040C0] transition-colors border-r border-slate-700 flex items-center gap-1.5">
                     <i class="fa-solid fa-cloud-sun text-[#F0C020]"></i> WEATHER
@@ -467,6 +480,33 @@
                     <!-- Dynamic Rows Rendered via JS -->
                 </div>
 
+            </div>
+        </section>
+
+        <!-- Trip Map (OpenStreetMap) -->
+        <section id="map" class="scroll-mt-20">
+            <div class="border-4 border-[#121212] bg-white p-4 shadow-bauhaus space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121212] pb-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center font-black text-sm">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-display font-black text-lg sm:text-xl uppercase tracking-tight text-[#121212]">TRIP MAP</h2>
+                            <p class="text-[10px] font-bold text-slate-600">ตำแหน่งสถานที่ตามแผนแต่ละวัน · ตัวเลข = ลำดับในวันนั้น · วงกลมเหลือง = ที่พัก</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="map-day-buttons" class="flex flex-wrap gap-1.5 text-[11px] font-bold">
+                    <!-- Injected via JS -->
+                </div>
+                <div id="trip-map" class="border-2 border-[#121212] bg-[#E0E0E0]"></div>
+                <div id="map-stop-list" class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] font-semibold">
+                    <!-- Injected via JS -->
+                </div>
+                <p class="text-[10px] font-bold text-slate-600">
+                    แผนที่: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener" class="underline">OpenStreetMap</a> contributors · พิกัดเป็นค่าโดยประมาณสำหรับดูภาพรวม เวลาเดินทางจริงให้กดปุ่ม Amap · ปี้เผิงโกวใช้พิกัดที่คุณให้มา
+                </p>
             </div>
         </section>
 
@@ -906,6 +946,9 @@
                         <div class="text-xs font-bold text-slate-700 bg-[#E0E0E0] p-2 border border-[#121212] flex items-center gap-2">
                             <i class="fa-solid fa-hotel text-[#1040C0]"></i> HOTEL STAY: <span class="text-[#121212] font-black">${item.hotel}</span>
                         </div>
+                        <button type="button" onclick="showDayOnMap(${item.id})" class="no-print btn-bauhaus bg-white text-[#121212] px-3 py-1.5 text-[11px] flex items-center gap-1.5">
+                            <i class="fa-solid fa-map-location-dot text-[#D02020]"></i> ดูวันนี้บนแผนที่
+                        </button>
                         <div class="space-y-1">
                             ${activitiesHtml}
                         </div>
@@ -1068,6 +1111,141 @@
             `).join('');
         }
 
+
+
+        // ---------- Trip map (Leaflet + OpenStreetMap) ----------
+        // Approximate WGS-84 coordinates keyed by the Chinese place name used in itinerary chips
+        const PLACE_COORDS = {
+            "重庆江北国际机场T3航站楼": [29.7265, 106.6460, "สนามบินฉงชิ่ง T3"],
+            "重庆华灵酒店(解放碑洪崖洞店)": [29.5612, 106.5790, "Walling Hotel", "hotel"],
+            "解放碑步行街": [29.5577, 106.5770, "เจียฟางเป่ย"],
+            "罗汉寺": [29.5603, 106.5812, "วัดหลัวฮั่น"],
+            "魁星楼广场": [29.5608, 106.5727, "Kuixinglou"],
+            "李子坝站": [29.5531, 106.5303, "สถานีหลี่จื่อปา"],
+            "李子坝观景平台": [29.5526, 106.5298, "จุดชมวิวรถไฟทะลุตึก"],
+            "鹅岭二厂文创公园": [29.5520, 106.5232, "เอ้อร์ฉั่ง"],
+            "龙门浩老街": [29.5524, 106.5865, "ถนนเก่าหลงเหมินเฮ่า"],
+            "下浩里": [29.5548, 106.5888, "เซี่ยเฮ่าหลี่"],
+            "南滨路": [29.5498, 106.5840, "ถนนหนานปิน"],
+            "千厮门嘉陵江大桥": [29.5660, 106.5795, "สะพานเชียนซื่อเหมิน"],
+            "八一路好吃街": [29.5558, 106.5782, "ถนนของกินปาอีลู่"],
+            "得意世界": [29.5537, 106.5763, "De Yi World"],
+            "十八梯": [29.5527, 106.5742, "สือปาถี"],
+            "重庆北站北广场": [29.6163, 106.5523, "สถานีฉงชิ่งเหนือ (ลานเหนือ)"],
+            "重庆北站": [29.6110, 106.5515, "สถานีฉงชิ่งเหนือ"],
+            "成都东站": [30.6297, 104.1420, "สถานีเฉิงตูตะวันออก"],
+            "丽怡酒店(成都春熙路太古里店)": [30.6545, 104.0832, "Park Inn ชุนซี", "hotel"],
+            "春熙路站": [30.6560, 104.0790, "สถานีชุนซี"],
+            "成都科幻馆": [30.8245, 103.9205, "พิพิธภัณฑ์นิยายวิทยาศาสตร์"],
+            "菁蓉湖": [30.8230, 103.9190, "ทะเลสาบจิงหรง"],
+            "宽窄巷子": [30.6638, 104.0558, "ตรอกกว้างตรอกแคบ"],
+            "东郊记忆": [30.6728, 104.1262, "ตงเจียวจี้อี้"],
+            "犀浦站": [30.7310, 103.9705, "สถานีซีผู่"],
+            "青城山站": [30.9010, 103.5960, "สถานีชิงเฉิงซาน"],
+            "中国大熊猫保护研究中心都江堰基地": [30.9480, 103.5665, "ศูนย์แพนด้าตู๋เจียงเอี้ยน"],
+            "都江堰景区": [31.0030, 103.6060, "เขื่อนโบราณตู๋เจียงเอี้ยน"],
+            "南桥": [30.9985, 103.6125, "สะพานหนานเฉียว"],
+            "离堆公园站": [30.9958, 103.6150, "สถานีหลีตุยกงหยวน"],
+            "理县": [31.4360, 103.1660, "อำเภอหลี่เซียน"],
+            "毕棚沟游客中心": [31.4120, 102.9830, "ทางเข้าอุทยานปี้เผิงโกว"],
+            "毕棚沟景区": [31.4120, 102.9830, "อุทยานปี้เผิงโกว"],
+            "上海子": [31.2510, 102.8890, "ซั่งไห่จื่อ (3,600 ม.)"]
+        };
+        const DAY_HOTEL = { 1: "重庆华灵酒店(解放碑洪崖洞店)", 2: "重庆华灵酒店(解放碑洪崖洞店)", 3: "丽怡酒店(成都春熙路太古里店)", 5: "丽怡酒店(成都春熙路太古里店)", 6: "丽怡酒店(成都春熙路太古里店)", 7: "重庆华灵酒店(解放碑洪崖洞店)" };
+        const DAY_COLORS = ['#1040C0', '#1040C0', '#121212', '#D02020', '#D02020', '#121212', '#1040C0', '#1040C0'];
+
+        function dayStops(item) {
+            const seen = new Set();
+            const stops = [];
+            item.items.forEach(act => (act.places || []).forEach(pl => {
+                const c = PLACE_COORDS[pl.zh];
+                if (!c) return;
+                const key = c[0] + ',' + c[1];
+                if (seen.has(key)) return;
+                seen.add(key);
+                stops.push({ zh: pl.zh, th: c[2], lat: c[0], lon: c[1], hotel: c[3] === 'hotel', time: act.time, pl });
+            }));
+            // Tonight's hotel (if known and not already listed)
+            const hz = DAY_HOTEL[item.id], hc = hz && PLACE_COORDS[hz];
+            if (hc && !seen.has(hc[0] + ',' + hc[1])) {
+                stops.push({ zh: hz, th: hc[2] + ' (ที่พักคืนนี้)', lat: hc[0], lon: hc[1], hotel: true, time: 'ที่พัก', pl: { zh: hz, city: hz.includes('成都') ? '成都' : '重庆' } });
+            }
+            return stops;
+        }
+
+        let tripMap = null, mapLayer = null, currentMapDay = 2;
+
+        function initMap() {
+            const el = document.getElementById('trip-map');
+            if (typeof L === 'undefined' || !el) {
+                if (el) el.innerHTML = '<div class="p-6 text-center text-xs font-bold">โหลดแผนที่ไม่ได้ (ไม่มีสัญญาณ?) ใช้ปุ่ม Amap ในแผนรายวันแทน</div>';
+                return;
+            }
+            tripMap = L.map(el, { scrollWheelZoom: false });
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(tripMap);
+            mapLayer = L.layerGroup().addTo(tripMap);
+            const todayItem = itineraryData.find(it => itemDate(it) === chinaToday());
+            renderMapDay(todayItem ? todayItem.id : currentMapDay);
+        }
+
+        function renderMapButtons() {
+            const box = document.getElementById('map-day-buttons');
+            const btn = (val, label) => {
+                const active = currentMapDay === val;
+                return `<button type="button" onclick="renderMapDay(${val === 'all' ? "'all'" : val})" class="px-2.5 py-1 border-2 border-[#121212] ${active ? 'bg-[#121212] text-white' : 'bg-white hover:bg-[#F0C020]'}">${label}</button>`;
+            };
+            box.innerHTML = btn('all', 'ทั้งทริป') + itineraryData.map(it => btn(it.id, `D${it.id} · ${itemDate(it).slice(8)} ต.ค.`)).join('');
+        }
+
+        function renderMapDay(day) {
+            currentMapDay = day;
+            renderMapButtons();
+            if (!tripMap) return;
+            mapLayer.clearLayers();
+            const days = day === 'all' ? itineraryData : itineraryData.filter(it => it.id === day);
+            const bounds = [];
+            const listRows = [];
+            days.forEach(item => {
+                const color = DAY_COLORS[item.id - 1];
+                const stops = dayStops(item);
+                if (stops.length > 1) {
+                    L.polyline(stops.map(s => [s.lat, s.lon]), { color, weight: 3, dashArray: '6 6', opacity: 0.8 }).addTo(mapLayer);
+                }
+                stops.forEach((st, i) => {
+                    const label = day === 'all' ? `D${item.id}` : (st.hotel ? '<i class="fa-solid fa-bed"></i>' : i + 1);
+                    const icon = L.divIcon({ className: '', html: `<div class="map-pin ${st.hotel ? 'hotel' : ''}" style="background:${color}">${label}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+                    const amap = st.pl.url || `https://uri.amap.com/search?keyword=${encodeURIComponent(st.zh)}&city=${encodeURIComponent(st.pl.city)}&callnative=1`;
+                    L.marker([st.lat, st.lon], { icon }).addTo(mapLayer).bindPopup(`
+                        <div class="text-[10px] font-black text-[#1040C0]">DAY ${item.id} · ${st.time}</div>
+                        <div class="font-black text-sm">${st.th}</div>
+                        <div class="chinese-font text-xs font-bold">${st.zh}</div>
+                        <a href="${amap}" target="_blank" rel="noopener" class="inline-block mt-1 bg-[#1040C0] text-white px-2 py-0.5 text-[11px] font-black" style="color:#fff">เปิดใน Amap</a>`);
+                    bounds.push([st.lat, st.lon]);
+                    if (day !== 'all') listRows.push(`
+                        <button type="button" onclick="focusStop(${st.lat}, ${st.lon})" class="text-left border border-[#121212] bg-[#F0F0F0] hover:bg-[#F0C020] px-2 py-1 flex items-center gap-2">
+                            <span class="map-pin ${st.hotel ? 'hotel' : ''} shrink-0" style="background:${color};width:20px;height:20px;font-size:10px">${st.hotel ? '<i class="fa-solid fa-bed"></i>' : i + 1}</span>
+                            <span><span class="font-mono text-[10px]">${st.time}</span> · ${st.th} <span class="chinese-font text-slate-600">${st.zh}</span></span>
+                        </button>`);
+                });
+            });
+            document.getElementById('map-stop-list').innerHTML = listRows.join('');
+            if (bounds.length) tripMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 15 });
+            setTimeout(() => tripMap.invalidateSize(), 50);
+        }
+
+        function focusStop(lat, lon) {
+            if (!tripMap) return;
+            tripMap.setView([lat, lon], 16);
+            mapLayer.eachLayer(l => { if (l.getLatLng && l.getLatLng().lat === lat && l.getLatLng().lng === lon) l.openPopup(); });
+        }
+
+        function showDayOnMap(id) {
+            document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+            renderMapDay(id);
+        }
 
         // ---------- PDF export (print dialog → Save as PDF) ----------
         function exportPDF() {
@@ -1525,6 +1703,8 @@
             renderItinerary();
             renderCountdown();
             renderFlights();
+            renderMapButtons();
+            initMap();
             loadForecasts(false);
             renderChecklist();
             renderPhrases();
