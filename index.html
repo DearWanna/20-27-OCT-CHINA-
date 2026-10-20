@@ -1248,20 +1248,115 @@
         }
 
         // ---------- PDF export (print dialog → Save as PDF) ----------
-        function exportPDF() {
-            const flights = document.getElementById('flights-details');
-            const flightsWasOpen = flights.open;
+        // Builds a clean copy of flights + hotels + full itinerary and downloads it as a PDF file
+        // (works in iPhone Safari / in-app browsers where window.print() is unavailable).
+        const HTML2PDF_URL = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        let html2pdfLoading = null;
+        function loadHtml2pdf() {
+            if (window.html2pdf) return Promise.resolve();
+            if (!html2pdfLoading) {
+                html2pdfLoading = new Promise((resolve, reject) => {
+                    const sc = document.createElement('script');
+                    sc.src = HTML2PDF_URL;
+                    sc.onload = resolve;
+                    sc.onerror = () => { html2pdfLoading = null; reject(new Error('load failed')); };
+                    document.head.appendChild(sc);
+                });
+            }
+            return html2pdfLoading;
+        }
+
+        function setPdfStatus(text) {
+            let el = document.getElementById('pdf-status');
+            if (!text) { if (el) el.remove(); return; }
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'pdf-status';
+                el.className = 'fixed inset-0 z-[60] bg-[#121212]/80 flex items-center justify-center p-4';
+                document.body.appendChild(el);
+            }
+            el.innerHTML = `<div class="bg-white border-4 border-[#121212] shadow-bauhaus-yellow px-6 py-4 text-sm font-black text-center">${text}</div>`;
+        }
+
+        function buildPdfContent() {
+            const root = document.createElement('div');
+            root.id = 'pdf-root';
+            root.style.cssText = 'width:760px;background:#fff;padding:0;font-family:Prompt,Outfit,sans-serif;color:#121212';
+            root.innerHTML = `
+                <div style="border-bottom:4px solid #121212;padding-bottom:6px;margin-bottom:14px">
+                    <div class="font-display font-black text-2xl uppercase">China Trip 2026 · แผนการเดินทาง</div>
+                    <div class="text-xs font-bold">20–27 ต.ค. 2026 · เชียงใหม่ ➔ ฉงชิ่ง ➔ เฉิงตู ➔ ปี้เผิงโกว ➔ เฉิงตู ➔ ฉงชิ่ง ➔ เชียงใหม่ · 4 ผู้ใหญ่ + 1 เด็ก</div>
+                </div>`;
+            const addSection = (title, node) => {
+                const wrap = document.createElement('div');
+                wrap.style.marginBottom = '18px';
+                wrap.innerHTML = `<div class="font-display font-black text-lg uppercase" style="border-bottom:2px solid #121212;margin-bottom:8px">${title}</div>`;
+                wrap.appendChild(node);
+                root.appendChild(wrap);
+            };
+            addSection('✈️ Flights', document.getElementById('flight-legs').cloneNode(true));
+            const hotels = document.querySelector('#hotels .space-y-4');
+            if (hotels) addSection('🏨 Hotels', hotels.cloneNode(true));
+            addSection('📅 Daily Itinerary', document.getElementById('itinerary-list').cloneNode(true));
+
+            // Strip interactive bits and shadows
+            root.querySelectorAll('button, .no-print, a[title], [id^="acc-icon-"]').forEach(el => {
+                if (el.matches('button[onclick^="toggleAccordion"]')) {
+                    // accordion header button: keep its content as a plain block
+                    const div = document.createElement('div');
+                    div.className = el.className;
+                    div.innerHTML = el.innerHTML;
+                    el.replaceWith(div);
+                    return;
+                }
+                el.remove();
+            });
+            root.querySelectorAll('[id^="acc-icon-"]').forEach(el => el.remove());
+            root.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+            root.querySelectorAll('.hidden').forEach(el => el.classList.remove('hidden'));
+            root.querySelectorAll('[class*="shadow-bauhaus"]').forEach(el => { el.style.boxShadow = 'none'; });
+            root.querySelectorAll('#itinerary-list > div, .border-l-3, .border-3').forEach(el => el.classList.add('pdf-avoid'));
+            root.querySelectorAll('[class*="border-l-3"]').forEach(el => el.classList.add('pdf-avoid'));
+            return root;
+        }
+
+        async function exportPDF() {
             const prevFilter = currentFilter;
             if (currentFilter !== 'ALL') filterCity('ALL');
+            setPdfStatus('<i class="fa-solid fa-spinner fa-spin"></i> กำลังสร้าง PDF…');
+            try {
+                await loadHtml2pdf();
+                const content = buildPdfContent();
+                await window.html2pdf().set({
+                    margin: [8, 8, 10, 8],
+                    filename: 'China-Trip-2026.pdf',
+                    image: { type: 'jpeg', quality: 0.92 },
+                    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    pagebreak: { mode: ['css', 'legacy'], avoid: '.pdf-avoid' }
+                }).from(content).save();
+                setPdfStatus('');
+            } catch (e) {
+                // Offline or library blocked: fall back to the browser print dialog
+                setPdfStatus('');
+                printFallback();
+            } finally {
+                if (prevFilter !== 'ALL') filterCity(prevFilter);
+            }
+        }
+
+        function printFallback() {
+            const flights = document.getElementById('flights-details');
+            const flightsWasOpen = flights.open;
             toggleAllAccordions(true);
             flights.open = true;
             const restore = () => {
                 window.removeEventListener('afterprint', restore);
                 flights.open = flightsWasOpen;
-                if (prevFilter !== 'ALL') filterCity(prevFilter); else renderItinerary();
+                renderItinerary();
             };
             window.addEventListener('afterprint', restore);
-            setTimeout(() => window.print(), 250);
+            window.print();
         }
 
         // ---------- Show-to-local modal ----------
