@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanghai Business Trip</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Prompt', 'Outfit', sans-serif; background: #F0F0F0; color: #121212; }
+        .font-display { font-family: 'Outfit', 'Prompt', sans-serif; }
+        .chinese-font { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+        .shadow-bauhaus-sm { box-shadow: 3px 3px 0 0 #121212; }
+        .shadow-bauhaus { box-shadow: 5px 5px 0 0 #121212; }
+        .shadow-bauhaus-lg { box-shadow: 8px 8px 0 0 #121212; }
+        .shadow-bauhaus-yellow { box-shadow: 5px 5px 0 0 #F0C020; }
+        .btn-bauhaus { border: 3px solid #121212; box-shadow: 4px 4px 0 0 #121212; transition: all .12s; font-weight: 800; text-transform: uppercase; }
+        .btn-bauhaus:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 #121212; }
+        .bg-dot-pattern { background-image: radial-gradient(#121212 1.5px, transparent 1.5px); background-size: 18px 18px; }
+        summary::-webkit-details-marker { display: none; }
+        .note-input { width: 100%; border: 2px solid #121212; background: #fff; padding: 6px 8px; font-size: 13px; font-weight: 600; }
+        .note-input:focus { outline: none; background: #FFF8DC; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <div class="bg-[#121212] text-white text-xs font-bold">
+        <div class="max-w-5xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2">
+            <span><i class="fa-solid fa-briefcase text-[#F0C020] mr-1"></i> BUSINESS TRIP · GOODWE</span>
+            <a href="./" class="bg-[#F0C020] text-[#121212] px-2 py-0.5 font-black uppercase"><i class="fa-solid fa-arrow-left"></i> ทริปทั้งหมด</a>
+        </div>
+    </div>
+
+    <header class="border-b-4 border-[#121212] bg-[#D02020] text-white">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase">
+            <span id="countdown">SHANGHAI 2026</span>
+            <span class="bg-[#121212] px-2.5 py-1 font-mono">NOV 3 – 8, 2026</span>
+        </div>
+    </header>
+
+    <section class="border-b-4 border-[#121212] bg-dot-pattern">
+        <div class="max-w-5xl mx-auto px-4 py-8 space-y-3">
+            <div class="inline-flex items-center gap-2 bg-[#F0C020] border-2 border-[#121212] px-3 py-1 font-extrabold uppercase text-xs shadow-bauhaus-sm">
+                <i class="fa-solid fa-solar-panel"></i> GOODWE · INVERTER / SOLAR
+            </div>
+            <h1 class="font-display font-black text-5xl sm:text-7xl uppercase tracking-tighter leading-[0.88]">
+                SHANGHAI<br><span class="bg-[#1040C0] text-white px-2 border-4 border-[#121212] inline-block my-1">BUSINESS</span><br>TRIP
+            </h1>
+            <p class="font-medium max-w-2xl">ทริปธุรกิจงาน GoodWe (อินเวอร์เตอร์ / โซลาร์เซลล์) · ผู้จัดดูแลตั๋วเครื่องบิน ที่พัก และรถรับส่ง</p>
+        </div>
+    </section>
+
+    <nav class="sticky top-0 z-40 bg-[#121212] text-white overflow-x-auto">
+        <div class="max-w-5xl mx-auto px-2 flex text-xs font-bold uppercase whitespace-nowrap">
+            <a href="#info" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-id-card text-[#F0C020]"></i> INFO</a>
+            <a href="#schedule" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-calendar-days text-[#F0C020]"></i> SCHEDULE</a>
+            <a href="#goodwe" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-building text-[#F0C020]"></i> GOODWE</a>
+            <a href="#weather" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-cloud-sun text-[#F0C020]"></i> WEATHER</a>
+            <a href="#checklist" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-check-square text-[#F0C020]"></i> CHECKLIST</a>
+            <a href="#help" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-life-ring text-[#F0C020]"></i> HELP</a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- Organizer info (saved on this device only) -->
+        <section id="info" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center font-black">01</div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">TRIP INFO</h2>
+                        <p class="text-xs font-bold text-slate-600">กรอกข้อมูลที่ได้จากผู้จัด · บันทึกไว้ในเครื่องนี้เท่านั้น ไม่ขึ้นเว็บสาธารณะ</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="info-fields"></div>
+                <div class="bg-[#F0C020] border-2 border-[#121212] p-3 text-xs font-semibold">
+                    <i class="fa-solid fa-shield-halved text-[#D02020]"></i> ข้อมูลที่กรอกจะถูกเก็บในเบราว์เซอร์ของเครื่องนี้เท่านั้น คนอื่นที่เปิดลิงก์จะไม่เห็น · ถ้าเปลี่ยนเครื่อง/ล้างข้อมูลเบราว์เซอร์ ต้องกรอกใหม่
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule -->
+        <section id="schedule" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#F0C020] border-2 border-[#121212] flex items-center justify-center font-black">02</div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">SCHEDULE</h2>
+                        <p class="text-xs font-bold text-slate-600">กำหนดการรายวัน · พิมพ์กำหนดการจากผู้จัดลงในช่องของแต่ละวันได้</p>
+                    </div>
+                </div>
+                <div id="days" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- GoodWe & transport -->
+        <section id="goodwe" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center font-black">03</div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">GOODWE & TRANSPORT</h2>
+                        <p class="text-xs font-bold text-slate-600">สำนักงานใหญ่ GoodWe อยู่ที่ซูโจว ไม่ใช่เซี่ยงไฮ้</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <div class="border-3 border-[#121212] border-2 bg-[#F0F0F0] p-3 space-y-1">
+                        <div class="font-black">GoodWe Technologies · สำนักงานใหญ่</div>
+                        <div class="chinese-font font-bold">固德威技术股份有限公司</div>
+                        <div class="text-xs">No. 90 Zijin Rd., New District, Suzhou 215011 · <span class="chinese-font">苏州市高新区紫金路90号</span></div>
+                        <div class="text-xs text-slate-600">GoodWe ย้ายไปสำนักงานใหญ่แห่งใหม่ในเขตไฮเทคซูโจวเมื่อปลายปี 2024 ให้เช็กที่อยู่จริงกับผู้จัด</div>
+                        <div class="flex flex-wrap gap-2 pt-1" id="goodwe-links"></div>
+                    </div>
+                    <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-1">
+                        <div class="font-black"><i class="fa-solid fa-train"></i> เซี่ยงไฮ้ ⇄ ซูโจว</div>
+                        <div class="text-xs">รถไฟความเร็วสูงจาก <span class="chinese-font font-bold">上海虹桥</span> (Hongqiao) ไป <span class="chinese-font font-bold">苏州</span> / <span class="chinese-font font-bold">苏州新区</span> ประมาณ 25–40 นาที มีเกือบทุก 10–15 นาที ต้องใช้พาสปอร์ตซื้อตั๋วและเข้าประตู</div>
+                        <div class="text-xs">นั่งรถ (ผู้จัดรับส่ง) เซี่ยงไฮ้ ➔ ซูโจว ประมาณ 1.5–2 ชม. ขึ้นกับรถติด</div>
+                        <div class="text-xs text-slate-600">สนามบิน: <span class="chinese-font">浦东</span> (PVG ไกลจากซูโจวกว่า) / <span class="chinese-font">虹桥</span> (SHA ใกล้ซูโจวกว่า ติดสถานีรถไฟ)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weather -->
+        <section id="weather" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121212] pb-2">
+                    <h2 class="font-display font-black text-xl uppercase"><i class="fa-solid fa-cloud-sun text-[#1040C0]"></i> WEATHER · YR.NO</h2>
+                    <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white px-2 py-1 text-[10px]"><i class="fa-solid fa-rotate"></i> REFRESH</button>
+                </div>
+                <p class="text-[11px] font-bold text-slate-600">ต้นเดือนพ.ย. เซี่ยงไฮ้/ซูโจว อากาศเย็นสบาย ราว 12–20°C อาจมีฝน · วันที่อยู่ในทริปไฮไลต์สีแดง</p>
+                <div id="weather-locations" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+                <p class="text-[10px] font-bold text-slate-600">ข้อมูล: <a href="https://www.yr.no/" target="_blank" rel="noopener" class="underline">Yr</a> / MET Norway (CC BY 4.0) · เวลาจีน (UTC+8)</p>
+            </div>
+        </section>
+
+        <!-- Checklist -->
+        <section id="checklist" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b-4 border-[#121212] pb-3">
+                    <h2 class="font-display font-black text-2xl uppercase">CHECKLIST</h2>
+                    <div class="bg-[#121212] text-white px-3 py-1 text-xs font-mono font-bold">PROGRESS: <span id="checklist-progress" class="text-[#F0C020]">0</span></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2" id="checklist-grid"></div>
+            </div>
+        </section>
+
+        <!-- Help -->
+        <section id="help" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <h2 class="font-display font-black text-2xl uppercase border-b-4 border-[#121212] pb-3">EMERGENCY & PHRASES</h2>
+                <div class="bg-[#D02020] text-white border-4 border-[#121212] p-4 space-y-2">
+                    <div class="text-xs font-black uppercase"><i class="fa-solid fa-triangle-exclamation text-[#F0C020]"></i> ALLERGY CARD · แพ้กุ้งรุนแรง</div>
+                    <div class="chinese-font font-black text-2xl">我对虾严重过敏，吃了可能会有生命危险！</div>
+                    <div class="chinese-font font-bold">如果菜里有虾（包括虾仁、虾米、虾皮、虾滑、虾酱、虾油、海鲜汤底），请一定告诉我。谢谢！</div>
+                    <div class="text-xs">มื้อเลี้ยงรับรองแบบจีนมักมีกุ้งหลายจาน (เช่น 油爆虾, 虾仁, 小笼包ไส้กุ้ง) แจ้งผู้จัด/โฮสต์ล่วงหน้าตั้งแต่วันแรก</div>
+                    <button onclick="showAllergyCard()" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-4 py-2 text-xs"><i class="fa-solid fa-expand"></i> ขยายเต็มจอ</button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                    <a href="tel:120" class="btn-bauhaus bg-[#D02020] text-white p-2"><div class="text-xl font-black">120</div><div class="text-[11px]">รถพยาบาล</div></a>
+                    <a href="tel:110" class="btn-bauhaus bg-[#1040C0] text-white p-2"><div class="text-xl font-black">110</div><div class="text-[11px]">ตำรวจ</div></a>
+                    <a href="tel:119" class="btn-bauhaus bg-[#F0C020] p-2"><div class="text-xl font-black">119</div><div class="text-[11px]">ดับเพลิง</div></a>
+                    <a href="tel:122" class="btn-bauhaus bg-white p-2"><div class="text-xl font-black">122</div><div class="text-[11px]">อุบัติเหตุจราจร</div></a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="phrase-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <button onclick="showAllergyCard()" class="fixed bottom-4 right-4 z-40 btn-bauhaus bg-[#D02020] text-white px-3 py-2 text-xs">🦐 แพ้กุ้ง</button>
+
+    <div id="show-modal" class="hidden fixed inset-0 z-50 bg-[#121212]/80 flex items-center justify-center p-4" onclick="if (event.target === this) closeShowModal()">
+        <div class="bg-white border-4 border-[#121212] shadow-bauhaus-yellow w-full max-w-lg p-6 space-y-4 text-center">
+            <div id="show-modal-label" class="text-xs font-black uppercase text-[#1040C0]"></div>
+            <div id="show-modal-zh" class="chinese-font font-black text-3xl leading-snug break-words"></div>
+            <div id="show-modal-sub" class="chinese-font font-bold text-lg text-[#D02020]"></div>
+            <div id="show-modal-th" class="text-sm font-semibold text-slate-600"></div>
+            <button onclick="closeShowModal()" class="btn-bauhaus bg-[#F0C020] px-6 py-2 text-sm">ปิด</button>
+        </div>
+    </div>
+
+    <script>
+        const store = {
+            get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+            set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+        };
+
+        // ---------- Trip info fields ----------
+        const infoFields = [
+            ['flight_out', 'เที่ยวบินขาไป (เลข / เวลา / สนามบิน)', 'เช่น TG664 3 พ.ย. 08:00 BKK ➔ PVG'],
+            ['flight_back', 'เที่ยวบินขากลับ', 'เช่น 8 พ.ย. ...'],
+            ['hotel', 'โรงแรม (ชื่อจีน + ที่อยู่)', 'ขอชื่อภาษาจีนจากผู้จัด ไว้ให้คนขับดู'],
+            ['contact', 'ผู้ประสานงาน GoodWe (ชื่อ / WeChat / โทร)', ''],
+            ['pickup', 'รถรับส่ง (จุดนัด / เวลา / ทะเบียนรถ)', ''],
+            ['venue', 'สถานที่จัดงาน', 'ซูโจว HQ / เซี่ยงไฮ้ / อื่นๆ']
+        ];
+        function renderInfo() {
+            const saved = store.get('sh_info', {});
+            document.getElementById('info-fields').innerHTML = infoFields.map(([k, label, ph]) => `
+                <label class="block space-y-1">
+                    <span class="text-[11px] font-black uppercase text-[#1040C0]">${label}</span>
+                    <textarea rows="2" class="note-input" data-k="${k}" placeholder="${ph}"></textarea>
+                </label>`).join('');
+            document.querySelectorAll('#info-fields textarea').forEach(t => {
+                t.value = saved[t.dataset.k] || '';
+                t.addEventListener('input', () => { const s = store.get('sh_info', {}); s[t.dataset.k] = t.value; store.set('sh_info', s); });
+            });
+        }
+
+        // ---------- Days ----------
+        const days = [
+            { d: '2026-11-03', title: 'เดินทางถึงเซี่ยงไฮ้', ideas: 'รถผู้จัดรับจากสนามบินไปโรงแรม · เปิดใช้ Alipay / eSIM · ถ้ามีเวลาเย็นนี้: เดินเล่นเดอะบันด์ (外滩) ชมวิวตึกลู่เจียจุ่ยเปิดไฟ', places: ['外滩'] },
+            { d: '2026-11-04', title: 'กำหนดการ GoodWe', ideas: '', places: [] },
+            { d: '2026-11-05', title: 'กำหนดการ GoodWe', ideas: '', places: [] },
+            { d: '2026-11-06', title: 'กำหนดการ GoodWe', ideas: '', places: [] },
+            { d: '2026-11-07', title: 'กำหนดการ GoodWe / เวลาว่าง', ideas: 'ถ้าว่าง (เซี่ยงไฮ้): สวนอวี้หยวน (豫园) · ถนนนานจิง (南京路步行街) · ย่านซินเทียนตี้ (新天地) · ถ้าอยู่ซูโจว: สวนจัวเจิ้ง (拙政园) · ถนนผิงเจียง (平江路)', places: ['豫园', '南京路步行街', '新天地', '拙政园', '平江路'] },
+            { d: '2026-11-08', title: 'เดินทางกลับ', ideas: 'เผื่อเวลาไปสนามบินและเช็กอินระหว่างประเทศอย่างน้อย 3 ชม. · ซื้อของฝากที่สนามบิน', places: [] }
+        ];
+        const thaiDays = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+        const thaiMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+        function thaiDate(ymd) { const d = new Date(ymd + 'T00:00:00Z'); return `${thaiDays[d.getUTCDay()]} ${d.getUTCDate()} ${thaiMonths[d.getUTCMonth()]}`; }
+        function chinaToday() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
+        const amapLink = (zh, city) => `https://uri.amap.com/search?keyword=${encodeURIComponent(zh)}&city=${encodeURIComponent(city || '上海')}&callnative=1`;
+        function renderDays() {
+            const notes = store.get('sh_days', {});
+            const today = chinaToday();
+            document.getElementById('days').innerHTML = days.map((x, i) => `
+                <div class="border-3 border-2 border-[#121212] ${x.d === today ? 'bg-[#FFF3C4]' : 'bg-[#F0F0F0]'} p-3 space-y-2">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="${i === 0 || i === days.length - 1 ? 'bg-[#D02020]' : 'bg-[#1040C0]'} text-white border-2 border-[#121212] px-2 py-0.5 font-black text-xs">DAY ${String(i + 1).padStart(2, '0')}</span>
+                        <span class="text-xs font-bold text-slate-600">${thaiDate(x.d)} 2026</span>
+                        ${x.d === today ? '<span class="bg-[#D02020] text-white text-[10px] font-black px-1.5">TODAY</span>' : ''}
+                        <span class="font-bold">${x.title}</span>
+                    </div>
+                    ${x.ideas ? `<div class="text-xs font-semibold"><i class="fa-solid fa-lightbulb text-[#D02020]"></i> ${x.ideas}</div>` : ''}
+                    ${x.places.length ? `<div class="flex flex-wrap gap-1.5">${x.places.map(p => `<a href="${amapLink(p, ['拙政园', '平江路'].includes(p) ? '苏州' : '上海')}" target="_blank" rel="noopener" class="chinese-font text-[11px] font-bold border-2 border-[#121212] bg-white px-2 py-0.5 hover:bg-[#F0C020]">${p} <i class="fa-solid fa-map-location-dot text-[#1040C0]"></i></a>`).join('')}</div>` : ''}
+                    <textarea rows="3" class="note-input" data-d="${x.d}" placeholder="พิมพ์กำหนดการจากผู้จัดของวันนี้ (บันทึกในเครื่องนี้)"></textarea>
+                </div>`).join('');
+            document.querySelectorAll('#days textarea').forEach(t => {
+                t.value = notes[t.dataset.d] || '';
+                t.addEventListener('input', () => { const s = store.get('sh_days', {}); s[t.dataset.d] = t.value; store.set('sh_days', s); });
+            });
+        }
+
+        // ---------- Checklist ----------
+        const checklistItems = [
+            'พาสปอร์ต (อายุเหลือ > 6 เดือน) · คนไทยเข้าจีนได้โดยไม่ต้องใช้วีซ่าไม่เกิน 30 วัน',
+            'หนังสือเชิญ / อีเมลยืนยันจาก GoodWe (เผื่อ ตม. ถาม)',
+            'นามบัตร (ภาษาอังกฤษ/จีน) จำนวนมากพอ · ยื่นสองมือ',
+            'โน้ตบุ๊ก + ที่ชาร์จ + ปลั๊กแปลง (จีนใช้ขา A / I)',
+            'Power bank ไม่เกิน 20,000 mAh มีฉลาก 3C/สเปกชัดเจน (ใส่กระเป๋าถือ)',
+            'eSIM/โรมมิ่ง (ใช้ LINE / Gmail / Google ได้ เพราะในจีนเน็ตปกติเข้าไม่ได้)',
+            'ติดตั้ง WeChat + ผูกบัตร (ผู้จัดจีนมักติดต่อผ่าน WeChat)',
+            'Alipay ผูกบัตรเครดิตแล้ว',
+            'เสื้อผ้าทำงาน + เสื้อแจ็กเก็ตบาง (12–20°C) + ร่ม',
+            'ยาแก้แพ้ / EpiPen (แพ้กุ้ง) พกติดตัว',
+            'ของฝาก/ของที่ระลึกสำหรับโฮสต์ (ถ้ามี)',
+            'บันทึกชื่อโรงแรมภาษาจีน + เบอร์ผู้ประสานงานในช่อง TRIP INFO'
+        ];
+        function renderChecklist() {
+            const st = store.get('sh_check', {});
+            let n = 0;
+            document.getElementById('checklist-grid').innerHTML = checklistItems.map((it, i) => {
+                const c = !!st[i]; if (c) n++;
+                return `<div onclick="toggleCheck(${i})" class="cursor-pointer border-2 border-[#121212] p-2.5 flex items-center gap-2 ${c ? 'bg-[#F0C020]' : 'bg-[#F0F0F0]'}">
+                    <span class="w-5 h-5 border-2 border-[#121212] flex items-center justify-center text-xs shrink-0 ${c ? 'bg-[#121212] text-[#F0C020]' : 'bg-white'}">${c ? '<i class="fa-solid fa-check"></i>' : ''}</span>
+                    <span class="text-xs font-bold ${c ? 'line-through opacity-80' : ''}">${it}</span></div>`;
+            }).join('');
+            document.getElementById('checklist-progress').textContent = `${n}/${checklistItems.length}`;
+        }
+        function toggleCheck(i) { const st = store.get('sh_check', {}); st[i] = !st[i]; store.set('sh_check', st); renderChecklist(); }
+
+        // ---------- Phrases & modal ----------
+        const phrases = [
+            { zh: '这个菜里有虾吗？', py: 'Zhège cài lǐ yǒu xiā ma?', th: 'เมนูนี้มีกุ้งไหม' },
+            { zh: '请不要放虾，我对虾过敏', py: 'Qǐng búyào fàng xiā, wǒ duì xiā guòmǐn', th: 'อย่าใส่กุ้ง ฉันแพ้กุ้ง' },
+            { zh: '我过敏了，请马上叫救护车！', py: 'Wǒ guòmǐn le, qǐng mǎshàng jiào jiùhùchē!', th: 'ฉันแพ้อาหาร เรียกรถพยาบาลด่วน' },
+            { zh: '请带我去这个地址', py: 'Qǐng dài wǒ qù zhège dìzhǐ', th: 'ช่วยพาไปที่อยู่นี้' },
+            { zh: '你好，很高兴认识你', py: 'Nǐ hǎo, hěn gāoxìng rènshi nǐ', th: 'สวัสดี ยินดีที่ได้รู้จัก' },
+            { zh: '这是我的名片', py: 'Zhè shì wǒ de míngpiàn', th: 'นี่คือนามบัตรของผม' },
+            { zh: '可以加个微信吗？', py: 'Kěyǐ jiā ge Wēixìn ma?', th: 'ขอแอด WeChat ได้ไหม' },
+            { zh: '谢谢你的招待', py: 'Xièxie nǐ de zhāodài', th: 'ขอบคุณสำหรับการต้อนรับ' },
+            { zh: '干杯！', py: 'Gānbēi!', th: 'ชนแก้ว!' },
+            { zh: '我不喝酒，谢谢', py: 'Wǒ bù hē jiǔ, xièxie', th: 'ไม่ดื่มเหล้า ขอบคุณ' }
+        ];
+        function openShowModal(label, zh, sub, th) {
+            document.getElementById('show-modal-label').textContent = label;
+            document.getElementById('show-modal-zh').textContent = zh;
+            document.getElementById('show-modal-sub').textContent = sub || '';
+            document.getElementById('show-modal-th').textContent = th || '';
+            document.getElementById('show-modal').classList.remove('hidden');
+        }
+        function closeShowModal() { document.getElementById('show-modal').classList.add('hidden'); }
+        function showAllergyCard() {
+            openShowModal('⚠️ 过敏 ALLERGY · แพ้กุ้ง', '我对虾严重过敏，吃了可能会有生命危险！',
+                '如果菜里有虾（包括虾仁、虾米、虾皮、虾滑、虾酱、虾油、海鲜汤底），请一定告诉我。谢谢！', 'ฉันแพ้กุ้งรุนแรง อาจถึงชีวิต ถ้าอาหารมีกุ้ง กรุณาบอกด้วย');
+        }
+        function renderPhrases() {
+            document.getElementById('phrase-grid').innerHTML = phrases.map((p, i) => `
+                <button onclick="openShowModal('PHRASE', phrases[${i}].zh, '', phrases[${i}].py + ' — ' + phrases[${i}].th)" class="text-left border-2 border-[#121212] bg-[#F0F0F0] hover:bg-[#F0C020] p-2.5">
+                    <div class="chinese-font font-black">${p.zh}</div>
+                    <div class="text-[11px] font-semibold text-slate-600">${p.py} · ${p.th}</div>
+                </button>`).join('');
+        }
+
+        // ---------- Weather (yr.no / MET Norway) ----------
+        const TRIP_DATES = days.map(x => x.d);
+        function symbolInfo(code) {
+            const base = (code || '').replace(/_(day|night|polartwilight)$/, '');
+            const night = /_night$/.test(code || '');
+            const map = {
+                clearsky: [night ? 'fa-moon' : 'fa-sun', 'ท้องฟ้าแจ่มใส'],
+                fair: [night ? 'fa-cloud-moon' : 'fa-cloud-sun', 'แดดออก มีเมฆเล็กน้อย'],
+                partlycloudy: [night ? 'fa-cloud-moon' : 'fa-cloud-sun', 'มีเมฆบางส่วน'],
+                cloudy: ['fa-cloud', 'เมฆมาก'],
+                fog: ['fa-smog', 'หมอก'],
+                lightrain: ['fa-cloud-rain', 'ฝนเล็กน้อย'],
+                rain: ['fa-cloud-showers-heavy', 'ฝนตก'],
+                heavyrain: ['fa-cloud-showers-heavy', 'ฝนตกหนัก'],
+                lightrainshowers: ['fa-cloud-sun-rain', 'ฝนโปรยเป็นช่วง'],
+                rainshowers: ['fa-cloud-sun-rain', 'ฝนตกเป็นช่วง'],
+                heavyrainshowers: ['fa-cloud-showers-heavy', 'ฝนตกหนักเป็นช่วง'],
+                lightsleet: ['fa-cloud-meatball', 'ฝนปนหิมะเล็กน้อย'],
+                sleet: ['fa-cloud-meatball', 'ฝนปนหิมะ'],
+                heavysleet: ['fa-cloud-meatball', 'ฝนปนหิมะหนัก'],
+                lightsleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะเป็นช่วง'],
+                sleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะเป็นช่วง'],
+                heavysleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะหนักเป็นช่วง'],
+                lightsnow: ['fa-snowflake', 'หิมะตกเล็กน้อย'],
+                snow: ['fa-snowflake', 'หิมะตก'],
+                heavysnow: ['fa-snowflake', 'หิมะตกหนัก'],
+                lightsnowshowers: ['fa-snowflake', 'หิมะโปรยเป็นช่วง'],
+                snowshowers: ['fa-snowflake', 'หิมะตกเป็นช่วง'],
+                heavysnowshowers: ['fa-snowflake', 'หิมะตกหนักเป็นช่วง']
+            };
+            if (map[base]) return map[base];
+            if (base.includes('thunder')) return ['fa-cloud-bolt', 'ฝนฟ้าคะนอง'];
+            if (base.includes('snow')) return ['fa-snowflake', 'หิมะ'];
+            if (base.includes('sleet')) return ['fa-cloud-meatball', 'ฝนปนหิมะ'];
+            if (base.includes('rain')) return ['fa-cloud-rain', 'ฝน'];
+            return ['fa-cloud', code || '-'];
+        }
+
+        // China local time (UTC+8) helpers
+        function cstParts(iso) {
+            const d = new Date(new Date(iso).getTime() + 8 * 3600 * 1000);
+            return { date: d.toISOString().slice(0, 10), hour: d.getUTCHours() };
+        }
+
+        function summarizeDaily(timeseries) {
+            const days = {};
+            timeseries.forEach(t => {
+                const { date, hour } = cstParts(t.time);
+                const det = t.data.instant.details;
+                const n1 = t.data.next_1_hours;
+                const n6 = t.data.next_6_hours;
+                const day = days[date] || (days[date] = { date, min: Infinity, max: -Infinity, precip: 0, wind: 0, symbol: null, symbolDist: 99 });
+                if (typeof det.air_temperature === 'number') {
+                    day.min = Math.min(day.min, det.air_temperature);
+                    day.max = Math.max(day.max, det.air_temperature);
+                }
+                if (typeof det.wind_speed === 'number') day.wind = Math.max(day.wind, det.wind_speed);
+                // Hourly steps carry next_1_hours; later 6-hourly steps only next_6_hours
+                if (n1) day.precip += n1.details.precipitation_amount || 0;
+                else if (n6) day.precip += n6.details.precipitation_amount || 0;
+                // Pick the symbol closest to midday as the day's representative
+                const sym = (n6 && n6.summary.symbol_code) || (n1 && n1.summary.symbol_code);
+                const dist = Math.abs(hour - 10);
+                if (sym && dist < day.symbolDist) { day.symbol = sym; day.symbolDist = dist; }
+            });
+            return Object.values(days)
+                .filter(d => d.min !== Infinity)
+                .sort((a, b) => a.date.localeCompare(b.date));
+        }
+
+
+        const wxLocations = [
+            { key: 'shanghai', name: 'เซี่ยงไฮ้ (เดอะบันด์)', nameEn: 'Shanghai', altitude: 5, lat: 31.235, lon: 121.485, accent: 'bg-[#1040C0]' },
+            { key: 'suzhou', name: 'ซูโจว (เขตไฮเทค · GoodWe)', nameEn: 'Suzhou New District', altitude: 5, lat: 31.300, lon: 120.540, accent: 'bg-[#D02020]' }
+        ];
+        const yrLink = loc => `https://www.yr.no/en/forecast/daily-table/${loc.lat},${loc.lon}`;
+        const FORECAST_CACHE_KEY = 'sh_yr_forecast_v1';
+        async function loadForecasts(force) {
+            const box = document.getElementById('weather-locations');
+            const cache = store.get(FORECAST_CACHE_KEY, {});
+            box.innerHTML = wxLocations.map(loc => `
+                <div class="border-2 border-[#121212]">
+                    <div class="${loc.accent} text-white p-2 flex justify-between items-center border-b-2 border-[#121212]">
+                        <span class="font-black text-sm">${loc.name}</span>
+                        <a href="${yrLink(loc)}" target="_blank" rel="noopener" class="bg-[#F0C020] text-[#121212] px-2 py-0.5 text-[10px] font-black">YR.NO ↗</a>
+                    </div>
+                    <div id="fc-${loc.key}" class="p-2 text-xs font-bold">กำลังโหลด…</div>
+                </div>`).join('');
+            await Promise.all(wxLocations.map(async loc => {
+                let entry = cache[loc.key];
+                if (force || !entry || Date.now() - entry.fetchedAt > 3600e3) {
+                    try {
+                        const r = await fetch(`https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${loc.lat}&lon=${loc.lon}&altitude=${loc.altitude}`);
+                        if (!r.ok) throw new Error(r.status);
+                        entry = { fetchedAt: Date.now(), days: summarizeDaily((await r.json()).properties.timeseries) };
+                        cache[loc.key] = entry;
+                    } catch (e) { if (entry) entry = { ...entry, stale: true }; }
+                }
+                const el = document.getElementById(`fc-${loc.key}`);
+                if (!entry) { el.innerHTML = `โหลดไม่ได้ · <a class="underline" href="${yrLink(loc)}" target="_blank" rel="noopener">เปิด yr.no</a>`; return; }
+                el.innerHTML = `<table class="w-full text-[11px]"><tbody>${entry.days.slice(0, 10).map(d => {
+                    const [icon, label] = symbolInfo(d.symbol);
+                    const trip = TRIP_DATES.includes(d.date);
+                    return `<tr class="${trip ? 'bg-[#D02020] text-white' : ''} border-b border-[#121212]">
+                        <td class="px-1.5 py-1 whitespace-nowrap">${thaiDate(d.date)}</td>
+                        <td class="px-1.5 py-1"><i class="fa-solid ${icon}"></i> ${label}</td>
+                        <td class="px-1.5 py-1 text-right font-black whitespace-nowrap">${Math.round(d.min)}° / ${Math.round(d.max)}°</td>
+                        <td class="px-1.5 py-1 text-right whitespace-nowrap">${d.precip >= 0.05 ? d.precip.toFixed(1) : '0'} mm</td></tr>`;
+                }).join('')}</tbody></table>
+                <div class="text-[10px] text-slate-500 mt-1">อัปเดต: ${new Date(entry.fetchedAt).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}${entry.stale ? ' (ข้อมูลเก่า)' : ''}</div>`;
+            }));
+            store.set(FORECAST_CACHE_KEY, cache);
+        }
+
+        function renderGoodweLinks() {
+            document.getElementById('goodwe-links').innerHTML = [
+                ['Amap: GoodWe', amapLink('固德威', '苏州')],
+                ['Amap: 苏州新区站', amapLink('苏州新区站', '苏州')],
+                ['ให้คนขับดู', 'javascript:openShowModal(\'TAXI · DIDI\', \'固德威技术股份有限公司\', \'苏州市高新区紫金路90号\', \'GoodWe สำนักงานใหญ่ (เช็กที่อยู่ใหม่กับผู้จัด)\')']
+            ].map(([t, u]) => `<a href="${u}" ${u.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-bauhaus bg-white px-2 py-1 text-[10px]">${t}</a>`).join('');
+        }
+
+        function renderCountdown() {
+            const diff = Math.round((Date.parse('2026-11-03T00:00:00Z') - Date.parse(chinaToday() + 'T00:00:00Z')) / 86400000);
+            document.getElementById('countdown').textContent =
+                diff > 0 ? `อีก ${diff} วัน ออกเดินทาง ✈️` : diff > -6 ? `วันนี้ DAY ${String(1 - diff).padStart(2, '0')} ของทริป` : 'จบทริปแล้ว';
+        }
+
+        renderCountdown();
+        renderInfo();
+        renderDays();
+        renderGoodweLinks();
+        renderChecklist();
+        renderPhrases();
+        loadForecasts(false);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShowModal(); });
+    </script>
+</body>
+</html>
