@@ -79,6 +79,16 @@
                     </div>
                 </div>
                 <div id="flight-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+                <!-- My ticket (device-only) -->
+                <div class="border-4 border-[#121212] bg-[#FFF8DC] p-3 space-y-2">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="font-black text-sm uppercase"><i class="fa-solid fa-ticket text-[#D02020]"></i> MY TICKET <span class="text-[10px] font-bold normal-case text-slate-600">· เก็บในมือถือเครื่องนี้เท่านั้น ไม่ขึ้นเว็บ</span></div>
+                        <button onclick="toggleTicketEdit()" id="ticket-edit-btn" class="btn-bauhaus bg-white px-2 py-1 text-[10px]"><i class="fa-solid fa-pen"></i> แก้ไข</button>
+                    </div>
+                    <div id="ticket-view" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
+                    <div id="ticket-form" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-semibold">
                     <div class="border-2 border-[#121212] bg-[#F0F0F0] p-2"><i class="fa-solid fa-suitcase text-[#1040C0]"></i> โหลดใต้เครื่อง <strong>23 กก. × 1 ใบ/คน</strong> (รวมด้าน ≤ 158 ซม.)</div>
                     <div class="border-2 border-[#121212] bg-[#F0F0F0] p-2"><i class="fa-solid fa-suitcase-rolling text-[#1040C0]"></i> ถือขึ้นเครื่อง <strong>8 กก. × 1 ใบ/คน</strong> (55×40×20 ซม.)</div>
@@ -386,6 +396,45 @@
                 </div>`).join('');
         }
 
+
+        // ---------- My ticket (stored only in this browser) ----------
+        const ticketFields = [
+            ['name', 'ชื่อผู้โดยสาร', 'เช่น NICHAPHON WANNASUYA'],
+            ['pnr', 'รหัสการจองสายการบิน (Booking Ref)', 'เช่น ABC123'],
+            ['eticket', 'หมายเลขอีทิกเก็ต (E-ticket)', 'เช่น 781-xxxxxxxxxx'],
+            ['tripno', 'หมายเลขการจอง Trip.com', '']
+        ];
+        function renderTicket() {
+            const t = store.get('sh_ticket', {});
+            const empty = !ticketFields.some(([k]) => t[k]);
+            document.getElementById('ticket-view').innerHTML = empty
+                ? '<div class="col-span-full text-xs font-bold text-slate-600">ยังไม่ได้กรอก · กด "แก้ไข" แล้วกรอกจากใบ Itinerary ของ Trip.com (กรอกครั้งเดียว ข้อมูลอยู่ในเครื่องนี้)</div>'
+                : ticketFields.map(([k, label]) => `
+                    <button type="button" onclick="copyText(this, ${JSON.stringify(t[k] || '').replace(/"/g, '&quot;')})" class="text-left border-2 border-[#121212] bg-white p-2">
+                        <div class="text-[10px] font-black uppercase text-[#1040C0]">${label}</div>
+                        <div class="font-mono font-black text-sm break-all">${(t[k] || '—').replace(/</g, '&lt;')}</div>
+                        <div class="text-[9px] text-slate-500">แตะเพื่อคัดลอก</div>
+                    </button>`).join('');
+            document.getElementById('ticket-form').innerHTML = ticketFields.map(([k, label, ph]) => `
+                <label class="block space-y-1"><span class="text-[11px] font-black uppercase text-[#1040C0]">${label}</span>
+                <input class="note-input" data-k="${k}" placeholder="${ph}" autocomplete="off"></label>`).join('');
+            document.querySelectorAll('#ticket-form input').forEach(inp => {
+                inp.value = t[inp.dataset.k] || '';
+                inp.addEventListener('input', () => { const x = store.get('sh_ticket', {}); x[inp.dataset.k] = inp.value.trim(); store.set('sh_ticket', x); });
+            });
+        }
+        function toggleTicketEdit() {
+            const form = document.getElementById('ticket-form');
+            const editing = form.classList.toggle('hidden') === false;
+            document.getElementById('ticket-edit-btn').innerHTML = editing ? '<i class="fa-solid fa-check"></i> เสร็จ' : '<i class="fa-solid fa-pen"></i> แก้ไข';
+            if (!editing) renderTicket();
+        }
+        function copyText(btn, text) {
+            if (!text) return;
+            const ok = () => { const n = btn.querySelector('.text-\\[9px\\]'); if (n) { n.textContent = 'คัดลอกแล้ว ✓'; setTimeout(() => n.textContent = 'แตะเพื่อคัดลอก', 1200); } };
+            if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, () => {});
+        }
+
         // ---------- Checklist ----------
         const checklistItems = [
             'พาสปอร์ต (อายุเหลือ > 6 เดือน) · คนไทยเข้าจีนได้โดยไม่ต้องใช้วีซ่าไม่เกิน 30 วัน',
@@ -580,6 +629,7 @@
 
         renderCountdown();
         renderFlights();
+        renderTicket();
         renderHotels();
         renderInfo();
         renderDays();
