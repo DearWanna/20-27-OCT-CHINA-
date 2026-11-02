@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shanghai Business Trip</title>
+    <title>GoodWe Installer Summit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,7 @@
 
     <div class="bg-[#121212] text-white text-xs font-bold">
         <div class="max-w-5xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2">
-            <span><i class="fa-solid fa-briefcase text-[#F0C020] mr-1"></i> BUSINESS TRIP · GOODWE</span>
+            <span><i class="fa-solid fa-briefcase text-[#F0C020] mr-1"></i> BUSINESS TRIP · GOODWE INSTALLER SUMMIT</span>
             <a href="./" class="bg-[#F0C020] text-[#121212] px-2 py-0.5 font-black uppercase"><i class="fa-solid fa-arrow-left"></i> ทริปทั้งหมด</a>
         </div>
     </div>
@@ -47,17 +47,19 @@
                 <i class="fa-solid fa-solar-panel"></i> GOODWE · INVERTER / SOLAR
             </div>
             <h1 class="font-display font-black text-5xl sm:text-7xl uppercase tracking-tighter leading-[0.88]">
-                SHANGHAI<br><span class="bg-[#1040C0] text-white px-2 border-4 border-[#121212] inline-block my-1">BUSINESS</span><br>TRIP
+                SUZHOU<br><span class="bg-[#1040C0] text-white px-2 border-4 border-[#121212] inline-block my-1">GUANGDE</span><br>SHANGHAI
             </h1>
-            <p class="font-medium max-w-2xl">ทริปธุรกิจงาน GoodWe (อินเวอร์เตอร์ / โซลาร์เซลล์) · ผู้จัดดูแลตั๋วเครื่องบิน ที่พัก และรถรับส่ง</p>
+            <p class="font-medium max-w-2xl"><strong>2026 GoodWe Global Installer Summit (APAC)</strong> · ซูโจว (สำนักงานใหญ่) ➔ กว่างเต๋อ (โรงงาน) ➔ เซี่ยงไฮ้ · ทีม 4 คน · GoodWe ดูแลที่พักและรถรับส่งทั้งหมด</p>
         </div>
     </section>
 
     <nav class="sticky top-0 z-40 bg-[#121212] text-white overflow-x-auto">
         <div class="max-w-5xl mx-auto px-2 flex text-xs font-bold uppercase whitespace-nowrap">
-            <a href="#info" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-id-card text-[#F0C020]"></i> INFO</a>
+            <a href="#flights" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-plane text-[#F0C020]"></i> FLIGHTS</a>
+            <a href="#hotels" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-hotel text-[#F0C020]"></i> HOTELS</a>
+            <a href="#info" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-id-card text-[#F0C020]"></i> NOTES</a>
             <a href="#schedule" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-calendar-days text-[#F0C020]"></i> SCHEDULE</a>
-            <a href="#goodwe" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-building text-[#F0C020]"></i> GOODWE</a>
+            <a href="#goodwe" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-building text-[#F0C020]"></i> VENUE</a>
             <a href="#weather" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-cloud-sun text-[#F0C020]"></i> WEATHER</a>
             <a href="#checklist" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-check-square text-[#F0C020]"></i> CHECKLIST</a>
             <a href="#help" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-life-ring text-[#F0C020]"></i> HELP</a>
@@ -66,14 +68,50 @@
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
 
+        <!-- Flights -->
+        <section id="flights" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#121212] text-[#F0C020] border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-plane"></i></div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">FLIGHTS</h2>
+                        <p class="text-xs font-bold text-slate-600">China Eastern (codeshare Shanghai Airlines) · บินตรง · 4 ผู้ใหญ่ ชั้นประหยัด</p>
+                    </div>
+                </div>
+                <div id="flight-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-semibold">
+                    <div class="border-2 border-[#121212] bg-[#F0F0F0] p-2"><i class="fa-solid fa-suitcase text-[#1040C0]"></i> โหลดใต้เครื่อง <strong>23 กก. × 1 ใบ/คน</strong> (รวมด้าน ≤ 158 ซม.)</div>
+                    <div class="border-2 border-[#121212] bg-[#F0F0F0] p-2"><i class="fa-solid fa-suitcase-rolling text-[#1040C0]"></i> ถือขึ้นเครื่อง <strong>8 กก. × 1 ใบ/คน</strong> (55×40×20 ซม.)</div>
+                    <div class="border-2 border-[#121212] bg-[#F0F0F0] p-2"><i class="fa-solid fa-briefcase text-[#1040C0]"></i> ของใช้ส่วนตัว <strong>1 ชิ้น</strong> (≤ 35×32×18 ซม. ใต้ที่นั่ง)</div>
+                </div>
+                <div class="bg-[#F0C020] border-2 border-[#121212] p-3 text-xs font-bold">
+                    <i class="fa-solid fa-lightbulb text-[#D02020]"></i> ถึงสนามบินอย่างน้อย 3 ชม. ก่อนออก · เลขการจอง/อีทิกเก็ตไม่ได้ใส่ไว้ในเว็บนี้ (เว็บเปิดสาธารณะ) ให้ดูในแอป Trip.com หรือกรอกในช่อง NOTES (เก็บในเครื่อง)
+                </div>
+            </div>
+        </section>
+
+        <!-- Hotels -->
+        <section id="hotels" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-hotel"></i></div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">HOTELS</h2>
+                        <p class="text-xs font-bold text-slate-600">โรงแรมทางการของงาน · ใช้ข้อมูลนี้กรอก China Arrival Card ได้</p>
+                    </div>
+                </div>
+                <div id="hotel-cards" class="space-y-3"></div>
+            </div>
+        </section>
+
         <!-- Organizer info (saved on this device only) -->
         <section id="info" class="scroll-mt-16">
             <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
                 <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
                     <div class="w-10 h-10 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center font-black">01</div>
                     <div>
-                        <h2 class="font-display font-black text-2xl uppercase">TRIP INFO</h2>
-                        <p class="text-xs font-bold text-slate-600">กรอกข้อมูลที่ได้จากผู้จัด · บันทึกไว้ในเครื่องนี้เท่านั้น ไม่ขึ้นเว็บสาธารณะ</p>
+                        <h2 class="font-display font-black text-2xl uppercase">MY NOTES</h2>
+                        <p class="text-xs font-bold text-slate-600">ข้อมูลส่วนตัว (เลขการจอง ผู้ติดต่อ ห้องพัก) · บันทึกไว้ในเครื่องนี้เท่านั้น ไม่ขึ้นเว็บสาธารณะ</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="info-fields"></div>
@@ -89,37 +127,38 @@
                 <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
                     <div class="w-10 h-10 bg-[#F0C020] border-2 border-[#121212] flex items-center justify-center font-black">02</div>
                     <div>
-                        <h2 class="font-display font-black text-2xl uppercase">SCHEDULE</h2>
-                        <p class="text-xs font-bold text-slate-600">กำหนดการรายวัน · พิมพ์กำหนดการจากผู้จัดลงในช่องของแต่ละวันได้</p>
+                        <h2 class="font-display font-black text-2xl uppercase">OFFICIAL AGENDA</h2>
+                        <p class="text-xs font-bold text-slate-600">กำหนดการทางการจากคู่มือ GoodWe (เวลาจีน) · แต่ละวันมีช่องจดโน้ตเก็บในเครื่อง</p>
                     </div>
                 </div>
                 <div id="days" class="space-y-3"></div>
             </div>
         </section>
 
-        <!-- GoodWe & transport -->
+        <!-- Venue & transport -->
         <section id="goodwe" class="scroll-mt-16">
             <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
                 <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
-                    <div class="w-10 h-10 bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center font-black">03</div>
+                    <div class="w-10 h-10 bg-[#1040C0] text-white border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-building"></i></div>
                     <div>
-                        <h2 class="font-display font-black text-2xl uppercase">GOODWE & TRANSPORT</h2>
-                        <p class="text-xs font-bold text-slate-600">สำนักงานใหญ่ GoodWe อยู่ที่ซูโจว ไม่ใช่เซี่ยงไฮ้</p>
+                        <h2 class="font-display font-black text-2xl uppercase">VENUE & TRANSPORT</h2>
+                        <p class="text-xs font-bold text-slate-600">สถานที่จัดงาน รถรับส่ง และผู้ติดต่อ</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                    <div class="border-3 border-[#121212] border-2 bg-[#F0F0F0] p-3 space-y-1">
-                        <div class="font-black">GoodWe Technologies · สำนักงานใหญ่</div>
-                        <div class="chinese-font font-bold">固德威技术股份有限公司</div>
-                        <div class="text-xs">No. 90 Zijin Rd., New District, Suzhou 215011 · <span class="chinese-font">苏州市高新区紫金路90号</span></div>
-                        <div class="text-xs text-slate-600">GoodWe ย้ายไปสำนักงานใหญ่แห่งใหม่ในเขตไฮเทคซูโจวเมื่อปลายปี 2024 ให้เช็กที่อยู่จริงกับผู้จัด</div>
+                    <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-1">
+                        <div class="font-black">GoodWe Headquarters · Smart Energy Building</div>
+                        <div class="chinese-font font-bold">固德威技术股份有限公司 · 苏州高新区塔园路93号</div>
+                        <div class="text-xs">No. 93 Tayuan Rd., New District, Suzhou 215011 (ตามหนังสือเชิญ)</div>
+                        <div class="text-xs"><strong>1F</strong> ทางเข้าหลัก นิทรรศการ วัฒนธรรม · <strong>5F</strong> ห้องประชุมหลักและงานเลี้ยง · <strong>6F</strong> WE Party Bar</div>
                         <div class="flex flex-wrap gap-2 pt-1" id="goodwe-links"></div>
                     </div>
                     <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-1">
-                        <div class="font-black"><i class="fa-solid fa-train"></i> เซี่ยงไฮ้ ⇄ ซูโจว</div>
-                        <div class="text-xs">รถไฟความเร็วสูงจาก <span class="chinese-font font-bold">上海虹桥</span> (Hongqiao) ไป <span class="chinese-font font-bold">苏州</span> / <span class="chinese-font font-bold">苏州新区</span> ประมาณ 25–40 นาที มีเกือบทุก 10–15 นาที ต้องใช้พาสปอร์ตซื้อตั๋วและเข้าประตู</div>
-                        <div class="text-xs">นั่งรถ (ผู้จัดรับส่ง) เซี่ยงไฮ้ ➔ ซูโจว ประมาณ 1.5–2 ชม. ขึ้นกับรถติด</div>
-                        <div class="text-xs text-slate-600">สนามบิน: <span class="chinese-font">浦东</span> (PVG ไกลจากซูโจวกว่า) / <span class="chinese-font">虹桥</span> (SHA ใกล้ซูโจวกว่า ติดสถานีรถไฟ)</div>
+                        <div class="font-black"><i class="fa-solid fa-van-shuttle"></i> รถรับส่ง (GoodWe จัดให้)</div>
+                        <div class="text-xs"><strong>3 พ.ย.:</strong> ลง PVG T1 ผ่าน ตม. รับกระเป๋า แล้วออกไปที่ <strong>ทางออก Arrivals Hall</strong> มองหาป้าย GoodWe ที่เจ้าหน้าที่/คนขับถือรอ</div>
+                        <div class="text-xs"><strong>5 พ.ย.:</strong> ซูโจว ➔ กว่างเต๋อ · <strong>6 พ.ย.:</strong> กว่างเต๋อ ➔ เซี่ยงไฮ้ (รถทางการ)</div>
+                        <div class="text-xs">เปิดโทรศัพท์ไว้หลังลงเครื่อง ถ้าเที่ยวบินดีเลย์ให้แจ้งผู้ติดต่อ GoodWe ทันที</div>
+                        <div class="text-xs text-slate-600">ผู้ติดต่อ GoodWe (Maggie, Alvin และผู้เชิญ) อยู่ในคู่มือ/หนังสือเชิญ ให้บันทึกในช่อง MY NOTES · โทรสำนักงานซูโจว <a class="underline" href="tel:+8651262397998">0512 6239 7998</a></div>
                     </div>
                 </div>
             </div>
@@ -132,8 +171,8 @@
                     <h2 class="font-display font-black text-xl uppercase"><i class="fa-solid fa-cloud-sun text-[#1040C0]"></i> WEATHER · YR.NO</h2>
                     <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white px-2 py-1 text-[10px]"><i class="fa-solid fa-rotate"></i> REFRESH</button>
                 </div>
-                <p class="text-[11px] font-bold text-slate-600">ต้นเดือนพ.ย. เซี่ยงไฮ้/ซูโจว อากาศเย็นสบาย ราว 12–20°C อาจมีฝน · วันที่อยู่ในทริปไฮไลต์สีแดง</p>
-                <div id="weather-locations" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+                <p class="text-[11px] font-bold text-slate-600">ต้นเดือนพ.ย. อากาศเย็นสบาย ราว 10–20°C อาจมีฝน · วันที่อยู่เมืองนั้นไฮไลต์สีแดง</p>
+                <div id="weather-locations" class="grid grid-cols-1 lg:grid-cols-3 gap-4"></div>
                 <p class="text-[10px] font-bold text-slate-600">ข้อมูล: <a href="https://www.yr.no/" target="_blank" rel="noopener" class="underline">Yr</a> / MET Norway (CC BY 4.0) · เวลาจีน (UTC+8)</p>
             </div>
         </section>
@@ -191,12 +230,12 @@
 
         // ---------- Trip info fields ----------
         const infoFields = [
-            ['flight_out', 'เที่ยวบินขาไป (เลข / เวลา / สนามบิน)', 'เช่น TG664 3 พ.ย. 08:00 BKK ➔ PVG'],
-            ['flight_back', 'เที่ยวบินขากลับ', 'เช่น 8 พ.ย. ...'],
-            ['hotel', 'โรงแรม (ชื่อจีน + ที่อยู่)', 'ขอชื่อภาษาจีนจากผู้จัด ไว้ให้คนขับดู'],
-            ['contact', 'ผู้ประสานงาน GoodWe (ชื่อ / WeChat / โทร)', ''],
+            ['booking', 'เลขการจอง / อีทิกเก็ต', 'ดูจาก Trip.com'],
+            ['contact', 'ผู้ติดต่อ GoodWe (ชื่อ / WeChat / อีเมล / โทร)', 'Maggie, Alvin, ผู้เชิญ ...'],
+            ['rooms', 'เลขห้องพักของทีม', 'Nikko / Guangde / Regal'],
             ['pickup', 'รถรับส่ง (จุดนัด / เวลา / ทะเบียนรถ)', ''],
-            ['venue', 'สถานที่จัดงาน', 'ซูโจว HQ / เซี่ยงไฮ้ / อื่นๆ']
+            ['team', 'เบอร์/WeChat ของทีม', ''],
+            ['other', 'อื่นๆ', '']
         ];
         function renderInfo() {
             const saved = store.get('sh_info', {});
@@ -213,12 +252,58 @@
 
         // ---------- Days ----------
         const days = [
-            { d: '2026-11-03', title: 'เดินทางถึงเซี่ยงไฮ้', ideas: 'รถผู้จัดรับจากสนามบินไปโรงแรม · เปิดใช้ Alipay / eSIM · ถ้ามีเวลาเย็นนี้: เดินเล่นเดอะบันด์ (外滩) ชมวิวตึกลู่เจียจุ่ยเปิดไฟ', places: ['外滩'] },
-            { d: '2026-11-04', title: 'กำหนดการ GoodWe', ideas: '', places: [] },
-            { d: '2026-11-05', title: 'กำหนดการ GoodWe', ideas: '', places: [] },
-            { d: '2026-11-06', title: 'กำหนดการ GoodWe', ideas: '', places: [] },
-            { d: '2026-11-07', title: 'กำหนดการ GoodWe / เวลาว่าง', ideas: 'ถ้าว่าง (เซี่ยงไฮ้): สวนอวี้หยวน (豫园) · ถนนนานจิง (南京路步行街) · ย่านซินเทียนตี้ (新天地) · ถ้าอยู่ซูโจว: สวนจัวเจิ้ง (拙政园) · ถนนผิงเจียง (平江路)', places: ['豫园', '南京路步行街', '新天地', '拙政园', '平江路'] },
-            { d: '2026-11-08', title: 'เดินทางกลับ', ideas: 'เผื่อเวลาไปสนามบินและเช็กอินระหว่างประเทศอย่างน้อย 3 ชม. · ซื้อของฝากที่สนามบิน', places: [] }
+            { d: '2026-11-03', city: 'ซูโจว', title: 'เดินทางถึง · ซูโจว', items: [
+                ['06:25', 'ถึงสุวรรณภูมิ เช็กอิน China Eastern (เผื่อ 3 ชม.)'],
+                ['09:25 – 14:45', '✈️ MU8614 / FM854 สุวรรณภูมิ ➔ ผู่ตง (PVG) T1'],
+                ['14:45 – 16:00', 'ผ่าน ตม. รับกระเป๋า ออก Arrivals Hall พบป้าย GoodWe'],
+                ['16:00 – 18:00', 'รถ GoodWe ไปซูโจว (~2 ชม.) เช็กอิน Hotel Nikko Suzhou รับเอกสารงาน'],
+                ['18:00 – 21:00', 'Welcome Buffet Dinner · Hotel Nikko Suzhou 🦐']
+            ], places: [['上海浦东国际机场T1航站楼', '上海'], ['苏州日航酒店', '苏州']] },
+            { d: '2026-11-04', city: 'ซูโจว', title: 'Summit Day · GoodWe HQ', items: [
+                ['08:30 – 09:30', 'ลงทะเบียน ถ่ายรูปหมู่ ทัวร์อาคาร'],
+                ['09:30 – 10:00', 'Powering the Prosumer Era — Daniel Huang (Founder & CEO)'],
+                ['10:00 – 10:20', 'Engineering a Smarter Energy Future — Alex Pan (VP & CTO)'],
+                ['10:20 – 10:40', 'From Brand Momentum to Installer Growth — Yingge Wang (VP & CMO)'],
+                ['10:40 – 11:00', 'SEMS Plus 3.0 Launch — Markin Ma (Director of IoT)'],
+                ['11:00 – 11:40', 'Global Energy Transition — Leo Wang (BloombergNEF)'],
+                ['11:40 – 12:00', 'Energy Storage Battery Costs, Prices & Supply Chains — Chengcong Huang (SMM)'],
+                ['12:00 – 13:30', 'Lunch 🦐'],
+                ['13:30 – 13:40', 'Powering the Asia-Pacific Energy Transition — John Grimes (RECAP)'],
+                ['13:40 – 14:00', 'Global Residential ESS Market Analysis — Abby Liu (InfoLink)'],
+                ['14:00 – 14:30', 'Installer Success Stories — Vanessa'],
+                ['14:30 – 16:30', 'Installation of the Year'],
+                ['16:30 – 17:30', 'Awards Ceremony 🏆'],
+                ['19:00 – 21:00', 'We Festival (งานเลี้ยงกลางคืน)']
+            ], places: [['固德威', '苏州']] },
+            { d: '2026-11-05', city: 'ซูโจว ➔ กว่างเต๋อ', title: 'Exclusive Product Experience', items: [
+                ['ก่อน 09:00', 'เช็กเอาต์ Hotel Nikko นำกระเป๋าไปด้วย (บ่ายย้ายเมือง)'],
+                ['09:00 – 11:00', 'Product Experience & Interactive Workshop'],
+                ['11:00 – 13:00', 'Showroom Tour, HQ Building Tour & Product Experience'],
+                ['13:00 – 14:00', 'Lunch · GoodWe HQ 🦐'],
+                ['14:00 – 17:30', '🚌 รถทางการ ซูโจว ➔ กว่างเต๋อ (มณฑลอานฮุย)'],
+                ['17:30 – 18:30', 'เช็กอิน Grand New Century Hotel Guangde'],
+                ['18:30 – 20:00', 'Banquet Dinner 🦐']
+            ], places: [['广德开元名都大酒店', '宣城']] },
+            { d: '2026-11-06', city: 'กว่างเต๋อ ➔ เซี่ยงไฮ้', title: 'Energy Innovation Journey', items: [
+                ['ก่อน 09:00', 'เช็กเอาต์ นำกระเป๋าไปด้วย'],
+                ['09:00 – 12:30', "GoodWe's Eco Smart Home & Factory Tour (โรงงานกว่างเต๋อ)"],
+                ['12:30 – 13:30', 'Buffet Lunch · Grand New Century Hotel Guangde 🦐'],
+                ['13:30 – 17:30', '🚌 รถทางการ กว่างเต๋อ ➔ เซี่ยงไฮ้'],
+                ['17:30 – 18:30', 'เช็กอิน Regal Jinfeng Hotel Shanghai (ผู่ตง)'],
+                ['18:30 – 21:30', 'Dinner · Chinese Cultural Experience & Interactive Performances 🦐']
+            ], places: [['富豪金丰酒店', '上海']] },
+            { d: '2026-11-07', city: 'เซี่ยงไฮ้', title: 'Cultural Exploration · Shanghai', items: [
+                ['09:30 – 10:30', 'หอไข่มุกตะวันออก (Oriental Pearl Tower)'],
+                ['10:30 – 11:30', 'ล่องเรือแม่น้ำหวงผู่ (Huangpu River Cruise)'],
+                ['12:00 – 13:30', 'Lunch · Latina Brazilian Steakhouse'],
+                ['13:30 – 17:30', 'เวลาว่าง: AP Plaza (ตลาดใต้ดินสถานี Science & Technology Museum) · ถนนอานฟู (Anfu Road) ย่านคาเฟ่'],
+                ['เย็น', 'อิสระ · แนะนำเดอะบันด์ (外滩) ตอนเปิดไฟ แล้วกลับไปจัดกระเป๋า']
+            ], places: [['东方明珠', '上海'], ['亚太盛汇', '上海'], ['安福路', '上海'], ['外滩', '上海']] },
+            { d: '2026-11-08', city: 'เซี่ยงไฮ้ ➔ กรุงเทพ', title: 'Departure', items: [
+                ['~09:30', 'เช็กเอาต์ Regal Jinfeng ออกไปสนามบินผู่ตง (~30–40 นาที) ยืนยันรถส่งกับ GoodWe'],
+                ['ภายใน 10:45', 'ถึง PVG T1 เช็กอิน China Eastern (เผื่อ 3 ชม.)'],
+                ['13:45 – 17:50', '✈️ MU8611 / FM855 ผู่ตง (PVG) T1 ➔ สุวรรณภูมิ']
+            ], places: [['上海浦东国际机场T1航站楼', '上海']] }
         ];
         const thaiDays = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
         const thaiMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
@@ -229,37 +314,95 @@
             const notes = store.get('sh_days', {});
             const today = chinaToday();
             document.getElementById('days').innerHTML = days.map((x, i) => `
-                <div class="border-3 border-2 border-[#121212] ${x.d === today ? 'bg-[#FFF3C4]' : 'bg-[#F0F0F0]'} p-3 space-y-2">
-                    <div class="flex flex-wrap items-center gap-2">
+                <details class="border-2 border-[#121212] ${x.d === today ? 'bg-[#FFF3C4]' : 'bg-[#F0F0F0]'}" ${x.d === today ? 'open' : ''}>
+                    <summary class="list-none cursor-pointer p-3 flex flex-wrap items-center gap-2 hover:bg-[#F0C020]">
                         <span class="${i === 0 || i === days.length - 1 ? 'bg-[#D02020]' : 'bg-[#1040C0]'} text-white border-2 border-[#121212] px-2 py-0.5 font-black text-xs">DAY ${String(i + 1).padStart(2, '0')}</span>
-                        <span class="text-xs font-bold text-slate-600">${thaiDate(x.d)} 2026</span>
+                        <span class="text-xs font-bold text-slate-600">${thaiDate(x.d)} · ${x.city}</span>
                         ${x.d === today ? '<span class="bg-[#D02020] text-white text-[10px] font-black px-1.5">TODAY</span>' : ''}
                         <span class="font-bold">${x.title}</span>
+                    </summary>
+                    <div class="p-3 pt-0 space-y-2">
+                        ${x.items.map(([t, txt]) => `
+                            <div class="flex gap-2 text-xs sm:text-sm border-l-4 border-[#121212] pl-2">
+                                <span class="bg-[#121212] text-white px-1.5 py-0.5 text-[11px] font-mono font-bold h-fit whitespace-nowrap">${t}</span>
+                                <span class="font-semibold">${txt}</span>
+                            </div>`).join('')}
+                        ${x.places.length ? `<div class="flex flex-wrap gap-1.5">${x.places.map(([p, c]) => `<a href="${amapLink(p, c)}" target="_blank" rel="noopener" class="chinese-font text-[11px] font-bold border-2 border-[#121212] bg-white px-2 py-0.5 hover:bg-[#F0C020]">${p} <i class="fa-solid fa-map-location-dot text-[#1040C0]"></i></a>`).join('')}</div>` : ''}
+                        <textarea rows="2" class="note-input" data-d="${x.d}" placeholder="โน้ตของวันนี้ (บันทึกในเครื่องนี้)"></textarea>
                     </div>
-                    ${x.ideas ? `<div class="text-xs font-semibold"><i class="fa-solid fa-lightbulb text-[#D02020]"></i> ${x.ideas}</div>` : ''}
-                    ${x.places.length ? `<div class="flex flex-wrap gap-1.5">${x.places.map(p => `<a href="${amapLink(p, ['拙政园', '平江路'].includes(p) ? '苏州' : '上海')}" target="_blank" rel="noopener" class="chinese-font text-[11px] font-bold border-2 border-[#121212] bg-white px-2 py-0.5 hover:bg-[#F0C020]">${p} <i class="fa-solid fa-map-location-dot text-[#1040C0]"></i></a>`).join('')}</div>` : ''}
-                    <textarea rows="3" class="note-input" data-d="${x.d}" placeholder="พิมพ์กำหนดการจากผู้จัดของวันนี้ (บันทึกในเครื่องนี้)"></textarea>
-                </div>`).join('');
+                </details>`).join('');
             document.querySelectorAll('#days textarea').forEach(t => {
                 t.value = notes[t.dataset.d] || '';
                 t.addEventListener('input', () => { const s = store.get('sh_days', {}); s[t.dataset.d] = t.value; store.set('sh_days', s); });
             });
         }
 
+        // ---------- Flights & hotels ----------
+        const flights = [
+            { label: 'ขาไป · อ. 3 พ.ย. 2026', no: 'MU8614', code: 'FM854', from: 'BKK', fromName: 'สุวรรณภูมิ', dep: '09:25', to: 'PVG', toName: 'เซี่ยงไฮ้ผู่ตง T1', arr: '14:45', note: 'ถึงเวลาจีน (UTC+8)' },
+            { label: 'ขากลับ · อา. 8 พ.ย. 2026', no: 'MU8611', code: 'FM855', from: 'PVG', fromName: 'เซี่ยงไฮ้ผู่ตง T1', dep: '13:45', to: 'BKK', toName: 'สุวรรณภูมิ', arr: '17:50', note: 'ออกเวลาจีน ถึงเวลาไทย' }
+        ];
+        function renderFlights() {
+            document.getElementById('flight-cards').innerHTML = flights.map(f => `
+                <div class="border-3 border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-2">
+                    <div class="flex justify-between items-center flex-wrap gap-1">
+                        <span class="font-black text-xs uppercase">${f.label}</span>
+                        <span class="bg-[#D02020] text-white border-2 border-[#121212] px-2 font-mono font-black text-sm">${f.no}</span>
+                    </div>
+                    <div class="grid grid-cols-[1fr_auto_1fr] items-center text-center">
+                        <div><div class="font-display font-black text-2xl">${f.dep}</div><div class="font-black">${f.from}</div><div class="text-[10px] font-bold text-slate-600">${f.fromName}</div></div>
+                        <i class="fa-solid fa-plane text-[#1040C0]"></i>
+                        <div><div class="font-display font-black text-2xl">${f.arr}</div><div class="font-black">${f.to}</div><div class="text-[10px] font-bold text-slate-600">${f.toName}</div></div>
+                    </div>
+                    <div class="text-[10px] font-bold text-slate-600">China Eastern · codeshare Shanghai Airlines ${f.code} · ${f.note}</div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <a class="btn-bauhaus bg-white px-2 py-0.5 text-[10px]" target="_blank" rel="noopener" href="https://www.google.com/search?q=${f.no}+flight+status"><i class="fa-brands fa-google"></i> Google</a>
+                        <a class="btn-bauhaus bg-white px-2 py-0.5 text-[10px]" target="_blank" rel="noopener" href="https://www.flightradar24.com/data/flights/${f.no.toLowerCase()}">Flightradar24</a>
+                        <a class="btn-bauhaus bg-white px-2 py-0.5 text-[10px]" target="_blank" rel="noopener" href="https://www.flightaware.com/live/flight/CES${f.no.slice(2)}">FlightAware</a>
+                    </div>
+                </div>`).join('');
+        }
+        const hotels = [
+            { dates: '3–5 พ.ย.', nights: '2 คืน', city: 'SUZHOU', name: 'Hotel Nikko Suzhou', zh: '苏州日航酒店', addr: 'No. 368 Changjiang Road, Suzhou New District, Suzhou 215011, Jiangsu', addrZh: '苏州高新区长江路368号', amapCity: '苏州' },
+            { dates: '5–6 พ.ย.', nights: '1 คืน', city: 'GUANGDE', name: 'Grand New Century Hotel Guangde', zh: '广德开元名都大酒店', addr: 'No. 888 Binhe Avenue, Guangde, Anhui', addrZh: '安徽省广德市滨河大道888号', amapCity: '宣城' },
+            { dates: '6–8 พ.ย.', nights: '2 คืน', city: 'SHANGHAI', name: 'Regal Jinfeng Hotel Shanghai', zh: '富豪金丰酒店', addr: 'No. 318 Jingang Road, Pudong New Area, Shanghai 201206', addrZh: '上海市浦东新区金港路318号', amapCity: '上海' }
+        ];
+        function renderHotels() {
+            document.getElementById('hotel-cards').innerHTML = hotels.map((h, i) => `
+                <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-[#1040C0] text-white border-2 border-[#121212] px-2 py-1 font-black text-center min-w-[78px]"><div class="text-xs">${h.dates}</div><div>${h.nights}</div></div>
+                        <div>
+                            <span class="bg-[#121212] text-white text-[10px] font-black px-2">${h.city}</span>
+                            <div class="font-bold">${h.name}</div>
+                            <div class="chinese-font text-xs font-bold">${h.zh} · ${h.addrZh}</div>
+                            <div class="text-[11px] text-slate-600">${h.addr}</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 shrink-0">
+                        <a class="btn-bauhaus bg-white px-2 py-1 text-[10px]" target="_blank" rel="noopener" href="${amapLink(h.addrZh, h.amapCity)}"><i class="fa-solid fa-map-location-dot text-[#1040C0]"></i> Amap</a>
+                        <button class="btn-bauhaus bg-[#F0C020] px-2 py-1 text-[10px]" onclick="openShowModal('TAXI · DIDI', hotels[${i}].zh, hotels[${i}].addrZh, '请带我去这个酒店 · ช่วยพาไปโรงแรมนี้')"><i class="fa-solid fa-taxi"></i> ให้คนขับดู</button>
+                    </div>
+                </div>`).join('');
+        }
+
         // ---------- Checklist ----------
         const checklistItems = [
             'พาสปอร์ต (อายุเหลือ > 6 เดือน) · คนไทยเข้าจีนได้โดยไม่ต้องใช้วีซ่าไม่เกิน 30 วัน',
-            'หนังสือเชิญ / อีเมลยืนยันจาก GoodWe (เผื่อ ตม. ถาม)',
+            'หนังสือเชิญ GoodWe (2 พ.ย.) พิมพ์/เซฟไว้ เผื่อ ตม. ถาม',
+            'กรอก China Arrival Card ออนไลน์ก่อนเดินทาง (ใช้ที่อยู่ Hotel Nikko Suzhou)',
             'นามบัตร (ภาษาอังกฤษ/จีน) จำนวนมากพอ · ยื่นสองมือ',
             'โน้ตบุ๊ก + ที่ชาร์จ + ปลั๊กแปลง (จีนใช้ขา A / I)',
             'Power bank ไม่เกิน 20,000 mAh มีฉลาก 3C/สเปกชัดเจน (ใส่กระเป๋าถือ)',
-            'eSIM/โรมมิ่ง (ใช้ LINE / Gmail / Google ได้ เพราะในจีนเน็ตปกติเข้าไม่ได้)',
+            'eSIM/โรมมิ่ง (ใช้ LINE / Gmail / Google ได้ เพราะเน็ตจีนปกติเข้าไม่ได้) หรือ VPN ที่ทดสอบแล้ว',
             'ติดตั้ง WeChat + ผูกบัตร (ผู้จัดจีนมักติดต่อผ่าน WeChat)',
             'Alipay ผูกบัตรเครดิตแล้ว',
-            'เสื้อผ้าทำงาน + เสื้อแจ็กเก็ตบาง (12–20°C) + ร่ม',
+            'เสื้อผ้าทำงาน + ชุดงานเลี้ยง (Awards / We Festival) + แจ็กเก็ตบาง (10–20°C) + ร่ม',
             'ยาแก้แพ้ / EpiPen (แพ้กุ้ง) พกติดตัว',
             'ของฝาก/ของที่ระลึกสำหรับโฮสต์ (ถ้ามี)',
-            'บันทึกชื่อโรงแรมภาษาจีน + เบอร์ผู้ประสานงานในช่อง TRIP INFO'
+            'บันทึกผู้ติดต่อ GoodWe ในช่อง MY NOTES + แอด WeChat และเข้ากลุ่มงาน',
+            'กระเป๋าโหลด ≤ 23 กก. / ถือขึ้น ≤ 8 กก.',
+            'Google Translate + ดาวน์โหลดภาษาจีนแบบออฟไลน์'
         ];
         function renderChecklist() {
             const st = store.get('sh_check', {});
@@ -379,8 +522,9 @@
 
 
         const wxLocations = [
-            { key: 'shanghai', name: 'เซี่ยงไฮ้ (เดอะบันด์)', nameEn: 'Shanghai', altitude: 5, lat: 31.235, lon: 121.485, accent: 'bg-[#1040C0]' },
-            { key: 'suzhou', name: 'ซูโจว (เขตไฮเทค · GoodWe)', nameEn: 'Suzhou New District', altitude: 5, lat: 31.300, lon: 120.540, accent: 'bg-[#D02020]' }
+            { key: 'shanghai', name: 'เซี่ยงไฮ้ (ผู่ตง) · 6–8 พ.ย.', nameEn: 'Shanghai', altitude: 5, lat: 31.235, lon: 121.500, accent: 'bg-[#1040C0]', days: ['2026-11-06','2026-11-07','2026-11-08'] },
+            { key: 'suzhou', name: 'ซูโจว (GoodWe HQ) · 3–5 พ.ย.', nameEn: 'Suzhou New District', altitude: 5, lat: 31.300, lon: 120.540, accent: 'bg-[#D02020]', days: ['2026-11-03','2026-11-04','2026-11-05'] },
+            { key: 'guangde', name: 'กว่างเต๋อ (โรงงาน) · 5–6 พ.ย.', nameEn: 'Guangde', altitude: 40, lat: 30.893, lon: 119.417, accent: 'bg-[#121212]', days: ['2026-11-05','2026-11-06'] }
         ];
         const yrLink = loc => `https://www.yr.no/en/forecast/daily-table/${loc.lat},${loc.lon}`;
         const FORECAST_CACHE_KEY = 'sh_yr_forecast_v1';
@@ -409,7 +553,7 @@
                 if (!entry) { el.innerHTML = `โหลดไม่ได้ · <a class="underline" href="${yrLink(loc)}" target="_blank" rel="noopener">เปิด yr.no</a>`; return; }
                 el.innerHTML = `<table class="w-full text-[11px]"><tbody>${entry.days.slice(0, 10).map(d => {
                     const [icon, label] = symbolInfo(d.symbol);
-                    const trip = TRIP_DATES.includes(d.date);
+                    const trip = loc.days.includes(d.date);
                     return `<tr class="${trip ? 'bg-[#D02020] text-white' : ''} border-b border-[#121212]">
                         <td class="px-1.5 py-1 whitespace-nowrap">${thaiDate(d.date)}</td>
                         <td class="px-1.5 py-1"><i class="fa-solid ${icon}"></i> ${label}</td>
@@ -423,9 +567,8 @@
 
         function renderGoodweLinks() {
             document.getElementById('goodwe-links').innerHTML = [
-                ['Amap: GoodWe', amapLink('固德威', '苏州')],
-                ['Amap: 苏州新区站', amapLink('苏州新区站', '苏州')],
-                ['ให้คนขับดู', 'javascript:openShowModal(\'TAXI · DIDI\', \'固德威技术股份有限公司\', \'苏州市高新区紫金路90号\', \'GoodWe สำนักงานใหญ่ (เช็กที่อยู่ใหม่กับผู้จัด)\')']
+                ['Amap: 塔园路93号', amapLink('苏州高新区塔园路93号', '苏州')],
+                ['ให้คนขับดู', "javascript:openShowModal('TAXI · DIDI', '固德威 总部', '苏州高新区塔园路93号', 'GoodWe สำนักงานใหญ่ · ช่วยพาไปที่นี่')"]
             ].map(([t, u]) => `<a href="${u}" ${u.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="btn-bauhaus bg-white px-2 py-1 text-[10px]">${t}</a>`).join('');
         }
 
@@ -436,6 +579,8 @@
         }
 
         renderCountdown();
+        renderFlights();
+        renderHotels();
         renderInfo();
         renderDays();
         renderGoodweLinks();
