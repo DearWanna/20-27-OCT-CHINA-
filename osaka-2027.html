@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osaka Family Trip</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <style>
+        body { font-family: 'Prompt', 'Outfit', sans-serif; background: #F0F0F0; color: #121212; }
+        .font-display { font-family: 'Outfit', 'Prompt', sans-serif; }
+        .jp-font { font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif; }
+        .shadow-bauhaus-sm { box-shadow: 3px 3px 0 0 #121212; }
+        .shadow-bauhaus { box-shadow: 5px 5px 0 0 #121212; }
+        .shadow-bauhaus-lg { box-shadow: 8px 8px 0 0 #121212; }
+        .shadow-bauhaus-yellow { box-shadow: 5px 5px 0 0 #F0C020; }
+        .btn-bauhaus { border: 3px solid #121212; box-shadow: 4px 4px 0 0 #121212; transition: all .12s; font-weight: 800; text-transform: uppercase; }
+        .btn-bauhaus:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 0 #121212; }
+        .bg-dot-pattern { background-image: radial-gradient(#121212 1.5px, transparent 1.5px); background-size: 18px 18px; }
+        summary::-webkit-details-marker { display: none; }
+        .note-input { width: 100%; border: 2px solid #121212; background: #fff; padding: 6px 8px; font-size: 13px; font-weight: 600; }
+        .note-input:focus { outline: none; background: #FFF8DC; }
+        #trip-map { height: 400px; }
+        @media (max-width: 640px) { #trip-map { height: 330px; } }
+        .map-pin { width: 26px; height: 26px; border: 2px solid #121212; display: flex; align-items: center; justify-content: center; font: 800 11px 'Outfit', sans-serif; color: #fff; box-shadow: 2px 2px 0 #121212; }
+        .map-pin.hotel { border-radius: 50%; background: #F0C020 !important; color: #121212; }
+        .leaflet-popup-content-wrapper { border-radius: 0; border: 2px solid #121212; box-shadow: 4px 4px 0 #121212; }
+        .leaflet-popup-content { margin: 10px 12px; font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <div class="bg-[#121212] text-white text-xs font-bold">
+        <div class="max-w-5xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2">
+            <span><i class="fa-solid fa-children text-[#F0C020] mr-1"></i> FAMILY TRIP · JAPAN</span>
+            <a href="./" class="bg-[#F0C020] text-[#121212] px-2 py-0.5 font-black uppercase"><i class="fa-solid fa-arrow-left"></i> ทริปทั้งหมด</a>
+        </div>
+    </div>
+
+    <header class="border-b-4 border-[#121212] bg-[#D02020] text-white">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase">
+            <span id="countdown">OSAKA 2027</span>
+            <span class="flex gap-2"><span class="bg-[#121212] px-2.5 py-1 font-mono">JAN 22 – 31, 2027</span><span class="bg-[#F0C020] text-[#121212] border-2 border-[#121212] px-2 py-0.5">10 DAYS / 9 NIGHTS</span></span>
+        </div>
+    </header>
+
+    <section class="border-b-4 border-[#121212] bg-dot-pattern">
+        <div class="max-w-5xl mx-auto px-4 py-8 space-y-3">
+            <div class="inline-flex items-center gap-2 bg-[#F0C020] border-2 border-[#121212] px-3 py-1 font-extrabold uppercase text-xs shadow-bauhaus-sm">
+                <i class="fa-solid fa-snowflake"></i> WINTER · SNOW · USJ · KYOTO
+            </div>
+            <h1 class="font-display font-black text-5xl sm:text-7xl uppercase tracking-tighter leading-[0.88]">
+                OSAKA<br><span class="bg-[#1040C0] text-white px-2 border-4 border-[#121212] inline-block my-1">KANNABE</span><br>KYOTO
+            </h1>
+            <p class="font-medium max-w-2xl">ทริปครอบครัว 2 ผู้ใหญ่ + 1 เด็ก · โอซาก้า ➔ เล่นหิมะ Up Kannabe + Kinosaki (ขับรถ 2 วัน) ➔ วัดดารุมะ ➔ USJ ➔ เกียวโต (อุจิ · ฟูชิมิอินาริ · วัดน้ำใส) ➔ รินคุ</p>
+            <div class="flex flex-wrap gap-2 pt-2">
+                <a href="#itinerary" class="btn-bauhaus bg-[#F0C020] px-4 py-2 text-xs"><i class="fa-solid fa-calendar-days"></i> แผนรายวัน</a>
+                <a href="#todo" class="btn-bauhaus bg-[#D02020] text-white px-4 py-2 text-xs"><i class="fa-solid fa-triangle-exclamation"></i> ต้องจัดการ</a>
+            </div>
+        </div>
+    </section>
+
+    <nav class="sticky top-0 z-40 bg-[#121212] text-white overflow-x-auto">
+        <div class="max-w-5xl mx-auto px-2 flex text-xs font-bold uppercase whitespace-nowrap">
+            <a href="#todo" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-triangle-exclamation text-[#F0C020]"></i> TO-DO</a>
+            <a href="#flights" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-plane text-[#F0C020]"></i> FLIGHTS</a>
+            <a href="#hotels" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-hotel text-[#F0C020]"></i> HOTELS</a>
+            <a href="#itinerary" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-route text-[#F0C020]"></i> ITINERARY</a>
+            <a href="#map" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-map-location-dot text-[#F0C020]"></i> MAP</a>
+            <a href="#weather" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-cloud-sun text-[#F0C020]"></i> WEATHER</a>
+            <a href="#checklist" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-check-square text-[#F0C020]"></i> CHECKLIST</a>
+            <a href="#help" class="px-3 py-3 hover:bg-[#1040C0]"><i class="fa-solid fa-life-ring text-[#F0C020]"></i> HELP</a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+
+        <!-- To-do / warnings -->
+        <section id="todo" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-[#F0C020] p-5 shadow-bauhaus-lg space-y-3">
+                <h2 class="font-display font-black text-2xl uppercase"><i class="fa-solid fa-triangle-exclamation text-[#D02020]"></i> ต้องจัดการก่อนเดินทาง</h2>
+                <div id="todo-list" class="space-y-2"></div>
+            </div>
+        </section>
+
+        <!-- Flights -->
+        <section id="flights" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#121212] text-[#F0C020] border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-plane"></i></div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">FLIGHTS</h2>
+                        <p class="text-xs font-bold text-slate-600">Thai AirAsia + Thai AirAsia X · ต่อเครื่องที่ดอนเมือง · 2 ผู้ใหญ่ + 1 เด็ก</p>
+                    </div>
+                </div>
+                <div id="flight-legs" class="space-y-5"></div>
+                <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 text-xs font-semibold">
+                    <i class="fa-solid fa-suitcase-rolling text-[#1040C0]"></i> สัมภาระที่ซื้อไว้: <strong>ถือขึ้นเครื่อง 7 กก./คน เท่านั้น (ทุกเที่ยว) · ยังไม่มีกระเป๋าโหลด</strong>
+                </div>
+                <div class="border-4 border-[#121212] bg-[#FFF8DC] p-3 space-y-2">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="font-black text-sm uppercase"><i class="fa-solid fa-ticket text-[#D02020]"></i> MY TICKET <span class="text-[10px] font-bold normal-case text-slate-600">· เก็บในมือถือเครื่องนี้เท่านั้น ไม่ขึ้นเว็บ</span></div>
+                        <button onclick="toggleTicketEdit()" id="ticket-edit-btn" class="btn-bauhaus bg-white px-2 py-1 text-[10px]"><i class="fa-solid fa-pen"></i> แก้ไข</button>
+                    </div>
+                    <div id="ticket-view" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+                    <div id="ticket-form" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hotels -->
+        <section id="hotels" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex items-center gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="w-10 h-10 bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-hotel"></i></div>
+                    <div>
+                        <h2 class="font-display font-black text-2xl uppercase">HOTELS</h2>
+                        <p class="text-xs font-bold text-slate-600">4 ที่พัก · 9 คืน</p>
+                    </div>
+                </div>
+                <div id="hotel-cards" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- Itinerary -->
+        <section id="itinerary" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b-4 border-[#121212] pb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-[#F0C020] border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-route"></i></div>
+                        <div>
+                            <h2 class="font-display font-black text-2xl uppercase">DAILY ITINERARY</h2>
+                            <p class="text-xs font-bold text-slate-600">เวลาญี่ปุ่น (UTC+9 · เร็วกว่าไทย 2 ชม.) · กดแต่ละวันเพื่อดู</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-1.5 text-[11px] font-bold">
+                        <button onclick="toggleAllDays(true)" class="px-2 py-1 border-2 border-[#121212] bg-[#121212] text-white">EXPAND ALL</button>
+                        <button onclick="toggleAllDays(false)" class="px-2 py-1 border-2 border-[#121212] bg-white">COLLAPSE</button>
+                    </div>
+                </div>
+                <div id="days" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- Map -->
+        <section id="map" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-4 shadow-bauhaus space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121212] pb-2">
+                    <h2 class="font-display font-black text-xl uppercase"><i class="fa-solid fa-map-location-dot text-[#D02020]"></i> TRIP MAP</h2>
+                    <span class="text-[10px] font-bold text-slate-600">ตัวเลข = ลำดับในวันนั้น · วงกลมเหลือง = ที่พัก</span>
+                </div>
+                <div id="map-day-buttons" class="flex flex-wrap gap-1.5 text-[11px] font-bold"></div>
+                <div id="trip-map" class="border-2 border-[#121212] bg-[#E0E0E0]"></div>
+                <div id="map-stop-list" class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px] font-semibold"></div>
+                <p class="text-[10px] font-bold text-slate-600">แผนที่: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener" class="underline">OpenStreetMap</a> · พิกัดโดยประมาณ ใช้ปุ่ม Google Maps เพื่อนำทางจริง</p>
+            </div>
+        </section>
+
+        <!-- Weather -->
+        <section id="weather" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-4 shadow-bauhaus space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#121212] pb-2">
+                    <h2 class="font-display font-black text-xl uppercase"><i class="fa-solid fa-cloud-sun text-[#1040C0]"></i> WEATHER · YR.NO</h2>
+                    <button onclick="loadForecasts(true)" class="btn-bauhaus bg-white px-2 py-1 text-[10px]"><i class="fa-solid fa-rotate"></i> REFRESH</button>
+                </div>
+                <p class="text-[11px] font-bold text-slate-600">ปลายม.ค. โอซาก้า/เกียวโต ราว 1–9°C · คันนาเบะ/คิโนซากิ (ทางเหนือ) ติดลบและมีหิมะ · yr.no พยากรณ์ได้ ~10 วันล่วงหน้า (ข้อมูลช่วงทริปจะเริ่มขึ้นราว 12 ม.ค.)</p>
+                <div id="weather-locations" class="grid grid-cols-1 lg:grid-cols-3 gap-4"></div>
+                <p class="text-[10px] font-bold text-slate-600">ข้อมูล: <a href="https://www.yr.no/" target="_blank" rel="noopener" class="underline">Yr</a> / MET Norway (CC BY 4.0) · เวลาญี่ปุ่น (UTC+9)</p>
+            </div>
+        </section>
+
+        <!-- Checklist -->
+        <section id="checklist" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b-4 border-[#121212] pb-3">
+                    <h2 class="font-display font-black text-2xl uppercase">CHECKLIST</h2>
+                    <div class="bg-[#121212] text-white px-3 py-1 text-xs font-mono font-bold">PROGRESS: <span id="checklist-progress" class="text-[#F0C020]">0</span></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2" id="checklist-grid"></div>
+            </div>
+        </section>
+
+        <!-- Help -->
+        <section id="help" class="scroll-mt-16">
+            <div class="border-4 border-[#121212] bg-white p-5 shadow-bauhaus-lg space-y-4">
+                <h2 class="font-display font-black text-2xl uppercase border-b-4 border-[#121212] pb-3">EMERGENCY & PHRASES</h2>
+                <div class="bg-[#D02020] text-white border-4 border-[#121212] p-4 space-y-2">
+                    <div class="text-xs font-black uppercase"><i class="fa-solid fa-triangle-exclamation text-[#F0C020]"></i> ALLERGY CARD · แพ้กุ้งรุนแรง</div>
+                    <div class="jp-font font-black text-2xl">私はエビの重いアレルギーがあります。食べると命に関わります。</div>
+                    <div class="jp-font font-bold">料理にエビ（エビのだし・桜えび・干しえび・えびせんべい・エキスを含む）が入っている場合は、必ず教えてください。</div>
+                    <div class="text-xs">ญี่ปุ่นใช้กุ้งในน้ำซุป (ดาชิ) ขนมกรอบ (えびせん) และเทมปุระบ่อย · ร้านส่วนใหญ่มีตาราง "アレルギー表" ขอดูได้</div>
+                    <button onclick="showAllergyCard()" class="btn-bauhaus bg-[#F0C020] text-[#121212] px-4 py-2 text-xs"><i class="fa-solid fa-expand"></i> ขยายเต็มจอ</button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-center">
+                    <a href="tel:119" class="btn-bauhaus bg-[#D02020] text-white p-2"><div class="text-xl font-black">119</div><div class="text-[11px]">รถพยาบาล / ดับเพลิง</div></a>
+                    <a href="tel:110" class="btn-bauhaus bg-[#1040C0] text-white p-2"><div class="text-xl font-black">110</div><div class="text-[11px]">ตำรวจ</div></a>
+                    <a href="tel:+81-50-3816-2787" class="btn-bauhaus bg-[#F0C020] p-2 col-span-2 sm:col-span-1"><div class="text-base font-black">050-3816-2787</div><div class="text-[11px]">JNTO Visitor Hotline (อังกฤษ 24 ชม.)</div></a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="phrase-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t-4 border-[#121212] bg-[#121212] text-white py-8 mt-10 text-center text-xs font-bold">
+        OSAKA FAMILY TRIP · 22–31 JAN 2027
+    </footer>
+
+    <button onclick="showAllergyCard()" class="fixed bottom-4 right-4 z-40 btn-bauhaus bg-[#D02020] text-white px-3 py-2 text-xs">🦐 แพ้กุ้ง</button>
+
+    <div id="show-modal" class="hidden fixed inset-0 z-50 bg-[#121212]/80 flex items-center justify-center p-4" onclick="if (event.target === this) closeShowModal()">
+        <div class="bg-white border-4 border-[#121212] shadow-bauhaus-yellow w-full max-w-lg p-6 space-y-4 text-center">
+            <div id="show-modal-label" class="text-xs font-black uppercase text-[#1040C0]"></div>
+            <div id="show-modal-zh" class="jp-font font-black text-3xl leading-snug break-words"></div>
+            <div id="show-modal-sub" class="jp-font font-bold text-lg text-[#D02020]"></div>
+            <div id="show-modal-th" class="text-sm font-semibold text-slate-600"></div>
+            <button onclick="closeShowModal()" class="btn-bauhaus bg-[#F0C020] px-6 py-2 text-sm">ปิด</button>
+        </div>
+    </div>
+
+    <script>
+        const store = {
+            get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+            set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+        };
+        const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        const gmap = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+        const thaiDays = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+        const thaiMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+        function thaiDate(ymd) { const d = new Date(ymd + 'T00:00:00Z'); return `${thaiDays[d.getUTCDay()]} ${d.getUTCDate()} ${thaiMonths[d.getUTCMonth()]}`; }
+        function japanToday() { return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10); }
+
+        // ---------- Places (approximate WGS-84) ----------
+        // key: [lat, lon, Thai/English label, Japanese name for Google Maps, 'hotel'?]
+        const P = {
+            kix: [34.4347, 135.2440, 'สนามบินคันไซ (KIX) T1', '関西国際空港 第1ターミナル'],
+            viaShinsai: [34.6735, 135.4995, 'Via Inn Shinsaibashi', 'ヴィアイン心斎橋', 'hotel'],
+            dotonbori: [34.6687, 135.5013, 'โดทงโบริ / ป้ายกูลิโกะ', '道頓堀 グリコサイン'],
+            shinsaibashi: [34.6744, 135.5013, 'ชินไซบาชิ', '心斎橋筋商店街'],
+            kizu: [34.6582, 135.4985, 'ตลาดปลาคิซุ', '木津卸売市場'],
+            kaiyukan: [34.6545, 135.4290, 'อควาเรียมไคยูคัง', '海遊館'],
+            kidsplaza: [34.7046, 135.5106, 'Kids Plaza Osaka', 'キッズプラザ大阪'],
+            umeda: [34.7025, 135.4959, 'อุเมดะ', '梅田'],
+            castle: [34.6873, 135.5262, 'ปราสาทโอซาก้า', '大阪城天守閣'],
+            nambaparks: [34.6617, 135.5017, 'Namba Parks', 'なんばパークス'],
+            shinosaka: [34.7334, 135.5001, 'สถานีชินโอซาก้า (รถเช่า)', '新大阪駅'],
+            fairfield: [35.4600, 134.6720, 'Fairfield by Marriott Kannabe', 'フェアフィールド・バイ・マリオット・兵庫神鍋高原', 'hotel'],
+            upkannabe: [35.4615, 134.6700, 'Up Kannabe (ลานหิมะ)', 'アップかんなべ'],
+            marine: [35.6560, 134.8150, 'Kinosaki Marine World', '城崎マリンワールド'],
+            kinosaki: [35.6265, 134.8130, 'เมืองออนเซ็นคิโนซากิ', '城崎温泉'],
+            katsuoji: [34.8670, 135.4910, 'วัดคัตสึโอจิ (วัดดารุมะ)', '勝尾寺'],
+            osakaHotel: [34.7330, 135.5010, 'โรงแรมโอซาก้า 27–30 (ยังไม่จอง)', '新大阪', 'hotel'],
+            usj: [34.6654, 135.4323, 'Universal Studios Japan', 'ユニバーサル・スタジオ・ジャパン'],
+            byodoin: [34.8892, 135.8077, 'วัดเบียวโดอิน · อุจิ', '平等院'],
+            inari: [34.9671, 135.7727, 'ศาลเจ้าฟูชิมิอินาริ', '伏見稲荷大社'],
+            kiyomizu: [34.9949, 135.7850, 'วัดน้ำใส (คิโยมิซุ)', '清水寺'],
+            ninenzaka: [34.9981, 135.7810, 'ถนนนิเนนซากะ', '二年坂'],
+            rinkuOutlet: [34.4040, 135.2960, 'Rinku Premium Outlets', 'りんくうプレミアム・アウトレット'],
+            odysis: [34.4075, 135.2995, 'Odysis Suites Osaka Airport', 'オディシススイーツ大阪エアポートホテル', 'hotel']
+        };
+
+        // ---------- Itinerary ----------
+        // items: [time, text, transport, placeKey?]
+        const days = [
+            { d: '2027-01-22', city: 'OSAKA', title: 'เชียงใหม่ ➔ โอซาก้า', hotel: 'viaShinsai', items: [
+                ['04:30', 'ถึงสนามบินเชียงใหม่ อาคาร 2 (เวลาไทย) เช็กอิน AirAsia ถามว่าได้บอร์ดดิ้งพาส 2 เที่ยวไหม', 'เช็กอิน CNX'],
+                ['06:30 – 07:40', '✈️ FD3417 เชียงใหม่ ➔ ดอนเมือง อาคาร 2 (เวลาไทย)', 'FD3417'],
+                ['07:40 – 10:40', 'ต่อเครื่องที่ดอนเมือง 3 ชม. เดินจากอาคาร 2 ไปอาคาร 1 ผ่าน ตม. ขาออก', 'Transfer DMK'],
+                ['10:40 – 18:15', '✈️ XJ610 ดอนเมือง อาคาร 1 ➔ คันไซ (KIX) อาคาร 1 (ถึงเวลาญี่ปุ่น)', 'XJ610', 'kix'],
+                ['18:15 – 19:15', 'ตม. + ศุลกากร (ใช้ QR จาก Visit Japan Web) ซื้อ/เติมบัตร ICOCA', 'KIX T1'],
+                ['19:15 – 20:30', 'รถไฟนันไค (Nankai) จาก Kansai Airport ไป Namba แล้วเดิน/แท็กซี่ไปโรงแรม เช็กอิน', 'Nankai ~45 นาที', 'viaShinsai'],
+                ['20:30 – 21:30', 'เดินเล่นโดทงโบริเบาๆ ถ่ายรูปป้ายกูลิโกะ ทาโกยากิ แล้วพักผ่อน 🦐', 'เดินเท้า', 'dotonbori']
+            ], tip: '⚠️ แผนเดิมเขียนเช็กอิน 15:00 และเดินเล่น 17:00 แต่เครื่องลงจอด 18:15 จึงปรับเป็นช่วงค่ำแทน · นั่ง Nankai "Rapi:t" (จองที่นั่ง) หรือ Airport Express ก็ได้' },
+            { d: '2027-01-23', city: 'OSAKA', title: 'ตลาดปลาคิซุ · ไคยูคัง · Kids Plaza', hotel: 'viaShinsai', items: [
+                ['07:00 – 07:30', 'ออกจากโรงแรมแต่เช้า', 'Subway'],
+                ['07:30 – 09:30', 'ตลาดปลาคิซุ (Kizu Market) + ODA Supermarket ทานข้าวหน้าปลาดิบ/ไข่ปลา (มีออนเซ็น Taihei no Yu ชั้น 2) 🦐 ระวังกุ้ง', 'Subway ลง Daikokucho เดิน 5 นาที', 'kizu'],
+                ['10:00 – 12:30', 'อควาเรียมไคยูคัง ชมฉลามวาฬ', 'Subway ลง Osakako', 'kaiyukan'],
+                ['13:30 – 16:30', 'Kids Plaza Osaka สนามเด็กเล่นในร่ม', 'Subway ลง Ogimachi', 'kidsplaza'],
+                ['18:00', 'มื้อเย็นย่านอุเมดะหรือชินไซบาชิ แล้วกลับโรงแรม', '', 'umeda']
+            ], tip: 'ตลาดคิซุคึกคักช่วงเช้าและวายราว 11:00 · ปิดวันอาทิตย์/วันหยุด จึงไปวันเสาร์' },
+            { d: '2027-01-24', city: 'OSAKA', title: 'ปราสาทโอซาก้า · นัมบะ', hotel: 'viaShinsai', items: [
+                ['09:30 – 12:00', 'ปราสาทโอซาก้า นั่งรถกอล์ฟขึ้นชมปราสาท', 'Subway ลง Tanimachi 4-chome', 'castle'],
+                ['13:30 – 16:30', 'ช้อปปิ้ง Namba Parks & Namba City ของเล่น/ของใช้เด็ก มื้อเย็นนัมบะ', 'Subway', 'nambaparks'],
+                ['19:00', 'กลับโรงแรม จัดกระเป๋า (พรุ่งนี้รับรถเช่า)', 'เดินเท้า', 'viaShinsai']
+            ], tip: '' },
+            { d: '2027-01-25', city: 'KANNABE', title: 'รับรถเช่า ➔ เล่นหิมะ Up Kannabe', hotel: 'fairfield', items: [
+                ['08:00 – 09:30', 'อาหารเช้า เช็กเอาต์ (ก่อน 10:00)', 'Subway Midosuji ไป Shin-Osaka'],
+                ['12:00', 'รับรถเช่าที่ชินโอซาก้า (48 ชม.) ตรวจยางหิมะ (Snow tires) + คาร์ซีทเด็ก', 'รถเช่า', 'shinosaka'],
+                ['12:00 – 15:00', 'ขับรถไปเมืองโทโยกะ จ.เฮียวโงะ ~150 กม.', 'ขับรถ 2.5–3 ชม.'],
+                ['15:00 – 17:00', 'เช็กอิน Fairfield Kannabe แล้วเดินข้ามถนนไปเล่นสไลเดอร์หิมะ/ปั้นหิมะที่ Up Kannabe', 'เดินเท้า', 'fairfield'],
+                ['', '', '', 'upkannabe']
+            ], tip: 'ถนนบนเขาอาจมีหิมะ/น้ำแข็ง ขับช้า เติมน้ำมันก่อนขึ้นเขา · ช่วงเช้าก่อนรับรถมีเวลาว่าง ~2 ชม. ฝากกระเป๋าที่ชินโอซาก้าได้' },
+            { d: '2027-01-26', city: 'KINOSAKI', title: 'Kinosaki Marine World · ออนเซ็นคิโนซากิ', hotel: 'fairfield', items: [
+                ['09:30 – 12:30', 'Kinosaki Marine World โชว์โลมา พาเรดเพนกวิน ตกปลาอาจิ', 'ขับรถ ~35 นาที', 'marine'],
+                ['13:00 – 16:00', 'เมืองออนเซ็นคิโนซากิ เดินชมคลอง ชิมขนม แช่น้ำร้อน', 'ขับรถ ~10 นาที', 'kinosaki'],
+                ['17:00', 'ขับรถกลับ Fairfield Kannabe', 'ขับรถ', 'fairfield']
+            ], tip: 'เช็กวันหยุดของ Marine World ช่วงหน้าหนาวก่อนไป' },
+            { d: '2027-01-27', city: 'OSAKA', title: 'คืนรถ ➔ วัดดารุมะ คัตสึโอจิ', hotel: 'osakaHotel', items: [
+                ['08:30 – 11:30', 'เช็กเอาต์ ขับรถกลับโอซาก้า เติมน้ำมันเต็มถัง (満タン) ใกล้ชินโอซาก้า', 'ขับรถ'],
+                ['12:00', 'คืนรถที่ชินโอซาก้า ฝากกระเป๋าที่โรงแรมโอซาก้า', 'รถเช่า', 'shinosaka'],
+                ['13:30 – 16:30', 'วัดคัตสึโอจิ (วัดดารุมะ) ตุ๊กตาดารุมะเต็มวัด (ปิด 17:00)', 'Subway/Kita-Osaka Kyuko ลง Minoh-kayano ต่อบัส/แท็กซี่', 'katsuoji'],
+                ['18:00', 'เช็กอินโรงแรมโอซาก้า (พัก 3 คืน 27–30)', '', 'osakaHotel']
+            ], tip: '' },
+            { d: '2027-01-28', city: 'OSAKA', title: 'Universal Studios Japan', hotel: 'osakaHotel', items: [
+                ['08:00 – 19:00', 'USJ เต็มวัน เน้น Super Nintendo World (Mario) & Wonderland', 'JR ลง Universal City', 'usj']
+            ], tip: 'ซื้อตั๋วล่วงหน้าออนไลน์ · Super Nintendo World อาจต้องใช้ Area Timed Entry / Express Pass · ไปถึงก่อนเปิด' },
+            { d: '2027-01-29', city: 'KYOTO', title: 'Day trip เกียวโต: อุจิ · ฟูชิมิอินาริ', hotel: 'osakaHotel', items: [
+                ['09:00 – 12:30', 'เมืองชาเขียวอุจิ วัดเบียวโดอิน ทานขนม/ไอศกรีมชาเขียว', 'JR ไป Kyoto ต่อ Nara Line ลง JR Uji', 'byodoin'],
+                ['13:30 – 16:00', 'ศาลเจ้าฟูชิมิอินาริ เสาโทริอิสีส้ม', 'JR Nara Line ลง JR Inari', 'inari'],
+                ['17:30', 'นั่ง JR กลับโอซาก้า (~25–30 นาที จากเกียวโต)', 'JR', 'osakaHotel']
+            ], tip: '' },
+            { d: '2027-01-30', city: 'KYOTO ➔ RINKU', title: 'วัดน้ำใส ➔ ย้ายไปรินคุ', hotel: 'odysis', items: [
+                ['08:30 – 12:30', 'เช็กเอาต์ฝากกระเป๋า แล้วไปวัดน้ำใส (คิโยมิซุ) เดินถนนนิเนนซากะ', 'JR ไปเกียวโต ต่อบัส/แท็กซี่', 'kiyomizu'],
+                ['', '', '', 'ninenzaka'],
+                ['14:30 – 16:30', 'กลับมารับกระเป๋าที่โอซาก้า แล้วไปรินคุทาวน์', 'Nankai / JR Haruka ลง Rinku-Town'],
+                ['16:30', 'เช็กอิน Odysis Suites แล้วช้อปเก็บตกที่ Rinku Premium Outlets', 'เดินเท้า', 'odysis'],
+                ['', '', '', 'rinkuOutlet']
+            ], tip: 'วันเสาร์วัดน้ำใสคนเยอะ ไปให้ถึงก่อน 09:30' },
+            { d: '2027-01-31', city: 'RINKU ➔ CNX', title: 'กลับบ้าน', hotel: null, items: [
+                ['07:30', 'เช็กเอาต์ ไปสนามบินคันไซ (1 สถานี ~5 นาที) ถึงภายใน 08:00', 'รถไฟ / รถรับส่งโรงแรม', 'kix'],
+                ['10:30 – 15:05', '✈️ XJ613 คันไซ T1 ➔ ดอนเมือง อาคาร 1 (ถึงเวลาไทย)', 'XJ613'],
+                ['15:05 – 17:40', 'ต่อเครื่องที่ดอนเมือง 2 ชม. 35 นาที ผ่าน ตม. ขาเข้าไทย แล้วไปอาคาร 2', 'Transfer DMK'],
+                ['17:40 – 19:00', '✈️ FD3439 ดอนเมือง ➔ เชียงใหม่ 🏠', 'FD3439']
+            ], tip: '' }
+        ];
+
+        const flightLegs = [
+            { label: 'ขาไป · ศ. 22 ม.ค. 2027', total: '9 ชม. 45 นาที · 1 ต่อ', segs: [
+                { no: 'FD3417', air: 'Thai AirAsia', from: 'CNX', fromN: 'เชียงใหม่ อาคาร 2', dep: '06:30', to: 'DMK', toN: 'ดอนเมือง อาคาร 2', arr: '07:40', dur: '1 ชม. 10 นาที', fa: 'AIQ3417' },
+                { lay: 'ต่อเครื่อง 3 ชม. · อาคาร 2 ➔ อาคาร 1 (ผ่าน ตม. ขาออก)' },
+                { no: 'XJ610', air: 'Thai AirAsia X', from: 'DMK', fromN: 'ดอนเมือง อาคาร 1', dep: '10:40', to: 'KIX', toN: 'คันไซ อาคาร 1', arr: '18:15', dur: '5 ชม. 35 นาที', note: 'ถึงเวลาญี่ปุ่น (GMT+9)', fa: 'TAX610' }
+            ] },
+            { label: 'ขากลับ · อา. 31 ม.ค. 2027', total: '10 ชม. 30 นาที · 1 ต่อ', segs: [
+                { no: 'XJ613', air: 'Thai AirAsia X', from: 'KIX', fromN: 'คันไซ อาคาร 1', dep: '10:30', to: 'DMK', toN: 'ดอนเมือง อาคาร 1', arr: '15:05', dur: '6 ชม. 35 นาที', note: 'ออกเวลาญี่ปุ่น ถึงเวลาไทย', fa: 'TAX613' },
+                { lay: 'ต่อเครื่อง 2 ชม. 35 นาที · ผ่าน ตม. ขาเข้าไทย แล้วอาคาร 1 ➔ อาคาร 2' },
+                { no: 'FD3439', air: 'Thai AirAsia', from: 'DMK', fromN: 'ดอนเมือง อาคาร 2', dep: '17:40', to: 'CNX', toN: 'เชียงใหม่ อาคาร 2', arr: '19:00', dur: '1 ชม. 20 นาที', fa: 'AIQ3439' }
+            ] }
+        ];
+
+        const hotels = [
+            { key: 'viaShinsai', dates: '22–25 ม.ค.', nights: '3 คืน', area: 'OSAKA · SHINSAIBASHI', name: 'Via Inn Shinsaibashi (JR West Group)', jp: 'ヴィアイン心斎橋', status: 'booked' },
+            { key: 'fairfield', dates: '25–27 ม.ค.', nights: '2 คืน', area: 'HYOGO · KANNABE', name: 'Fairfield by Marriott Hyogo Kannabe Highland', jp: 'フェアフィールド・バイ・マリオット・兵庫神鍋高原', status: 'booked' },
+            { key: 'osakaHotel', dates: '27–30 ม.ค.', nights: '3 คืน', area: 'OSAKA', name: 'ยังไม่ได้จอง · ตัวเลือก: Comfort Hotel Shin-Osaka หรือ Via Inn Umeda', jp: 'コンフォートホテル新大阪 / ヴィアイン梅田', status: 'todo' },
+            { key: 'odysis', dates: '30–31 ม.ค.', nights: '1 คืน', area: 'RINKU TOWN · KIX', name: 'Odysis Suites Osaka Airport Hotel', jp: 'オディシススイーツ大阪エアポートホテル', status: 'booked' }
+        ];
+
+        const todos = [
+            ['fa-hotel', '<strong>จองโรงแรมโอซาก้า 27–30 ม.ค. (3 คืน)</strong> และ <strong>ยกเลิก Hotel Keihan Kyoto Ekiminami</strong> ถ้ายังมีการจองอยู่'],
+            ['fa-suitcase', '<strong>ยังไม่มีกระเป๋าโหลด</strong> ซื้อไว้แค่ถือขึ้น 7 กก./คน ทั้ง 4 เที่ยว · 10 วันหน้าหนาว (เสื้อกันหนาวหนา) ควรซื้อกระเป๋าโหลดเพิ่มในแอป AirAsia ล่วงหน้า ถูกกว่าซื้อที่สนามบิน'],
+            ['fa-id-card', '<strong>ใบขับขี่สากล (IDP)</strong> ของคนขับ จากกรมการขนส่งทางบก · ญี่ปุ่นไม่รับใบขับขี่ไทยอย่างเดียว · และจองรถเช่าพร้อม <strong>ยางหิมะ + คาร์ซีทเด็ก</strong> (กฎหมายบังคับเด็กต่ำกว่า 6 ขวบ)'],
+            ['fa-ticket', '<strong>ตั๋ว USJ</strong> (28 ม.ค.) ซื้อออนไลน์ล่วงหน้า + พิจารณา Express Pass สำหรับ Super Nintendo World'],
+            ['fa-mobile-screen', 'ลงทะเบียน <strong>Visit Japan Web</strong> (ตม./ศุลกากร) ก่อนบิน · คนไทยเข้าญี่ปุ่นได้ไม่ต้องใช้วีซ่าไม่เกิน 15 วัน'],
+            ['fa-snowflake', 'เช็กสภาพลานหิมะ Up Kannabe และวันเปิดของ Kinosaki Marine World ช่วงปลายม.ค.']
+        ];
+
+        const checklistItems = [
+            'พาสปอร์ตทุกคน (อายุเหลือ > 6 เดือน)',
+            'Visit Japan Web ลงทะเบียน + QR code ทุกคน',
+            'ใบขับขี่ไทย + ใบขับขี่สากล (IDP) ของคนขับ',
+            'ยืนยันรถเช่า (ยางหิมะ + คาร์ซีท + ETC card)',
+            'กระเป๋าโหลด (ซื้อเพิ่มในแอป AirAsia)',
+            'ตั๋ว USJ / Express Pass',
+            'บัตร ICOCA หรือ Suica บน iPhone (Apple Wallet)',
+            'เงินเยนสด (หลายร้านยังรับแต่เงินสด) + บัตรเครดิต',
+            'eSIM / Pocket WiFi',
+            'เสื้อกันหนาวหนา ฮีทเทค ถุงมือ หมวก ผ้าพันคอ',
+            'ชุดเล่นหิมะ/กางเกงกันน้ำ + รองเท้าบูทกันลื่น (ลูก)',
+            'ยาประจำตัว ยาแก้แพ้ / EpiPen (แพ้กุ้ง) ยาลดไข้เด็ก',
+            'ลิปมัน ครีมทาผิว (อากาศแห้ง)',
+            'Powerbank (ห้ามโหลด ใส่กระเป๋าถือ)',
+            'ปลั๊ก: ญี่ปุ่นใช้ขาแบน Type A (100V)'
+        ];
+
+        const phrases = [
+            { jp: 'エビは入っていますか？', ro: 'Ebi wa haitte imasu ka?', th: 'มีกุ้งไหม' },
+            { jp: 'エビ抜きでお願いします', ro: 'Ebi nuki de onegaishimasu', th: 'ขอไม่ใส่กุ้ง' },
+            { jp: 'アレルギー表を見せてください', ro: 'Arerugī-hyō o misete kudasai', th: 'ขอดูตารางสารก่อภูมิแพ้' },
+            { jp: '救急車を呼んでください！', ro: 'Kyūkyūsha o yonde kudasai!', th: 'เรียกรถพยาบาลด่วน!' },
+            { jp: 'ここに行きたいです', ro: 'Koko ni ikitai desu', th: 'อยากไปที่นี่' },
+            { jp: 'トイレはどこですか？', ro: 'Toire wa doko desu ka?', th: 'ห้องน้ำอยู่ที่ไหน' },
+            { jp: '子ども用の椅子はありますか？', ro: 'Kodomo-yō no isu wa arimasu ka?', th: 'มีเก้าอี้เด็กไหม' },
+            { jp: '辛くないですか？', ro: 'Karakunai desu ka?', th: 'ไม่เผ็ดใช่ไหม' },
+            { jp: 'カードで払えますか？', ro: 'Kādo de haraemasu ka?', th: 'จ่ายบัตรได้ไหม' },
+            { jp: 'ありがとうございます', ro: 'Arigatō gozaimasu', th: 'ขอบคุณครับ/ค่ะ' }
+        ];
+
+        // ---------- Render: to-do, flights, ticket, hotels ----------
+        function renderTodo() {
+            document.getElementById('todo-list').innerHTML = todos.map(([ic, t]) => `
+                <div class="bg-white border-2 border-[#121212] p-2.5 text-xs sm:text-sm flex gap-2"><i class="fa-solid ${ic} text-[#D02020] mt-0.5"></i><div>${t}</div></div>`).join('');
+        }
+        function renderFlights() {
+            document.getElementById('flight-legs').innerHTML = flightLegs.map(leg => `
+                <div class="space-y-2">
+                    <div class="flex flex-wrap justify-between items-center gap-2 border-b-2 border-[#121212] pb-1">
+                        <span class="font-black text-sm uppercase">${leg.label}</span>
+                        <span class="bg-[#121212] text-white px-2 py-0.5 text-[11px] font-mono font-bold">${leg.total}</span>
+                    </div>
+                    ${leg.segs.map(s => s.lay ? `<div class="text-[11px] font-bold text-[#D02020] border-l-4 border-dashed border-[#D02020] pl-3 py-1"><i class="fa-solid fa-person-walking-luggage"></i> ${s.lay}</div>` : `
+                        <div class="border-2 border-[#121212] bg-[#F0F0F0] p-3 space-y-2">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <span class="bg-[#D02020] text-white border-2 border-[#121212] px-2 font-mono font-black text-sm">${s.no}</span>
+                                <span class="text-[11px] font-bold text-slate-700">${s.air} · ${s.dur}${s.note ? ' · ' + s.note : ''}</span>
+                            </div>
+                            <div class="grid grid-cols-[1fr_auto_1fr] items-center text-center">
+                                <div><div class="font-display font-black text-2xl">${s.dep}</div><div class="font-black">${s.from}</div><div class="text-[10px] font-bold text-slate-600">${s.fromN}</div></div>
+                                <i class="fa-solid fa-plane text-[#1040C0]"></i>
+                                <div><div class="font-display font-black text-2xl">${s.arr}</div><div class="font-black">${s.to}</div><div class="text-[10px] font-bold text-slate-600">${s.toN}</div></div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <a class="btn-bauhaus bg-white px-2 py-0.5 text-[10px]" target="_blank" rel="noopener" href="https://www.google.com/search?q=${s.no}+flight+status"><i class="fa-brands fa-google"></i> Google</a>
+                                <a class="btn-bauhaus bg-white px-2 py-0.5 text-[10px]" target="_blank" rel="noopener" href="https://www.flightradar24.com/data/flights/${s.no.toLowerCase()}">Flightradar24</a>
+                                <a class="btn-bauhaus bg-white px-2 py-0.5 text-[10px]" target="_blank" rel="noopener" href="https://www.flightaware.com/live/flight/${s.fa}">FlightAware</a>
+                            </div>
+                        </div>`).join('')}
+                </div>`).join('');
+        }
+        const ticketFields = [['pnr', 'หมายเลขการสำรองที่นั่ง (AirAsia)', 'เช่น ABC123'], ['names', 'ชื่อผู้โดยสาร', ''], ['note', 'โน้ต (ที่นั่ง/บริการเสริม)', '']];
+        function renderTicket() {
+            const t = store.get('osk_ticket', {});
+            const empty = !ticketFields.some(([k]) => t[k]);
+            document.getElementById('ticket-view').innerHTML = empty
+                ? '<div class="col-span-full text-xs font-bold text-slate-600">ยังไม่ได้กรอก · กด "แก้ไข" แล้วกรอกจากอีเมล AirAsia (ข้อมูลอยู่ในเครื่องนี้เท่านั้น)</div>'
+                : ticketFields.map(([k, label]) => `<div class="border-2 border-[#121212] bg-white p-2"><div class="text-[10px] font-black uppercase text-[#1040C0]">${label}</div><div class="font-mono font-black text-sm break-all">${esc(t[k] || '—')}</div></div>`).join('');
+            document.getElementById('ticket-form').innerHTML = ticketFields.map(([k, label, ph]) => `
+                <label class="block space-y-1"><span class="text-[11px] font-black uppercase text-[#1040C0]">${label}</span><input class="note-input" data-k="${k}" placeholder="${ph}" autocomplete="off"></label>`).join('');
+            document.querySelectorAll('#ticket-form input').forEach(inp => {
+                inp.value = t[inp.dataset.k] || '';
+                inp.addEventListener('input', () => { const x = store.get('osk_ticket', {}); x[inp.dataset.k] = inp.value.trim(); store.set('osk_ticket', x); });
+            });
+        }
+        function toggleTicketEdit() {
+            const form = document.getElementById('ticket-form');
+            const editing = form.classList.toggle('hidden') === false;
+            document.getElementById('ticket-edit-btn').innerHTML = editing ? '<i class="fa-solid fa-check"></i> เสร็จ' : '<i class="fa-solid fa-pen"></i> แก้ไข';
+            if (!editing) renderTicket();
+        }
+        function renderHotels() {
+            document.getElementById('hotel-cards').innerHTML = hotels.map((h, i) => `
+                <div class="border-2 border-[#121212] ${h.status === 'todo' ? 'bg-[#FFE4E1]' : 'bg-[#F0F0F0]'} p-3 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+                    <div class="flex gap-3 items-start">
+                        <div class="${h.status === 'todo' ? 'bg-[#D02020]' : 'bg-[#1040C0]'} text-white border-2 border-[#121212] px-2 py-1 font-black text-center min-w-[80px]"><div class="text-xs">${h.dates}</div><div>${h.nights}</div></div>
+                        <div>
+                            <span class="bg-[#121212] text-white text-[10px] font-black px-2">${h.area}</span>
+                            ${h.status === 'todo' ? '<span class="bg-[#D02020] text-white text-[10px] font-black px-2 ml-1">ยังไม่จอง</span>' : '<span class="bg-[#F0C020] text-[10px] font-black px-2 ml-1 border border-[#121212]">จองแล้ว</span>'}
+                            <div class="font-bold">${h.name}</div>
+                            <div class="jp-font text-xs font-bold">${h.jp}</div>
+                        </div>
+                    </div>
+                    ${h.status === 'todo' ? '' : `<div class="flex gap-2 shrink-0">
+                        <a class="btn-bauhaus bg-white px-2 py-1 text-[10px]" target="_blank" rel="noopener" href="${gmap(h.jp)}"><i class="fa-solid fa-map-location-dot text-[#1040C0]"></i> Maps</a>
+                        <button class="btn-bauhaus bg-[#F0C020] px-2 py-1 text-[10px]" onclick="openShowModal('TAXI', hotels[${i}].jp, 'このホテルまでお願いします', 'ช่วยพาไปโรงแรมนี้')"><i class="fa-solid fa-taxi"></i> ให้คนขับดู</button>
+                    </div>`}
+                </div>`).join('');
+        }
+
+        // ---------- Render: days ----------
+        function renderDays() {
+            const today = japanToday();
+            document.getElementById('days').innerHTML = days.map((x, i) => {
+                const rows = x.items.filter(it => it[1]).map(([t, txt, tr, pk]) => `
+                    <div class="border-l-4 border-[#121212] pl-3 pb-2 space-y-1">
+                        <div class="flex flex-wrap gap-1.5 items-center">
+                            ${t ? `<span class="bg-[#121212] text-white px-1.5 py-0.5 text-[11px] font-mono font-bold">${t}</span>` : ''}
+                            ${tr ? `<span class="bg-[#E0E0E0] border border-[#121212] px-1.5 py-0.5 text-[10px] font-bold">${tr}</span>` : ''}
+                        </div>
+                        <div class="text-xs sm:text-sm font-semibold">${txt}</div>
+                        ${pk && P[pk] && P[pk][4] !== 'hotel' ? `<a href="${gmap(P[pk][3])}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 border-2 border-[#121212] bg-white px-2 py-0.5 text-[11px] font-bold hover:bg-[#F0C020]"><span class="jp-font">${P[pk][3]}</span> <i class="fa-solid fa-map-location-dot text-[#1040C0]"></i></a>` : ''}
+                    </div>`).join('');
+                const hotel = x.hotel ? hotels.find(h => h.key === x.hotel) : null;
+                return `
+                <details class="day border-2 border-[#121212] ${x.d === today ? 'bg-[#FFF3C4]' : 'bg-white'}" ${x.d === today ? 'open' : ''}>
+                    <summary class="list-none cursor-pointer p-3 flex flex-wrap items-center gap-2 bg-[#F0F0F0] hover:bg-[#F0C020] border-b-2 border-[#121212]">
+                        <span class="${['KANNABE', 'KINOSAKI'].includes(x.city) ? 'bg-[#D02020]' : x.city.startsWith('KYOTO') ? 'bg-[#121212]' : 'bg-[#1040C0]'} text-white border-2 border-[#121212] px-2 py-0.5 font-black text-xs">DAY ${String(i + 1).padStart(2, '0')}</span>
+                        <span class="text-[11px] font-bold text-slate-600">${thaiDate(x.d)} · ${x.city}</span>
+                        ${x.d === today ? '<span class="bg-[#D02020] text-white text-[10px] font-black px-1.5">TODAY</span>' : ''}
+                        <span class="font-bold text-sm sm:text-base">${x.title}</span>
+                    </summary>
+                    <div class="p-4 space-y-3">
+                        ${hotel ? `<div class="text-xs font-bold bg-[#E0E0E0] border border-[#121212] p-2"><i class="fa-solid fa-hotel text-[#1040C0]"></i> คืนนี้พัก: ${hotel.name}</div>` : ''}
+                        <button type="button" onclick="showDayOnMap(${i})" class="btn-bauhaus bg-white px-3 py-1 text-[11px]"><i class="fa-solid fa-map-location-dot text-[#D02020]"></i> ดูวันนี้บนแผนที่</button>
+                        <div class="space-y-1">${rows}</div>
+                        ${x.tip ? `<div class="bg-[#F0C020] border-2 border-[#121212] p-2.5 text-xs font-bold"><i class="fa-solid fa-lightbulb text-[#D02020]"></i> ${x.tip}</div>` : ''}
+                    </div>
+                </details>`;
+            }).join('');
+        }
+        function toggleAllDays(open) { document.querySelectorAll('#days details.day').forEach(d => d.open = open); }
+
+        // ---------- Map ----------
+        let tripMap = null, mapLayer = null, currentMapDay = 1;
+        function dayStops(i) {
+            const x = days[i], seen = new Set(), stops = [];
+            x.items.forEach(([t, txt, tr, pk]) => {
+                if (!pk || !P[pk] || seen.has(pk)) return;
+                seen.add(pk);
+                stops.push({ key: pk, time: t || '', hotel: P[pk][4] === 'hotel' });
+            });
+            if (x.hotel && !seen.has(x.hotel)) stops.push({ key: x.hotel, time: 'ที่พัก', hotel: true });
+            return stops;
+        }
+        const DAY_COLORS = ['#1040C0', '#1040C0', '#1040C0', '#D02020', '#D02020', '#1040C0', '#7B2FBE', '#121212', '#121212', '#1040C0'];
+        function renderMapButtons() {
+            const b = (v, l) => `<button type="button" onclick="renderMapDay(${v === 'all' ? "'all'" : v})" class="px-2.5 py-1 border-2 border-[#121212] ${currentMapDay === v ? 'bg-[#121212] text-white' : 'bg-white hover:bg-[#F0C020]'}">${l}</button>`;
+            document.getElementById('map-day-buttons').innerHTML = b('all', 'ทั้งทริป') + days.map((x, i) => b(i, `D${i + 1} · ${x.d.slice(8)} ม.ค.`)).join('');
+        }
+        function initMap() {
+            const el = document.getElementById('trip-map');
+            if (typeof L === 'undefined') { el.innerHTML = '<div class="p-6 text-center text-xs font-bold">โหลดแผนที่ไม่ได้ · ใช้ปุ่ม Google Maps ในแผนรายวันแทน</div>'; return; }
+            tripMap = L.map(el, { scrollWheelZoom: false });
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(tripMap);
+            mapLayer = L.layerGroup().addTo(tripMap);
+            const ti = days.findIndex(x => x.d === japanToday());
+            renderMapDay(ti >= 0 ? ti : 1);
+        }
+        function renderMapDay(day) {
+            currentMapDay = day;
+            renderMapButtons();
+            if (!tripMap) return;
+            mapLayer.clearLayers();
+            const idx = day === 'all' ? days.map((_, i) => i) : [day];
+            const bounds = [], list = [];
+            idx.forEach(i => {
+                const color = DAY_COLORS[i], stops = dayStops(i);
+                if (stops.length > 1) L.polyline(stops.map(s => P[s.key].slice(0, 2)), { color, weight: 3, dashArray: '6 6', opacity: 0.8 }).addTo(mapLayer);
+                stops.forEach((s, n) => {
+                    const p = P[s.key];
+                    const label = day === 'all' ? `D${i + 1}` : (s.hotel ? '<i class="fa-solid fa-bed"></i>' : n + 1);
+                    const icon = L.divIcon({ className: '', html: `<div class="map-pin ${s.hotel ? 'hotel' : ''}" style="background:${color}">${label}</div>`, iconSize: [26, 26], iconAnchor: [13, 13] });
+                    L.marker(p.slice(0, 2), { icon }).addTo(mapLayer).bindPopup(`<div class="text-[10px] font-black text-[#1040C0]">DAY ${i + 1} · ${s.time}</div><div class="font-black text-sm">${p[2]}</div><div class="jp-font text-xs font-bold">${p[3]}</div><a href="${gmap(p[3])}" target="_blank" rel="noopener" class="inline-block mt-1 bg-[#1040C0] px-2 py-0.5 text-[11px] font-black" style="color:#fff">เปิด Google Maps</a>`);
+                    bounds.push(p.slice(0, 2));
+                    if (day !== 'all') list.push(`<button type="button" onclick="tripMap.setView([${p[0]}, ${p[1]}], 15)" class="text-left border border-[#121212] bg-[#F0F0F0] hover:bg-[#F0C020] px-2 py-1 flex items-center gap-2"><span class="map-pin ${s.hotel ? 'hotel' : ''} shrink-0" style="background:${color};width:20px;height:20px;font-size:10px">${s.hotel ? '<i class="fa-solid fa-bed"></i>' : n + 1}</span><span><span class="font-mono text-[10px]">${s.time}</span> · ${p[2]}</span></button>`);
+                });
+            });
+            document.getElementById('map-stop-list').innerHTML = list.join('');
+            if (bounds.length) tripMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 14 });
+            setTimeout(() => tripMap.invalidateSize(), 50);
+        }
+        function showDayOnMap(i) { document.getElementById('map').scrollIntoView({ behavior: 'smooth' }); renderMapDay(i); }
+
+        // ---------- Weather (yr.no / MET Norway, Japan time) ----------
+        function cstParts(iso) { const d = new Date(new Date(iso).getTime() + 9 * 3600 * 1000); return { date: d.toISOString().slice(0, 10), hour: d.getUTCHours() }; }
+        function symbolInfo(code) {
+            const base = (code || '').replace(/_(day|night|polartwilight)$/, '');
+            const night = /_night$/.test(code || '');
+            const map = {
+                clearsky: [night ? 'fa-moon' : 'fa-sun', 'ท้องฟ้าแจ่มใส'],
+                fair: [night ? 'fa-cloud-moon' : 'fa-cloud-sun', 'แดดออก มีเมฆเล็กน้อย'],
+                partlycloudy: [night ? 'fa-cloud-moon' : 'fa-cloud-sun', 'มีเมฆบางส่วน'],
+                cloudy: ['fa-cloud', 'เมฆมาก'],
+                fog: ['fa-smog', 'หมอก'],
+                lightrain: ['fa-cloud-rain', 'ฝนเล็กน้อย'],
+                rain: ['fa-cloud-showers-heavy', 'ฝนตก'],
+                heavyrain: ['fa-cloud-showers-heavy', 'ฝนตกหนัก'],
+                lightrainshowers: ['fa-cloud-sun-rain', 'ฝนโปรยเป็นช่วง'],
+                rainshowers: ['fa-cloud-sun-rain', 'ฝนตกเป็นช่วง'],
+                heavyrainshowers: ['fa-cloud-showers-heavy', 'ฝนตกหนักเป็นช่วง'],
+                lightsleet: ['fa-cloud-meatball', 'ฝนปนหิมะเล็กน้อย'],
+                sleet: ['fa-cloud-meatball', 'ฝนปนหิมะ'],
+                heavysleet: ['fa-cloud-meatball', 'ฝนปนหิมะหนัก'],
+                lightsleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะเป็นช่วง'],
+                sleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะเป็นช่วง'],
+                heavysleetshowers: ['fa-cloud-meatball', 'ฝนปนหิมะหนักเป็นช่วง'],
+                lightsnow: ['fa-snowflake', 'หิมะตกเล็กน้อย'],
+                snow: ['fa-snowflake', 'หิมะตก'],
+                heavysnow: ['fa-snowflake', 'หิมะตกหนัก'],
+                lightsnowshowers: ['fa-snowflake', 'หิมะโปรยเป็นช่วง'],
+                snowshowers: ['fa-snowflake', 'หิมะตกเป็นช่วง'],
+                heavysnowshowers: ['fa-snowflake', 'หิมะตกหนักเป็นช่วง']
+            };
+            if (map[base]) return map[base];
+            if (base.includes('thunder')) return ['fa-cloud-bolt', 'ฝนฟ้าคะนอง'];
+            if (base.includes('snow')) return ['fa-snowflake', 'หิมะ'];
+            if (base.includes('sleet')) return ['fa-cloud-meatball', 'ฝนปนหิมะ'];
+            if (base.includes('rain')) return ['fa-cloud-rain', 'ฝน'];
+            return ['fa-cloud', code || '-'];
+        }
+
+
+        function summarizeDaily(timeseries) {
+            const days = {};
+            timeseries.forEach(t => {
+                const { date, hour } = cstParts(t.time);
+                const det = t.data.instant.details;
+                const n1 = t.data.next_1_hours;
+                const n6 = t.data.next_6_hours;
+                const day = days[date] || (days[date] = { date, min: Infinity, max: -Infinity, precip: 0, wind: 0, symbol: null, symbolDist: 99 });
+                if (typeof det.air_temperature === 'number') {
+                    day.min = Math.min(day.min, det.air_temperature);
+                    day.max = Math.max(day.max, det.air_temperature);
+                }
+                if (typeof det.wind_speed === 'number') day.wind = Math.max(day.wind, det.wind_speed);
+                // Hourly steps carry next_1_hours; later 6-hourly steps only next_6_hours
+                if (n1) day.precip += n1.details.precipitation_amount || 0;
+                else if (n6) day.precip += n6.details.precipitation_amount || 0;
+                // Pick the symbol closest to midday as the day's representative
+                const sym = (n6 && n6.summary.symbol_code) || (n1 && n1.summary.symbol_code);
+                const dist = Math.abs(hour - 10);
+                if (sym && dist < day.symbolDist) { day.symbol = sym; day.symbolDist = dist; }
+            });
+            return Object.values(days)
+                .filter(d => d.min !== Infinity)
+                .sort((a, b) => a.date.localeCompare(b.date));
+        }
+
+
+        const wxLocations = [
+            { key: 'osaka', name: 'โอซาก้า · 22–25, 27–28 ม.ค.', lat: 34.672, lon: 135.501, altitude: 10, accent: 'bg-[#1040C0]', days: ['2027-01-22','2027-01-23','2027-01-24','2027-01-25','2027-01-27','2027-01-28','2027-01-30','2027-01-31'] },
+            { key: 'kannabe', name: 'คันนาเบะ (ลานหิมะ) · 25–27 ม.ค.', lat: 35.460, lon: 134.672, altitude: 400, accent: 'bg-[#D02020]', days: ['2027-01-25','2027-01-26','2027-01-27'] },
+            { key: 'kyoto', name: 'เกียวโต · 29–30 ม.ค.', lat: 34.995, lon: 135.770, altitude: 40, accent: 'bg-[#121212]', days: ['2027-01-29','2027-01-30'] }
+        ];
+        const yrLink = l => `https://www.yr.no/en/forecast/daily-table/${l.lat},${l.lon}`;
+        async function loadForecasts(force) {
+            const box = document.getElementById('weather-locations');
+            const cache = store.get('osk_yr_v1', {});
+            box.innerHTML = wxLocations.map(l => `
+                <div class="border-2 border-[#121212]">
+                    <div class="${l.accent} text-white p-2 flex justify-between items-center border-b-2 border-[#121212]"><span class="font-black text-xs">${l.name}</span><a href="${yrLink(l)}" target="_blank" rel="noopener" class="bg-[#F0C020] text-[#121212] px-2 py-0.5 text-[10px] font-black">YR.NO ↗</a></div>
+                    <div id="fc-${l.key}" class="p-2 text-xs font-bold">กำลังโหลด…</div>
+                </div>`).join('');
+            await Promise.all(wxLocations.map(async l => {
+                let e = cache[l.key];
+                if (force || !e || Date.now() - e.fetchedAt > 3600e3) {
+                    try {
+                        const r = await fetch(`https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${l.lat}&lon=${l.lon}&altitude=${l.altitude}`);
+                        if (!r.ok) throw new Error(r.status);
+                        e = { fetchedAt: Date.now(), days: summarizeDaily((await r.json()).properties.timeseries) };
+                        cache[l.key] = e;
+                    } catch (err) { if (e) e = { ...e, stale: true }; }
+                }
+                const el = document.getElementById(`fc-${l.key}`);
+                if (!e) { el.innerHTML = `โหลดไม่ได้ · <a class="underline" href="${yrLink(l)}" target="_blank" rel="noopener">เปิด yr.no</a>`; return; }
+                el.innerHTML = `<table class="w-full text-[11px]"><tbody>${e.days.slice(0, 10).map(d => {
+                    const [icon, label] = symbolInfo(d.symbol), trip = l.days.includes(d.date);
+                    return `<tr class="${trip ? 'bg-[#D02020] text-white' : ''} border-b border-[#121212]"><td class="px-1.5 py-1 whitespace-nowrap">${thaiDate(d.date)}</td><td class="px-1.5 py-1"><i class="fa-solid ${icon}"></i> ${label}</td><td class="px-1.5 py-1 text-right font-black whitespace-nowrap">${Math.round(d.min)}° / ${Math.round(d.max)}°</td></tr>`;
+                }).join('')}</tbody></table><div class="text-[10px] text-slate-500 mt-1">อัปเดต: ${new Date(e.fetchedAt).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}${e.stale ? ' (ข้อมูลเก่า)' : ''}</div>`;
+            }));
+            store.set('osk_yr_v1', cache);
+        }
+
+        // ---------- Checklist, phrases, modal ----------
+        function renderChecklist() {
+            const st = store.get('osk_check', {}); let n = 0;
+            document.getElementById('checklist-grid').innerHTML = checklistItems.map((it, i) => {
+                const c = !!st[i]; if (c) n++;
+                return `<div onclick="toggleCheck(${i})" class="cursor-pointer border-2 border-[#121212] p-2.5 flex items-center gap-2 ${c ? 'bg-[#F0C020]' : 'bg-[#F0F0F0]'}"><span class="w-5 h-5 border-2 border-[#121212] flex items-center justify-center text-xs shrink-0 ${c ? 'bg-[#121212] text-[#F0C020]' : 'bg-white'}">${c ? '<i class="fa-solid fa-check"></i>' : ''}</span><span class="text-xs font-bold ${c ? 'line-through opacity-80' : ''}">${it}</span></div>`;
+            }).join('');
+            document.getElementById('checklist-progress').textContent = `${n}/${checklistItems.length}`;
+        }
+        function toggleCheck(i) { const st = store.get('osk_check', {}); st[i] = !st[i]; store.set('osk_check', st); renderChecklist(); }
+        function openShowModal(label, main, sub, th) {
+            document.getElementById('show-modal-label').textContent = label;
+            document.getElementById('show-modal-zh').textContent = main;
+            document.getElementById('show-modal-sub').textContent = sub || '';
+            document.getElementById('show-modal-th').textContent = th || '';
+            document.getElementById('show-modal').classList.remove('hidden');
+        }
+        function closeShowModal() { document.getElementById('show-modal').classList.add('hidden'); }
+        function showAllergyCard() {
+            openShowModal('⚠️ アレルギー ALLERGY · แพ้กุ้ง', '私はエビの重いアレルギーがあります。食べると命に関わります。', '料理にエビ（エビのだし・桜えび・干しえび・えびせんべい・エキスを含む）が入っている場合は、必ず教えてください。', 'แพ้กุ้งรุนแรง อาจถึงชีวิต ถ้าอาหารมีกุ้ง (รวมน้ำซุป กุ้งแห้ง ขนมกุ้ง) กรุณาบอกด้วย');
+        }
+        function renderPhrases() {
+            document.getElementById('phrase-grid').innerHTML = phrases.map((p, i) => `
+                <button onclick="openShowModal('PHRASE', phrases[${i}].jp, '', phrases[${i}].ro + ' — ' + phrases[${i}].th)" class="text-left border-2 border-[#121212] ${i < 4 ? 'bg-[#F0C020]' : 'bg-[#F0F0F0]'} hover:bg-[#F0C020] p-2.5">
+                    <div class="jp-font font-black">${p.jp}</div><div class="text-[11px] font-semibold text-slate-600">${p.ro} · ${p.th}</div>
+                </button>`).join('');
+        }
+        function renderCountdown() {
+            const diff = Math.round((Date.parse('2027-01-22T00:00:00Z') - Date.parse(japanToday() + 'T00:00:00Z')) / 86400000);
+            document.getElementById('countdown').textContent = diff > 0 ? `อีก ${diff} วัน ออกเดินทาง ✈️` : diff > -10 ? `วันนี้ DAY ${String(1 - diff).padStart(2, '0')} ของทริป 🇯🇵` : 'จบทริปแล้ว';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShowModal(); });
+
+        renderCountdown();
+        renderTodo();
+        renderFlights();
+        renderTicket();
+        renderHotels();
+        renderDays();
+        renderMapButtons();
+        initMap();
+        renderChecklist();
+        renderPhrases();
+        loadForecasts(false);
+    </script>
+</body>
+</html>
