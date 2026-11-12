@@ -120,10 +120,23 @@
                     <div class="w-10 h-10 bg-[#D02020] text-white border-2 border-[#121212] flex items-center justify-center"><i class="fa-solid fa-hotel"></i></div>
                     <div>
                         <h2 class="font-display font-black text-2xl uppercase">HOTELS</h2>
-                        <p class="text-xs font-bold text-slate-600">4 ที่พัก · 9 คืน</p>
+                        <p class="text-xs font-bold text-slate-600">4 ที่พัก · 9 คืน · รถเช่า 2 วัน</p>
                     </div>
                 </div>
                 <div id="hotel-cards" class="space-y-3"></div>
+                <div class="border-2 border-[#121212] bg-[#E8F0FF] p-3 flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-[#121212] text-white border-2 border-[#121212] px-2 py-1 font-black text-center min-w-[80px]"><div class="text-xs">25–27 ม.ค.</div><div><i class="fa-solid fa-car"></i> 48 ชม.</div></div>
+                        <div>
+                            <span class="bg-[#1040C0] text-white text-[10px] font-black px-2">RENTAL CAR</span>
+                            <span class="bg-[#F0C020] text-[10px] font-black px-2 ml-1 border border-[#121212]">จองแล้ว</span>
+                            <div class="font-bold">รถ SUV ขนาดกะทัดรัด · รับ 25 ม.ค. 12:00 · คืน 27 ม.ค. 12:00</div>
+                            <div class="text-xs font-bold">รับ-คืนที่เดียวกัน: 7-chōme-5-22 Nishinakajima, Yodogawa Ward, Osaka 532-0011 (ใกล้สถานีชินโอซาก้า)</div>
+                            <div class="jp-font text-xs font-bold">大阪市淀川区西中島7丁目5-22</div>
+                        </div>
+                    </div>
+                    <a class="btn-bauhaus bg-white px-2 py-1 text-[10px] shrink-0" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E5%B8%82%E6%B7%80%E5%B7%9D%E5%8C%BA%E8%A5%BF%E4%B8%AD%E5%B3%B67%E4%B8%81%E7%9B%AE5-22"><i class="fa-solid fa-map-location-dot text-[#1040C0]"></i> Maps</a>
+                </div>
             </div>
         </section>
 
@@ -247,7 +260,7 @@
             umeda: [34.7025, 135.4959, 'อุเมดะ', '梅田'],
             castle: [34.6873, 135.5262, 'ปราสาทโอซาก้า', '大阪城天守閣'],
             nambaparks: [34.6617, 135.5017, 'Namba Parks', 'なんばパークス'],
-            shinosaka: [34.7334, 135.5001, 'สถานีชินโอซาก้า (รถเช่า)', '新大阪駅'],
+            shinosaka: [34.7305, 135.4985, 'จุดรับ-คืนรถเช่า (นิชินากาจิมะ ใกล้ชินโอซาก้า)', '大阪市淀川区西中島7丁目5-22'],
             fairfield: [35.4600, 134.6720, 'Fairfield by Marriott Kannabe', 'フェアフィールド・バイ・マリオット・兵庫神鍋高原', 'hotel'],
             upkannabe: [35.4615, 134.6700, 'Up Kannabe (ลานหิมะ)', 'アップかんなべ'],
             marine: [35.6560, 134.8150, 'Kinosaki Marine World', '城崎マリンワールド'],
@@ -289,7 +302,7 @@
             ], tip: '' },
             { d: '2027-01-25', city: 'KANNABE', title: 'รับรถเช่า ➔ เล่นหิมะ Up Kannabe', hotel: 'fairfield', items: [
                 ['08:00 – 09:30', 'อาหารเช้า เช็กเอาต์ (ก่อน 10:00)', 'Subway Midosuji ไป Shin-Osaka'],
-                ['12:00', 'รับรถเช่าที่ชินโอซาก้า (48 ชม.) ตรวจยางหิมะ (Snow tires) + คาร์ซีทเด็ก', 'รถเช่า', 'shinosaka'],
+                ['12:00', 'รับรถเช่า SUV ที่ 7-5-22 Nishinakajima (ใกล้ชินโอซาก้า) ตรวจยางหิมะ (Snow tires) + คาร์ซีทเด็ก + ถ่ายรูปรอบคัน', 'รถเช่า 48 ชม.', 'shinosaka'],
                 ['12:00 – 15:00', 'ขับรถไปเมืองโทโยกะ จ.เฮียวโงะ ~150 กม.', 'ขับรถ 2.5–3 ชม.'],
                 ['15:00 – 17:00', 'เช็กอิน Fairfield Kannabe แล้วเดินข้ามถนนไปเล่นสไลเดอร์หิมะ/ปั้นหิมะที่ Up Kannabe', 'เดินเท้า', 'fairfield'],
                 ['', '', '', 'upkannabe']
@@ -301,7 +314,7 @@
             ], tip: 'เช็กวันหยุดของ Marine World ช่วงหน้าหนาวก่อนไป' },
             { d: '2027-01-27', city: 'OSAKA', title: 'คืนรถ ➔ วัดดารุมะ คัตสึโอจิ', hotel: 'osakaHotel', items: [
                 ['08:30 – 11:30', 'เช็กเอาต์ ขับรถกลับโอซาก้า เติมน้ำมันเต็มถัง (満タン) ใกล้ชินโอซาก้า', 'ขับรถ'],
-                ['12:00', 'คืนรถที่ชินโอซาก้า แล้วนั่ง Midosuji 2 สถานีไปอุเมดะ ฝากกระเป๋าที่ Via Inn Umeda', 'รถเช่า + Subway', 'shinosaka'],
+                ['12:00', 'คืนรถที่ 7-5-22 Nishinakajima (ภายใน 12:00) แล้วนั่ง Midosuji จาก Nishinakajima-Minamigata 2 สถานีไปอุเมดะ ฝากกระเป๋าที่ Via Inn Umeda', 'รถเช่า + Subway', 'shinosaka'],
                 ['13:30 – 16:30', 'วัดคัตสึโอจิ (วัดดารุมะ) ตุ๊กตาดารุมะเต็มวัด (ปิด 17:00)', 'Midosuji จากอุเมดะ (ต่อสาย Kita-Osaka Kyuko) ลง Minoh-kayano ต่อบัส/แท็กซี่', 'katsuoji'],
                 ['18:00', 'เช็กอิน Via Inn Umeda (พัก 3 คืน 27–30)', '', 'osakaHotel']
             ], tip: '' },
@@ -342,16 +355,16 @@
         ];
 
         const hotels = [
-            { key: 'viaShinsai', dates: '22–25 ม.ค.', nights: '3 คืน', area: 'OSAKA · SHINSAIBASHI', name: 'Via Inn Shinsaibashi (JR West Group)', jp: 'ヴィアイン心斎橋', status: 'booked', pay: '' },
+            { key: 'viaShinsai', dates: '22–25 ม.ค.', nights: '3 คืน', area: 'OSAKA · SHINSAIBASHI', name: 'Via Inn Shinsaibashi (JR West Group) · ห้องดีลักซ์ เตียงใหญ่', jp: 'ヴィアイン心斎橋', status: 'booked', pay: 'จองก่อน ชำระทีหลัง · เช็กวันตัดบัตรใน Trip.com' },
             { key: 'fairfield', dates: '25–27 ม.ค.', nights: '2 คืน', area: 'HYOGO · KANNABE', name: 'Fairfield by Marriott Hyogo Kannabe Highland · ห้องสแตนดาร์ด เตียงคิง', jp: 'フェアフィールド・バイ・マリオット・兵庫神鍋高原', status: 'booked', pay: 'จองก่อน ชำระทีหลัง · เช็กวันตัดบัตรใน Trip.com' },
             { key: 'osakaHotel', dates: '27–30 ม.ค.', nights: '3 คืน', area: 'OSAKA · UMEDA', name: 'JR West Group Via Inn Umeda · ห้องปลอดบุหรี่ เตียงควีน', jp: 'ヴィアイン梅田', status: 'booked', pay: 'ชำระออนไลน์แล้ว' },
             { key: 'odysis', dates: '30–31 ม.ค.', nights: '1 คืน', area: 'RINKU TOWN · KIX', name: 'Odysis Suites Osaka Airport Hotel · ห้องมุม เตียงควีน', jp: 'オディシススイーツ大阪エアポートホテル', status: 'booked', pay: 'ชำระที่โรงแรม (เงินเยน)' }
         ];
 
         const todos = [
-            ['fa-hotel', 'โรงแรมครบ 9 คืนแล้ว ✅ · เช็กว่า <strong>ยกเลิก Hotel Keihan Kyoto Ekiminami</strong> แล้ว (ถ้าเคยจองไว้) · Fairfield เป็นแบบชำระทีหลัง ดูวันตัดบัตรใน Trip.com'],
+            ['fa-hotel', 'โรงแรมครบ 9 คืน + รถเช่าจองแล้ว ✅ (ยกเลิกโรงแรมเกียวโตแล้ว) · Via Inn Shinsaibashi และ Fairfield เป็นแบบ <strong>ชำระทีหลัง</strong> ดูวันตัดบัตรใน Trip.com · Odysis ชำระที่โรงแรมเป็นเงินเยน'],
             ['fa-suitcase', '<strong>ยังไม่มีกระเป๋าโหลด</strong> ซื้อไว้แค่ถือขึ้น 7 กก./คน ทั้ง 4 เที่ยว · 10 วันหน้าหนาว (เสื้อกันหนาวหนา) ควรซื้อกระเป๋าโหลดเพิ่มในแอป AirAsia ล่วงหน้า ถูกกว่าซื้อที่สนามบิน'],
-            ['fa-id-card', '<strong>ใบขับขี่สากล (IDP)</strong> ของคนขับ จากกรมการขนส่งทางบก · ญี่ปุ่นไม่รับใบขับขี่ไทยอย่างเดียว · และจองรถเช่าพร้อม <strong>ยางหิมะ + คาร์ซีทเด็ก</strong> (กฎหมายบังคับเด็กต่ำกว่า 6 ขวบ)'],
+            ['fa-id-card', '<strong>ใบขับขี่สากล (IDP)</strong> ของคนขับ จากกรมการขนส่งทางบก · ญี่ปุ่นไม่รับใบขับขี่ไทยอย่างเดียว · <strong>ยืนยันกับบริษัทรถเช่าว่ามียางหิมะ + คาร์ซีทเด็ก</strong> (กฎหมายบังคับเด็กต่ำกว่า 6 ขวบ) เพราะในหน้าการจองไม่ได้ระบุ'],
             ['fa-ticket', '<strong>ตั๋ว USJ</strong> (28 ม.ค.) ซื้อออนไลน์ล่วงหน้า + พิจารณา Express Pass สำหรับ Super Nintendo World'],
             ['fa-mobile-screen', 'ลงทะเบียน <strong>Visit Japan Web</strong> (ตม./ศุลกากร) ก่อนบิน · คนไทยเข้าญี่ปุ่นได้ไม่ต้องใช้วีซ่าไม่เกิน 15 วัน'],
             ['fa-snowflake', 'เช็กสภาพลานหิมะ Up Kannabe และวันเปิดของ Kinosaki Marine World ช่วงปลายม.ค.']
